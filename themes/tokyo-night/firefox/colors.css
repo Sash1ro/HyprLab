@@ -1,0 +1,14 @@
+/*Tokyo Night*/
+
+:root {
+  --accent: #7aa2f7;
+  --color-bg: #1a1b26;   
+  --alt-bg: #24283b;      /* couleur de fond principale */
+  --color-fg: #a9b1d6;         /* texte principal */
+  --alt-fg: var(--alt-bg);
+  --color-accent: var(--accent);     /* couleur d'accent (barre active, survol, etc.) */
+  --color-hover: var(--accent);      /* fond d’élément survolé */
+  --color-border: #565f89; 
+  --color-tab: var(--alt-bg);  /* bordures */
+  --toolbar-bgcolor: var(--alt-bg) 
+}

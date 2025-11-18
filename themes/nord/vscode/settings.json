@@ -1,0 +1,42 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.productIconTheme": "material-product-icons",
+  "workbench.colorTheme": "Nord",
+  "editor.cursorBlinking": "expand",
+  "files.autoSave": "afterDelay",
+  "editor.formatOnSave": true,
+  "editor.minimap.autohide": "mouseover",
+  "files.autoSaveDelay": 100,
+  "editor.fontFamily": "'JetBrainsMono Nerd Font'",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "chat.commandCenter.enabled": true,
+  "qt-core.additionalQtPaths": [
+    {
+      "name": "Qt-5.15.17-linux-g++_from_PATH",
+      "path": "/usr/bin/qmake"
+    }
+  ],
+  "workbench.view.showQuietly": {
+    "workbench.panel.output": false
+  },
+  "window.titleBarStyle": "native",
+  "workbench.layoutControl.enabled": false,
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "toggle",
+  "workbench.editor.editorActionsLocation": "hidden",
+  "workbench.editor.scrollToSwitchTabs": true,
+  "editor.mouseWheelZoom": true,
+  "window.customTitleBarVisibility": "never",
+  "workbench.colorCustomizations": {
+    "tab.activeBorderTop": "#00000000",
+    "focusBorder": "#00000000"
+  },
+  "editor.scrollbar.vertical": "auto",
+  "editor.scrollbar.verticalScrollbarSize": 6,
+  "editor.scrollbar.horizontalScrollbarSize": 6,
+  "editor.scrollbar.horizontal": "auto",
+  "window.zoomLevel": 0,
+  "workbench.statusBar.visible": false
+}

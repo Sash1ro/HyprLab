@@ -1,0 +1,4 @@
+* {
+    font:                       "SF Pro Text medium 12";
+    spacing:                    10;
+}

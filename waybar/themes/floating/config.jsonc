@@ -1,0 +1,240 @@
+// -*- mode: jsonc -*-
+
+{
+  //INIT
+  "layer": "top",
+  "position": "top",
+  "mod": "dock",
+  "spacing": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+  "margin-top": 0,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+
+  // MODULES POSITIONS
+
+  "modules-left": ["hyprland/window", "custom/media"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["group/perfs", "group/utils", "group/first"],
+
+  // MODULES CONFIGURATION
+
+  "hyprland/window": {
+    "format": "  {title}",
+    "icon": false,
+    "seperate-outputs": true,
+    "rewrite": {
+      "  ": "  Hyprland",
+      "(.*)org.gnome.Nautilus": "  Nautilus",
+      "(.*)Firefox(.*)": "  Firefox",
+      "(.*)obs(.*)": "  OBS"
+    },
+    "on-click-middle": "pkill waybar && hyprctl dispatch exec waybar",
+    "on-click": "~/.config/hyprlab/scripts/menu.sh"
+  },
+
+  "mpris": {
+    "player": "chromium",
+    "format-playing": "{player_icon}  {title} - {artist}",
+    "format-paused": "{status_icon} <i>{title} - {artist}</i>",
+    "format-stopped": "{status_icon} Aucun Media",
+    "title-len": 30,
+    "artist-len": 25,
+    "tooltip-format": "{player} - {status}",
+    "player-icons": {
+      "default": "󰎆"
+    },
+    "status-icons": {
+      "paused": "",
+      "stopped": "󰱶 "
+    },
+    "ignored-players": ["firefox"],
+    "on-click": "playerctl play-pause",
+    "on-click-middle": "sleep 2 && playerctl previous",
+    "on-click-right": "sleep 2 && playerctl next"
+  },
+
+  "custom/media": {
+    "exec": "~/.config/hyprlab/scripts/song.sh",
+    "on-click": "playerctl play-pause",
+    "on-click-middle": "playerctl previous",
+    "on-click-right": "playerctl next",
+    "interval": 1
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
+  },
+
+  "group/bar": {
+    "orientation": "horizontal",
+    "modules": ["mpris"]
+  },
+
+  //CENTER
+
+  "hyprland/workspaces": {
+    "rotate": 0,
+    "all-outputs": false,
+    "active-only": false,
+    "on-click": "activate",
+    "disable-scroll": false,
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5],
+      "DP-2": [1, 2, 3, 4, 5],
+      "DP-3": [6, 7, 8, 9, 10]
+    }
+  },
+
+  //right
+  "clock": {
+    "timezone": "Europe/Paris",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%d-%m-%Y}"
+  },
+  "tray": {
+    "icon-size": 19,
+    "spacing": 10,
+    "show-passive-items": false
+  },
+  "cpu": {
+    "format": "{usage}%",
+    "tooltip": true
+  },
+  "memory": {
+    "format": "{}%"
+  },
+
+  "cpu#icon": {
+    "format": ""
+  },
+
+  "memory#icon": {
+    "format": "󰾆"
+  },
+  //bluethooh icon
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂰 {device_alias}",
+    "format-off": "",
+    "interval": 30,
+    "on-click": "pkill blueman-manager && hyprctl dispatch exec blueman- || hyprctl dispatch exec blueman-manager",
+    "format-no-controller": ""
+  },
+  //network icon
+  "network": {
+    "format-wifi": " ",
+    "format-ethernet": "",
+    "tooltip-format": "{ifname} - {ipaddr}\n  {bandwidthUpBits}  {bandwidthDownBits}",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "<span foreground='#f38ba8'> Disconnected</span>",
+    "on-click": "pkill nm-connection-editor && hyprctl dispatch exec nm-connection-editor || hyprctl dispatch exec nm-connection-editor"
+  },
+  //audio icon
+
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-bluetooth": "{icon}",
+    "tooltip-format": "{volume}% - {desc}",
+    //"format-muted": "<span foreground='#f38ba8'></span>",
+    "format-icons": {
+      "alsa_output.usb-HP__Inc_HyperX_Cloud_Alpha_Wireless_00000001-00.analog-stereo": "",
+      "alsa_output.usb-HP__Inc_HyperX_Cloud_Alpha_Wireless_00000001-00.analog-stereo-muted": "<span foreground='#f38ba8'>󰟎</span>",
+      "headphone": "",
+      "portable": "",
+      "default": ["", ""]
+    },
+    "scroll-step": 1,
+    "on-click": "pkill pavucontrol && hyprctl dispatch exec pavucontrol || hyprctl dispatch exec pavucontrol",
+    "on-click-middle": "pactl set-sink-mute 0 toggle",
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+  "custom/clip": {
+    "format": "󱉧",
+    "tooltip": false,
+    "on-click": "~/.config/hyprlab/scripts/clip.sh",
+    "on-click-middle": "~/.config/hyprlab/scripts/clip.sh w"
+  },
+  "custom/shot": {
+    "format": "󱣴",
+    "tooltip": false,
+    "on-click": "hyprshot -m output",
+    "on-click-right": "hyprshot -m region",
+    "on-click-middle": "hyprshot -m output --clipboard-only"
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  //power button
+
+  "custom/exit": {
+    "format": "",
+    "on-click": "wlogout -b 4 -P 0",
+    "tooltip": false
+  },
+
+  "group/first": {
+    "orientation": "horizontal",
+    "modules": ["clock", "custom/notification", "custom/exit"]
+  },
+
+  "group/utils": {
+    "orientation": "horizontal",
+    "modules": [
+      "group/traybox",
+      //"custom/shot",
+      //"custom/clip",
+      "pulseaudio",
+      "bluetooth",
+      "network"
+    ]
+  },
+
+  "group/perfs": {
+    "orientation": "horizontal",
+    "modules": ["cpu#icon", "cpu", "memory#icon", "memory"]
+  },
+
+  "custom/tray": {
+    "format": "",
+    "tooltip": false
+  },
+
+  "group/traybox": {
+    "drawer": {
+      "transition-left-to-right": false,
+      "transition-duration": 300,
+      "children-class": "childs"
+      /*,"click-to-reveal": true*/
+    },
+    "orientation": "horizontal",
+    "modules": ["custom/tray", "tray"]
+  }
+}

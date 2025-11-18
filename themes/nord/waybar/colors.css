@@ -1,0 +1,19 @@
+/*Nord*/
+
+@define-color background #2e3440;
+
+@define-color back-alt #2e3440;
+
+@define-color inactive #434c5e;
+
+@define-color border #3b4252;
+
+@define-color foreground #d8dee9;
+
+@define-color accent #88c0d0;
+
+@define-color pink #b48ead;
+@define-color red #f7768e;
+@define-color yellow #ebcb8b;
+@define-color green #a3be8c;
+@define-color blue #5e81ac;

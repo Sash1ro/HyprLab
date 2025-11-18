@@ -1,0 +1,14 @@
+/*RosePine*/
+
+:root {
+  --accent: #ebbcba;
+  --color-bg: #191724;   
+  --alt-bg: #1f1d2e;      /* couleur de fond principale */
+  --color-fg: #e0def4;         /* texte principal */
+  --alt-fg: var(--alt-bg);
+  --color-accent: var(--accent);     /* couleur d'accent (barre active, survol, etc.) */
+  --color-hover: var(--accent);      /* fond d’élément survolé */
+  --color-border: #26233a; 
+  --color-tab: var(--alt-bg);  /* bordures */
+  --toolbar-bgcolor: var(--alt-bg) 
+}

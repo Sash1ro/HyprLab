@@ -1,0 +1,14 @@
+/*Nord*/
+
+:root {
+  --accent: #88c0d0;
+  --color-bg: #2e3440;   
+  --alt-bg: #3b4252;      /* couleur de fond principale */
+  --color-fg: #d8dee9;         /* texte principal */
+  --alt-fg: var(--alt-bg);
+  --color-accent: var(--accent);     /* couleur d'accent (barre active, survol, etc.) */
+  --color-hover: var(--accent);      /* fond d’élément survolé */
+  --color-border: #434c5e; 
+  --color-tab: var(--alt-bg);  /* bordures */
+  --toolbar-bgcolor: var(--alt-bg) 
+}

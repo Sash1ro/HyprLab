@@ -1,0 +1,166 @@
+// -*- mode: jsonc -*-
+{
+  //INIT
+  "layer": "top",
+  "position": "top",
+  "mod": "dock",
+  "spacing": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+  "margin-top": 0,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+
+  // MODULES POSITIONS
+  "modules-left": ["custom/icon", "hyprland/workspaces", "custom/media"],
+  "modules-center": ["clock"],
+  "modules-right": ["group/right"],
+
+  // MODULES CONFIGURATION
+
+  "custom/icon": {
+    "format": "",
+    "on-click": "~/.config/hyprlab/scripts/menu.sh",
+    "on-click-middle": "pkill waybar && hyprctl dispatch exec waybar"
+  },
+
+  "custom/tray": {
+    "format": "",
+    "tooltip": false
+  },
+
+  "custom/media": {
+    "exec": "~/.config/hyprlab/scripts/song.sh",
+    "on-click": "playerctl play-pause",
+    "on-click-middle": "playerctl previous",
+    "on-click-right": "playerctl next",
+    "interval": 1
+  },
+
+  "custom/clip": {
+    "format": "󱉧",
+    "tooltip": false,
+    "on-click": "~/.config/hyprlab/scripts/clip.sh",
+    "on-click-middle": "~/.config/hyprlab/scripts/clip.sh w"
+  },
+  "custom/shot": {
+    "format": "󱣴",
+    "tooltip": false,
+    "on-click": "hyprshot -m output",
+    "on-click-right": "hyprshot -m region",
+    "on-click-middle": "hyprshot -m output --clipboard-only"
+  },
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/exit": {
+    "format": "󰍃",
+    "on-click": "wlogout -b 4 -P 0",
+    "tooltip": false
+  },
+
+  "hyprland/workspaces": {
+    "rotate": 0,
+    "all-outputs": false,
+    "active-only": false,
+    "on-click": "activate",
+    "disable-scroll": false,
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "persistent-workspaces": {
+      "DP-2": [1, 2, 3, 4, 5],
+      "DP-3": [6, 7, 8, 9, 10]
+    }
+  },
+
+  "clock": {
+    "format": "{:%A ~ %H:%M}",
+    "timezone": "Europe/Paris",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%d-%m-%Y}"
+  },
+
+  "tray": {
+    "icon-size": 19,
+    "spacing": 10,
+    "show-passive-items": false
+  },
+
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂰 {device_alias}",
+    "format-off": "",
+    "interval": 30,
+    "on-click": "pkill blueman-manager && hyprctl dispatch exec blueman- || hyprctl dispatch exec blueman-manager",
+    "format-no-controller": ""
+  },
+
+  "network": {
+    "format-wifi": " ",
+    "format-ethernet": "",
+    "tooltip-format": "{ifname} - {ipaddr}\n  {bandwidthUpBits}  {bandwidthDownBits}",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "<span foreground='#f38ba8'> Disconnected</span>",
+    "on-click": "pkill nm-connection-editor && hyprctl dispatch exec nm-connection-editor || hyprctl dispatch exec nm-connection-editor"
+  },
+
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-bluetooth": "{icon}",
+    "tooltip-format": "{volume}% - {desc}",
+    "format-muted": "<span foreground='#f38ba8'></span>",
+    "format-icons": {
+      "headphone": "",
+      "portable": "",
+      "default": ["", ""]
+    },
+    "scroll-step": 1,
+    "on-click": "pkill pavucontrol && hyprctl dispatch exec pavucontrol || hyprctl dispatch exec pavucontrol",
+    "on-click-middle": "pactl set-sink-mute 0 toggle",
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+
+  "group/right": {
+    "orientation": "horizontal",
+    "modules": [
+      "group/traybox",
+      "bluetooth",
+      "network",
+      "pulseaudio",
+      "custom/notification",
+      "custom/exit"
+    ]
+  },
+
+  "group/traybox": {
+    "drawer": {
+      "transition-left-to-right": false,
+      "transition-duration": 300,
+      "children-class": "element"
+      /*,"click-to-reveal": true*/
+    },
+    "orientation": "horizontal",
+    "modules": ["custom/tray", "tray"]
+  }
+}

@@ -1,0 +1,177 @@
+@import "colors.css";
+@import "size.css";
+
+/* ---- Global Defaults ---- */
+* {
+  font-family: "SF Pro Display","JetBrainsMono Nerd Font Propo";
+  min-height: 0;
+  font-weight: bold;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+window#waybar {
+  background: alpha(@background, 0);
+  border-radius: 0px 0px 10px 10px; 
+  color: @foreground;
+  box-shadow: none;
+}
+
+tooltip {
+  background-color: @background;
+  border: 1px solid @border;
+  transition:  all 200ms ease-out;
+}
+
+#first,
+#utils,
+#perfs,
+#window,
+#custom-media,
+#workspaces {
+  margin: 5px;
+  border-radius: 40px;
+}
+
+
+/* ---- Workspaces ---- */
+
+#workspaces {
+  padding: 5px;
+  background-color: @back-alt;
+  border: 2px solid transparent;
+  transition:  all 200ms ease-out;
+}
+
+#workspaces button {
+  margin: 0 5px 0 5px;
+  border-radius: 40px;
+  padding: 0 6px;
+  color: transparent;
+  background-color: @inactive;
+  transition: all 400ms cubic-bezier(.47,1.64,.41,.8), background 0;
+}
+
+#workspaces button:not(.empty):not(.active) {
+    color: @accent;
+    opacity: 0.4;
+    background-color: @accent;
+    transition: all 200ms cubic-bezier(.47,1.64,.41,.8), background 0;
+}
+
+#workspaces button:not(.empty):not(.active):hover {
+    color: @back-alt;
+    opacity: 0.7;
+    transition: all 200ms cubic-bezier(.47,1.64,.41,.8), background 0;
+}
+
+
+#workspaces button:hover {
+    min-width: 30px;
+    color: @back-alt;
+    opacity: 0.7;
+    background-color: @accent;
+    transition: all 200ms cubic-bezier(.47,1.64,.41,.8), background 0;
+}
+
+
+#workspaces button.active {
+    min-width: 50px;
+    color: @back-alt;
+    background-color: @accent;
+    transition: all 200ms cubic-bezier(.47,1.64,.41,.8), background 0;
+}
+
+/* ---- Shared Style Blocks ---- */
+
+#first,
+#utils,
+#perfs,
+#window,
+#custom-media {
+  background-color: @back-alt;
+  padding: 7px;
+  color: @foreground;
+  border: 2px solid transparent;
+  transition:  all 200ms ease-out;
+}
+
+#utils {
+  color: @pink;
+}
+
+#utils:hover {
+  border: 2px solid @pink;
+  transition:  all 200ms ease-out;
+}
+
+#first:hover {
+  border: 2px solid @green;
+  transition:  all 200ms ease-out;
+}
+
+#first {
+  color: @green;
+}
+
+
+#window {
+  color: @green;
+  padding-left: 8px;
+  padding-right: 10px;
+}
+
+
+#window:hover {
+  border: 2px solid @green;
+  transition:  all 200ms ease-out;
+}
+
+#perfs {
+  color: @yellow;
+}
+
+#perfs:hover {
+  border: 2px solid @yellow;
+  transition:  all 200ms ease-out;
+}
+
+#cpu.icon,
+#memory.icon {
+  margin-right: 0;
+}
+
+#custom-media {
+  color: @blue;
+}
+
+#custom-media:hover {
+  border: 2px solid @blue;
+  transition:  all 200ms ease-out;
+}
+
+
+#clock,
+#cpu,
+#memory,
+#window,
+#tray,
+#custom-tray,
+#custom-shot,
+#custom-media,
+#mpris,
+#taskbar button,
+#custom-notification,
+#custom-exit,
+#bluetooth,
+#pulseaudio,
+#network,
+#custom-clip {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#taskbar {
+  padding-left: 10px;
+}

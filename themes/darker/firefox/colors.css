@@ -1,0 +1,14 @@
+/*EverForest*/
+
+:root {
+  --accent: #ced4da;
+  --color-bg: #212529;   
+  --alt-bg: #343a40;      /* couleur de fond principale */
+  --color-fg: #ced4da;         /* texte principal */
+  --alt-fg: var(--alt-bg);
+  --color-accent: var(--accent);     /* couleur d'accent (barre active, survol, etc.) */
+  --color-hover: var(--accent);      /* fond d’élément survolé */
+  --color-border: #495057; 
+  --color-tab: var(--alt-bg);  /* bordures */
+  --toolbar-bgcolor: var(--alt-bg);
+}
