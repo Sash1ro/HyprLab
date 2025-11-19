@@ -3,7 +3,7 @@
 
 /* ---- Global Defaults ---- */
 * {
-  font-family: "SF Pro Display","JetBrainsMono Nerd Font Propo";
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
   min-height: 0;
   font-weight: bold;
   border: 0;
@@ -13,7 +13,7 @@
 
 window#waybar {
   background: alpha(@background, 0);
-  border-radius: 0px 0px 10px 10px; 
+  border-radius: 0px 0px 10px 10px;
   color: @foreground;
   box-shadow: none;
 }
@@ -21,19 +21,19 @@ window#waybar {
 tooltip {
   background-color: @background;
   border: 1px solid @border;
-  transition:  all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
 
 #first,
 #utils,
 #perfs,
 #window,
+#custom-record,
 #custom-media,
 #workspaces {
   margin: 5px;
   border-radius: 40px;
 }
-
 
 /* ---- Workspaces ---- */
 
@@ -41,7 +41,7 @@ tooltip {
   padding: 5px;
   background-color: @back-alt;
   border: 2px solid transparent;
-  transition:  all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
 
 #workspaces button {
@@ -50,37 +50,35 @@ tooltip {
   padding: 0 6px;
   color: transparent;
   background-color: @inactive;
-  transition: all 400ms cubic-bezier(.47,1.64,.41,.8), background 0;
+  transition: all 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 #workspaces button:not(.empty):not(.active) {
-    color: @accent;
-    opacity: 0.4;
-    background-color: @accent;
-    transition: all 200ms cubic-bezier(.47,1.64,.41,.8), background 0;
+  color: @accent;
+  opacity: 0.4;
+  background-color: @accent;
+  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 #workspaces button:not(.empty):not(.active):hover {
-    color: @back-alt;
-    opacity: 0.7;
-    transition: all 200ms cubic-bezier(.47,1.64,.41,.8), background 0;
+  color: @back-alt;
+  opacity: 0.7;
+  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
-
 
 #workspaces button:hover {
-    min-width: 30px;
-    color: @back-alt;
-    opacity: 0.7;
-    background-color: @accent;
-    transition: all 200ms cubic-bezier(.47,1.64,.41,.8), background 0;
+  min-width: 30px;
+  color: @back-alt;
+  opacity: 0.7;
+  background-color: @accent;
+  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
-
 #workspaces button.active {
-    min-width: 50px;
-    color: @back-alt;
-    background-color: @accent;
-    transition: all 200ms cubic-bezier(.47,1.64,.41,.8), background 0;
+  min-width: 50px;
+  color: @back-alt;
+  background-color: @accent;
+  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 /* ---- Shared Style Blocks ---- */
@@ -89,12 +87,13 @@ tooltip {
 #utils,
 #perfs,
 #window,
-#custom-media {
+#custom-media,
+#custom-record {
   background-color: @back-alt;
   padding: 7px;
   color: @foreground;
   border: 2px solid transparent;
-  transition:  all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
 
 #utils {
@@ -103,18 +102,17 @@ tooltip {
 
 #utils:hover {
   border: 2px solid @pink;
-  transition:  all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
 
 #first:hover {
   border: 2px solid @green;
-  transition:  all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
 
 #first {
   color: @green;
 }
-
 
 #window {
   color: @green;
@@ -122,10 +120,9 @@ tooltip {
   padding-right: 10px;
 }
 
-
 #window:hover {
   border: 2px solid @green;
-  transition:  all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
 
 #perfs {
@@ -134,7 +131,7 @@ tooltip {
 
 #perfs:hover {
   border: 2px solid @yellow;
-  transition:  all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
 
 #cpu.icon,
@@ -148,9 +145,8 @@ tooltip {
 
 #custom-media:hover {
   border: 2px solid @blue;
-  transition:  all 200ms ease-out;
+  transition: all 200ms ease-out;
 }
-
 
 #clock,
 #cpu,

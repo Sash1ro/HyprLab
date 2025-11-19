@@ -17,7 +17,12 @@
 
   "modules-left": ["hyprland/window", "custom/media"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": ["group/perfs", "group/utils", "group/first"],
+  "modules-right": [
+    "custom/record",
+    "group/perfs",
+    "group/utils",
+    "group/first"
+  ],
 
   // MODULES CONFIGURATION
 
@@ -198,6 +203,14 @@
     "format": "",
     "on-click": "wlogout -b 4 -P 0",
     "tooltip": false
+  },
+
+  "custom/record": {
+    "exec": "~/.config/hyprlab/scripts/record-tray.sh",
+    "tooltip": true,
+    "tooltip-format": "Recording...\nClick to stop",
+    "on-click": "pkill -INT -x wf-recorder",
+    "interval": 1
   },
 
   "group/first": {
