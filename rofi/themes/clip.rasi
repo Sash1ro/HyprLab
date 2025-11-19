@@ -1,0 +1,44 @@
+@import "colors.rasi"
+@import "alt.rasi"
+
+* {
+        spacing:                    5;
+}
+
+configuration {
+    show-icons: false;
+}
+
+window {
+    width: 400 px;
+    x-offset:       0;
+    y-offset:       0;
+    location:                     center;
+    anchor:                       center;
+}
+
+listview {
+    columns: 1;
+    lines: 6;
+}
+
+element {
+    orientation:    horizontal;
+    padding: 8px;
+}
+
+element-text {
+    horizontal-align : 0;
+}
+
+mainbox {
+    children: ["listbox"];
+}
+
+inputbar {
+    padding: 10px 10px 5px 10px;
+}
+
+entry {
+    placeholder:       "  Presse Papier";
+}

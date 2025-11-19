@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+source $HOME/.config/hyprlab/scripts/data/conf.env
 
 HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
 ICON="$HOME/.config/hyprlab/assets/hypr.svg"

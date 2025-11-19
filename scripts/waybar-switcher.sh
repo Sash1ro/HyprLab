@@ -8,6 +8,8 @@
 
 set -euo pipefail
 
+source $HOME/.config/hyprlab/scripts/data/conf.env
+
 #─────────────────────────────────────────────────────────────
 #  CHEMINS DE CONFIGURATION
 #─────────────────────────────────────────────────────────────

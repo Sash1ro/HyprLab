@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+source $HOME/.config/hyprlab/scripts/data/conf.env
 
 # Get current Bluetooth state (0 = unblocked, 1 = blocked)
 state=$(rfkill list bluetooth | grep "Soft blocked" | awk '{print $3}')

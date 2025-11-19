@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+source $HOME/.config/hyprlab/scripts/data/conf.env
+
 configFolder="$HOME/.config"
 themeFolder="$configFolder/hyprlab/waybar/themes"
 themeSwitcher="$configFolder/hyprlab/scripts/waybar-switcher.sh"
-rofiConf="$configFolder/rofi/themes/list.rasi"
+rofiConf="$ROFI_THEME/list.rasi"
 currentLink="$themeFolder/current"
 
 notifIcon="$configFolder/hyprlab/assets/hypr.svg"

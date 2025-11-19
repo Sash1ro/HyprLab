@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source $HOME/.config/hyprlab/scripts/data/conf.env
+
 terminate_clients() {
   	TIMEOUT=5
 	

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-themeFolder="$HOME/.config/rofi/themes"
-scriptFolder="$HOME/.config/hyprlab/scripts/"
+source $HOME/.config/hyprlab/scripts/data/conf.env
+
 videoFolder="$HOME/Videos"
 
-recording_flag="$scriptFolder/cache/wf-recorder-active"
+recording_flag="$SCRIPT_DIR/cache/wf-recorder-active"
 
 if [ ! -d $videoFolder ]; then 
     mkdir $videoFolder
@@ -19,7 +19,7 @@ op4="  Record region"
 menu="$op1\n$op2\n$op3\n$op4"
 [ -f "$recording_flag" ] && menu="$menu\nStop record"
 
-choice=$(printf "%b" "$menu" | rofi -dmenu -i -p "MENU : " -theme "$themeFolder/list.rasi")
+choice=$(printf "%b" "$menu" | rofi -dmenu -i -p "MENU : " -theme "$ROFI_THEME/list.rasi")
 
 
 record() {

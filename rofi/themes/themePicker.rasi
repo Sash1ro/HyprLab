@@ -1,0 +1,43 @@
+@import "colors.rasi"
+@import "config.rasi"
+
+
+configuration {
+    show-icons: false;
+}
+
+window {
+    location:       center;
+    anchor:         center;
+    width: 600px;
+    layout: vertical;
+}
+
+listview {
+    columns: 1;
+    lines: 6;
+    orientation: vertical;
+}
+
+element {
+    margin: 0;
+    padding: 10px;
+}
+
+element-text {
+    horizontal-align: 0;
+}
+inputbar {
+    children:   ["prompt", "entry"];
+}
+
+prompt {
+    vertical-align: 0;
+    padding: 5px;
+    text-color:        @normal-foreground;
+    spacing:           0;
+}
+
+entry {
+    placeholder:       "";
+}

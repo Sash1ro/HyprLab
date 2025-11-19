@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-current="$HOME/.config/hyprlab/themes/current"
+source $HOME/.config/hyprlab/scripts/data/conf.env
+
+current="$THEMES_DIR/current"
 currentWallpaper="$current/wallpaper"
-CACHE_ROOT="$HOME/.config/hyprlab/themes/.cache/cached_imgs"
+CACHE_ROOT="$THEMES_DIR/.cache/cached_imgs"
 WALLPAPER_ROOT="$current/wallpapers"
 
-notifIcon="$HOME/.config/hyprlab/assets/hypr.svg"
+notifIcon="$HYPRLAB/assets/hypr.svg"
 
 rm -rf $CACHE_ROOT
 [ ! -d $CACHE_ROOT ] && mkdir -p $CACHE_ROOT
@@ -68,7 +70,7 @@ for fName in "${bgnames[@]}"; do
 done
 
 
-selected=$(echo -en "${strrr}" | rofi -dmenu -p "Choisir un fond d'écran" -theme $HOME/.config/rofi/themes/wallpapersPicker.rasi )
+selected=$(echo -en "${strrr}" | rofi -dmenu -i -p "Choisir un fond d'écran" -theme $ROFI_THEME/wallpapersPicker.rasi )
 
 if [ -z "$selected" ]; then
     exit 0

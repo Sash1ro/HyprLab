@@ -1,0 +1,18 @@
+@import "colors.rasi"
+@import "clip.rasi"
+
+configuration {
+    show-icons: false;
+}
+
+
+window {
+    width: 400 px;
+    anchor: center;
+    x-offset:       0;
+    y-offset:       0;
+    location:                     center;
+    anchor:                       center;
+
+}
+

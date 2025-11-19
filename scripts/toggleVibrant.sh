@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-SCRIPT_DIR="$HOME/.config/hyprlab/scripts/"
+source $HOME/.config/hyprlab/scripts/data/conf.env
+
 file="$SCRIPT_DIR/cache/currentVibrant.txt"
-ICON="$HOME/.config/hyprlab/assets/hypr.svg"
+ICON="$HYPRLAB/assets/hypr.svg"
 
 if [ -f "$file" ]; then
     current=$(cat "$file")

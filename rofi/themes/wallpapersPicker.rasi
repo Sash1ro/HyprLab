@@ -1,0 +1,43 @@
+@import "colors.rasi"
+@import "config.rasi"
+
+configuration{
+    show-icons: true;
+    sidebar-mode: false;
+    alternate-row-color: false;
+    fixed-height: false;
+}
+
+
+listview{
+    spacing: 0px;
+    scrollbar: true;
+    overflow:true;
+    layout: horizontal;
+}
+
+element-icon {
+    vertical-align: 0.0;
+    size:300px;
+    border-radius: 10px;
+    padding: 0px 0px;
+    margin: 0px;
+    spacing:0px 0px;
+}
+
+element{
+    orientation: vertical;
+    height: 0px;
+    padding: 0px;
+    margin: 10px;
+    spacing:0px;
+    overflow: true;
+}
+
+window{
+    location:       center;
+    anchor:         center;
+    x-offset: 0;
+    y-offset: 0;
+    width: 60%;
+}

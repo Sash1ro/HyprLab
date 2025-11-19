@@ -1,0 +1,36 @@
+@import "colors.rasi"
+@import "config.rasi"
+
+
+configuration {
+    show-icons: false;
+}
+
+
+window {
+    height: 0;
+    width:          1000px;
+}
+
+mainbox {
+    children: ["inputbar"];
+}
+
+inputbar {
+    margin:                      5px;
+}
+
+textbox {
+    text-color: @foreground;
+}
+
+textbox-search {
+  content: "";
+}
+
+entry {
+    placeholder:       "Google Search";
+
+}
+
+

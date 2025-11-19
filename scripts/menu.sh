@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-
-themeFolder="$HOME/.config/rofi/themes"
-scriptFolder="$HOME/.config/hyprlab/scripts/"
-
+source $HOME/.config/hyprlab/scripts/data/conf.env
 
 #KILL ROFI
 if pgrep -x "rofi" >/dev/null; then
@@ -24,7 +21,7 @@ $keys
 $custom"
 
 #POP ROFI
-v=$(echo -e "$prompt" | rofi -dmenu -i -p "MENU : " -theme $themeFolder/list.rasi)
+v=$(echo -e "$prompt" | rofi -dmenu -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
 
 
 custom_menu() {
@@ -33,12 +30,12 @@ custom_menu() {
     local wallpaper="󰸉   Wallpapers"
     local p="$theme\n$waybar\n$wallpaper"
 
-    local v=$(echo -e "$p" | rofi -dmenu -i -p "MENU : " -theme $themeFolder/list.rasi)
+    local v=$(echo -e "$p" | rofi -dmenu -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
 
     case $v in 
-        "$theme") "$scriptFolder/theme-picker.sh";;
-        "$wallpaper") "$scriptFolder/wallpaper-switcher.sh" &;;
-        "$waybar") "$scriptFolder/waybar-picker.sh";;
+        "$theme") "$SCRIPT_DIR/theme-picker.sh" &;;
+        "$wallpaper") "$SCRIPT_DIR/wallpaper-switcher.sh" &;;
+        "$waybar") "$SCRIPT_DIR/waybar-picker.sh" &;;
         *)exit 0
     esac
 }
@@ -46,9 +43,9 @@ custom_menu() {
 
 #SETTING UP OPTIONS 
 case $v in
-    "$clip") "$scriptFolder/clip.sh";;
+    "$clip") "$SCRIPT_DIR/clip.sh" &;;
 
-    "$capture") "$scriptFolder/capture.sh";;
+    "$capture") "$SCRIPT_DIR/capture.sh" &;;
 
     "$custom") custom_menu;;
     *) exit 0

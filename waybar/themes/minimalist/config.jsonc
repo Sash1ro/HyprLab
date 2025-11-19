@@ -25,6 +25,14 @@
     "on-click-middle": "pkill waybar && hyprctl dispatch exec waybar"
   },
 
+  "custom/record": {
+    "exec": "~/.config/hyprlab/scripts/record-tray.sh",
+    "tooltip": true,
+    "tooltip-format": "Recording...\nClick to stop",
+    "on-click": "pkill -INT -x wf-recorder",
+    "interval": 1
+  },
+
   "custom/tray": {
     "format": "",
     "tooltip": false
@@ -144,6 +152,7 @@
   "group/right": {
     "orientation": "horizontal",
     "modules": [
+      "custom/record",
       "group/traybox",
       "bluetooth",
       "network",

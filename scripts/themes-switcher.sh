@@ -8,14 +8,14 @@
 
 set -euo pipefail
 
+source $HOME/.config/hyprlab/scripts/data/conf.env
+
 #─────────────────────────────────────────────────────────────
 #  CHEMINS DE CONFIGURATION
 #─────────────────────────────────────────────────────────────
 CONFIG="$HOME/.config"
-THEMES="$CONFIG/hyprlab/themes"
-CURRENT="$THEMES/current"
-SIZE_DIR="$THEMES/size"
-WALLPAPER_DIR="$HOME/Images/Wallpapers"
+CURRENT="$THEMES_DIR/current"
+SIZE_DIR="$THEMES_DIR/size"
 
 # Applications cibles
 GTK4="$CONFIG/gtk-4.0/gtk.css"
@@ -30,6 +30,8 @@ ROFI="$CONFIG/rofi/colors.rasi"
 STARSHIP="$CONFIG/starship.toml"
 VESTOP="$CONFIG/vesktop/themes/current.theme.css"
 NVIM="$CONFIG/nvim/lua/plugins/colors.lua"
+BTOP="$CONFIG/btop/themes/current.theme"
+CAVA="$CONFIG/cava/themes/current"
 
 FIREFOX_PROFILE=$(ls "$HOME/.mozilla/firefox" | grep '\.default-release-' | head -n1 || true)
 FIREFOX="$HOME/.mozilla/firefox/$FIREFOX_PROFILE/chrome/colors.css"
@@ -99,6 +101,14 @@ set_couleur_fish() {
 #─────────────────────────────────────────────────────────────
 #  APPLICATION DU THÈME
 #─────────────────────────────────────────────────────────────
+appliquer_icon() {
+  local file="$1/folder"
+  local icon=$(<"$file") 
+  if command -v papirus-folders >/dev/null; then
+    papirus-folders -C "$icon" 
+  fi
+}
+
 appliquer_theme() {
   local dossier="$1"
 
@@ -125,6 +135,8 @@ appliquer_theme() {
   lien_conf "$STARSHIP" "$dossier/starship/starship.toml" "Starship"
   lien_conf "$VESTOP" "$dossier/vesktop/current.theme.css" "Vesktop"
   lien_conf "$NVIM" "$dossier/nvim/colors.lua" "Nvim"
+  lien_conf "$BTOP" "$dossier/btop/theme.theme" "btop"
+  lien_conf "$CAVA" "$dossier/cava/theme" "cava"
 
   set_couleur_fish "$fishColor"
 
@@ -134,6 +146,9 @@ appliquer_theme() {
 
   msg_info "Relancez Firefox, les apps GTK et kitty pour voir les changements"
   [[ -x "$RELOAD" ]] && "$RELOAD"
+
+   msg_info "Application du thèmes papirus pour les icons"
+   appliquer_icon "$dossier"
 }
 
 #─────────────────────────────────────────────────────────────
@@ -176,7 +191,7 @@ aide() {
 Utilisation : $(basename "$0") [options]
 
 Options :
-  -t THEME       Appliquer un thème (nom du dossier dans $THEMES)
+  -t THEME       Appliquer un thème (nom du dossier dans $THEMES_DIR)
   -s TAILLE      Appliquer un profil de taille (1 ou 2)
   --liste        Afficher la liste des thèmes disponibles
   -h, --aide     Afficher ce message d’aide
@@ -185,7 +200,7 @@ EOF
 
 liste_themes() {
   echo "🎨 Thèmes disponibles :"
-  find "$THEMES" -mindepth 1 -maxdepth 1 -type d ! -name "size" ! -name "current" ! -iname ".*" -exec basename {} \;
+  find "$THEMES_DIR" -mindepth 1 -maxdepth 1 -type d ! -name "size" ! -name "current" ! -iname ".*" -exec basename {} \;
 }
 
 selected_theme() {
@@ -231,5 +246,5 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[[ "$theme" != "off" ]] && appliquer_theme "$THEMES/$theme"
+[[ "$theme" != "off" ]] && appliquer_theme "$THEMES_DIR/$theme"
 [[ "$taille" != "off" ]] && appliquer_taille "$taille"

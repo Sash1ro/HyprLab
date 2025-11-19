@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+source $HOME/.config/hyprlab/scripts/data/conf.env
 
 players=$(playerctl -l 2>/dev/null | grep -vE "\bfirefox\b")
 
@@ -10,7 +12,6 @@ if [ -z "$player" ]; then
 fi
 
 status=$(playerctl -p $player status 2>/dev/null)
-
 
 truncate_text() {
     local text="$1"
@@ -32,6 +33,6 @@ FORMAT=" ${Fsong} - ${Fartist}"
 
 case "$status" in
     "Playing") echo -e "󰎆 $FORMAT";;
-    "Paused")  echo -e " $FORMAT";;
+    "Paused")  echo -e " ${FORMAT}";;
     "Stopped"|"") echo -e "󰱶 Aucune Musique";;
 esac

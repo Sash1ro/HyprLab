@@ -1,4 +1,6 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+source $HOME/.config/hyprlab/scripts/data/conf.env
 
 #Hyprland
 echo " Rechargement commencé..."
@@ -28,3 +30,7 @@ if pgrep -x "swaync" >/dev/null; then
     echo "󰑓 Swaync"
     swaync-client -R -rs >/dev/null && echo "OK" || echo "Erreur"
 fi
+
+#Kitty
+echo "󰑓 kitty"
+kill -SIGUSR1 $(pidof kitty) >/dev/null && echo "OK" || echo "Erreur"
