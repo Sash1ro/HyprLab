@@ -1,0 +1,78 @@
+@import "colors.css";
+@import "size.css";
+
+/* ---- Global Defaults ---- */
+* {
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  min-height: 0;
+  font-weight: bold;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+window#waybar {
+  background: alpha(@background, 0.75);
+  border-radius: 0;
+  color: @foreground;
+  box-shadow: none;
+}
+
+tooltip {
+  background-color: @background;
+  border: 1px solid @border;
+  transition: all 200ms ease-out;
+}
+
+/* ---- Workspaces ---- */
+
+#workspaces {
+  margin: 10px 0 10px 1rem;
+  background-color: transparent;
+  transition: all 200ms ease-out;
+}
+
+#workspaces button {
+  opacity: 0.5;
+  margin: 0 6px;
+}
+
+#workspaces button:not(.empty):not(.active) {
+  opacity: 1;
+}
+
+#workspaces button.active {
+  opacity: 1;
+  margin: 0 7px;
+  color: @background;
+  background-color: @accent;
+  min-width: 20px;
+  border-radius: 2px;
+}
+
+#custom-media,
+#custom-record,
+#custom-icon,
+#clock,
+#right {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#custom-media {
+  margin-left: 3rem;
+}
+
+#custom-icon {
+  margin-left: 1rem;
+}
+
+#bluetooth,
+#network,
+#pulseaudio,
+#custom-notification,
+#custom-exit,
+#custom-tray {
+  margin-left: 10px;
+  margin-right: 10px;
+}

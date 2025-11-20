@@ -1,23 +1,13 @@
 #!/usr/bin/env bash
-#─────────────────────────────────────────────────────────────
-#  🎨 Gestionnaire de thèmes Hyprland
-#─────────────────────────────────────────────────────────────
-#  Hyprland, Waybar, Rofi, VSCode, Kitty, GTK, Starship, Fish, etc.
-#  Gère aussi les tailles et le fond d’écran via swww.
-#─────────────────────────────────────────────────────────────
-
 set -euo pipefail
 
 source $HOME/.config/hyprlab/scripts/data/conf.env
 
-#─────────────────────────────────────────────────────────────
-#  CHEMINS DE CONFIGURATION
-#─────────────────────────────────────────────────────────────
 CONFIG="$HOME/.config"
 CURRENT="$THEMES_DIR/current"
 SIZE_DIR="$THEMES_DIR/size"
 
-# Applications cibles
+
 GTK4="$CONFIG/gtk-4.0/gtk.css"
 GTK3="$CONFIG/gtk-3.0/gtk.css"
 CODIUM="$CONFIG/VSCodium/User/settings.json"
@@ -32,13 +22,11 @@ VESTOP="$CONFIG/vesktop/themes/current.theme.css"
 NVIM="$CONFIG/nvim/lua/plugins/colors.lua"
 BTOP="$CONFIG/btop/themes/current.theme"
 CAVA="$CONFIG/cava/themes/current"
+FISH="$CONFIG/fish/themes/current.theme"
 
 FIREFOX_PROFILE=$(ls "$HOME/.mozilla/firefox" | grep '\.default-release-' | head -n1 || true)
 FIREFOX="$HOME/.mozilla/firefox/$FIREFOX_PROFILE/chrome/colors.css"
 
-#─────────────────────────────────────────────────────────────
-#  ICONES + COULEURS
-#─────────────────────────────────────────────────────────────
 OK=""
 FAIL="󰅙"
 INFO=""
@@ -48,9 +36,6 @@ C_GREEN="\e[32m"
 C_RED="\e[31m"
 C_BLUE="\e[34m"
 
-#─────────────────────────────────────────────────────────────
-#  OUTILS
-#─────────────────────────────────────────────────────────────
 msg_ok() { echo -e "${C_GREEN}${OK}${C_RESET} $*"; }
 msg_fail() { echo -e "${C_RED}${FAIL}${C_RESET} $*"; }
 msg_info() { echo -e "${C_BLUE}${INFO}${C_RESET} $*"; }
@@ -61,46 +46,30 @@ lien_conf() {
   local cible="$1" lien="$2" app="$3"
   if existe "$cible" && [[ -n "$lien" && -e "$lien" ]]; then
     ln -sfn "$lien" "$cible"
-    msg_ok "Lien mis à jour pour $app"
+    msg_ok "Link updated for $app"
   else
-    msg_fail "Fichiers manquants pour $app"
+    msg_fail "Missing files for $app"
   fi
 }
 
 verif_cmd() {
   command -v "$1" >/dev/null 2>&1 || {
-    msg_fail "Dépendance manquante : $1"
+    msg_fail "Missing dependencies : $1"
     exit 1
   }
 }
 
-#─────────────────────────────────────────────────────────────
-#  COULEURS FISH
-#─────────────────────────────────────────────────────────────
 set_couleur_fish() {
-  local themeName="$1"
+
   if ! command -v fish >/dev/null; then
-    msg_fail "Fish n'est pas installé."
+    msg_fail "Fish is not installed"
     return
   fi
 
-  local themeList
-  themeList=$(fish -c "fish_config theme list" 2>/dev/null || true)
-  themeName=$(echo "$themeName" | tr '[:upper:]' '[:lower:]' | tr '_-' ' ')
-  local match
-  match=$(echo "$themeList" | grep -i "$themeName" || true)
-
-  if [[ -n "$match" ]]; then
-    msg_ok "Thème Fish trouvé : $match"
-    printf "y\n" | fish -c "fish_config theme save \"$match\"" >/dev/null 2>&1
-  else
-    msg_fail "Aucun thème Fish correspondant à '$themeName'"
-  fi
+  lien_conf "$FISH" "$dossier/fish/theme.theme" "fish"
+  printf "y\n" | fish -c "fish_config theme save current" >/dev/null 2>&1 
 }
 
-#─────────────────────────────────────────────────────────────
-#  APPLICATION DU THÈME
-#─────────────────────────────────────────────────────────────
 appliquer_icon() {
   local file="$1/folder"
   local icon=$(<"$file") 
@@ -113,15 +82,12 @@ appliquer_theme() {
   local dossier="$1"
 
   if [[ ! -d "$dossier" ]]; then
-    msg_fail "Ce thème n'existe pas : $(basename $dossier)"
+    msg_fail "Unknown theme : $(basename $dossier)"
     exit 1
   fi
 
-  msg_info "Application du thème : $(basename "$dossier")"
+  msg_info "Applying theme : $(basename "$dossier")"
   ln -sfn "$dossier" "$CURRENT"
-
-  local fishColor
-  fishColor=$(cat "$dossier/fish" 2>/dev/null || true)
 
   lien_conf "$HYPR" "$dossier/hypr/colors.conf" "Hyprland"
   lien_conf "$WAYBAR" "$dossier/waybar/colors.css" "Waybar"
@@ -138,16 +104,16 @@ appliquer_theme() {
   lien_conf "$BTOP" "$dossier/btop/theme.theme" "btop"
   lien_conf "$CAVA" "$dossier/cava/theme" "cava"
 
-  set_couleur_fish "$fishColor"
+  set_couleur_fish 
 
-  msg_ok "Changement du fond d’écran..."
+  msg_ok "Changing wallpaper..."
   verif_cmd swww
-  swww img "$dossier/wallpaper" --transition-type grow --transition-fps 60 || msg_fail "Erreur lors du changement du fond d’écran"
+  swww img "$dossier/wallpaper" --transition-type grow --transition-fps 60 || msg_fail "Error while changing wallpaper"
 
-  msg_info "Relancez Firefox, les apps GTK et kitty pour voir les changements"
+  msg_info "Restart firefox, gtk apps to see changes"
   [[ -x "$RELOAD" ]] && "$RELOAD"
 
-   msg_info "Application du thèmes papirus pour les icons"
+   msg_info "Applying Papirus icon theme"
    appliquer_icon "$dossier"
 }
 
@@ -161,24 +127,24 @@ changer_police_gtk() {
 
 appliquer_taille() {
   local s="$1"
-  msg_info "Application du profil de taille : $s"
+  msg_info "Applying size profile : $s"
   case "$s" in
   1)
     lien_conf "$CONFIG/kitty/size.conf" "$SIZE_DIR/size.conf" "Taille Kitty"
     lien_conf "$CONFIG/waybar/size.css" "$SIZE_DIR/size.css" "Taille Waybar"
     lien_conf "$CONFIG/rofi/size.rasi" "$SIZE_DIR/size.rasi" "Taille Rofi"
-    changer_police_gtk 'SF Pro Display Bold 10' || msg_fail "Erreur lors du changement de la police GTK"
+    changer_police_gtk 'SF Pro Display Bold 10' || msg_fail "Error while applying gtk font"
     [[ -x "$RELOAD" ]] && "$RELOAD"
     ;;
   2)
     lien_conf "$CONFIG/kitty/size.conf" "$SIZE_DIR/size2k.conf" "Taille Kitty (2K)"
     lien_conf "$CONFIG/waybar/size.css" "$SIZE_DIR/size2k.css" "Taille Waybar (2K)"
     lien_conf "$CONFIG/rofi/size.rasi" "$SIZE_DIR/size2k.rasi" "Taille Rofi (2K)"
-    changer_police_gtk 'SF Pro Display Bold 13' || msg_fail "Erreur lors du changement de la police GTK"
+    changer_police_gtk 'SF Pro Display Bold 13' || msg_fail "Error while applying gtk font"
     [[ -x "$RELOAD" ]] && "$RELOAD"
     ;;
   *)
-    msg_fail "Profil de taille inconnu : $s"
+    msg_fail "Unknown profile size : $s"
     ;;
   esac
 }
@@ -188,18 +154,18 @@ appliquer_taille() {
 #─────────────────────────────────────────────────────────────
 aide() {
   cat <<EOF
-Utilisation : $(basename "$0") [options]
+Usage : $(basename "$0") [options]
 
 Options :
-  -t THEME       Appliquer un thème (nom du dossier dans $THEMES_DIR)
-  -s TAILLE      Appliquer un profil de taille (1 ou 2)
-  --liste        Afficher la liste des thèmes disponibles
-  -h, --aide     Afficher ce message d’aide
+  -t THEME       Apply a theme 
+  -s TAILLE      Apply a size profile (1 (1920x1080) ou 2 (2560x1440))
+  --liste        Show themes list
+  -h, --aide     Show this message
 EOF
 }
 
 liste_themes() {
-  echo "🎨 Thèmes disponibles :"
+  echo "🎨 Themes :"
   find "$THEMES_DIR" -mindepth 1 -maxdepth 1 -type d ! -name "size" ! -name "current" ! -iname ".*" -exec basename {} \;
 }
 
@@ -239,7 +205,7 @@ while [[ $# -gt 0 ]]; do
     exit 0
     ;;
   *)
-    msg_fail "Option inconnue : $1"
+    msg_fail "Unknown option : $1"
     aide
     exit 1
     ;;

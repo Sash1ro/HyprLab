@@ -1,0 +1,51 @@
+# syntax highlighting variables
+# https://fishshell.com/docs/current/interactive.html#syntax-highlighting-variables
+fish_color_normal ced4da
+fish_color_command adb5bd
+fish_color_keyword adb5bd
+fish_color_quote adb5bd
+fish_color_redirection ced4da
+fish_color_end ced4da
+fish_color_error ced4da
+fish_color_param ced4da
+fish_color_comment ced4da
+# fish_color_match --background=brblue
+fish_color_selection --reverse
+# fish_color_history_current --bold
+fish_color_operator ced4da
+fish_color_escape ced4da
+fish_color_autosuggestion ced4da
+fish_color_cwd ced4da
+# fish_color_cwd_root red
+fish_color_user ced4da
+fish_color_host adb5bd
+fish_color_host_remote adb5bd
+fish_color_cancel ced4da
+fish_color_search_match --background=212529
+fish_color_valid_path
+
+# pager color variables
+# https://fishshell.com/docs/current/interactive.html#pager-color-variables
+fish_pager_color_progress ced4da
+fish_pager_color_background --background=212529
+fish_pager_color_prefix adb5bd
+fish_pager_color_completion ced4da
+fish_pager_color_description ced4da
+fish_pager_color_secondary_background
+fish_pager_color_secondary_prefix
+fish_pager_color_secondary_completion
+fish_pager_color_secondary_description
+fish_pager_color_selected_background --background=212529
+fish_pager_color_selected_prefix adb5bd
+fish_pager_color_selected_completion ced4da
+fish_pager_color_selected_description ced4da
+
+# custom color variables
+fish_color_subtle ced4da
+fish_color_text ced4da
+fish_color_love ced4da
+fish_color_gold adb5bd
+fish_color_rose ced4da
+fish_color_pine ced4da
+fish_color_foam adb5bd
+fish_color_iris adb5bd

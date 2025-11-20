@@ -1,0 +1,24 @@
+{
+    "label" : "lock",
+    "action" : "~/.config/hyprlab/scripts/power.sh lock",
+    "text" : "Lock",
+    "keybind" : "l"
+}
+{
+    "label" : "logout",
+    "action" : "~/.config/hyprlab/scripts/power.sh exit",
+    "text" : "Log Out",
+    "keybind" : "e"
+}
+{
+    "label" : "reboot",
+    "action" : "~/.config/hyprlab/scripts/power.sh reboot",
+    "text" : "Restart",
+    "keybind" : "r"
+}
+{
+    "label" : "shutdown",
+    "action" : "~/.config/hyprlab/scripts/power.sh shutdown",
+    "text" : "Power Off",
+    "keybind" : "s"
+}

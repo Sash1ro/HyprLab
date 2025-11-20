@@ -1,0 +1,186 @@
+@import "colors.rasi"
+@import "size.rasi"
+
+
+configuration {
+    modi: "drun,filebrowser,window";
+    show-icons: true;
+
+    display-drun:        "󰘳";
+    display-window:      "";
+    display-filebrowser: " ";
+
+    drun-display-format: "{name}";
+    window-format:              "{w} · {c} · {t}";
+}
+
+window {
+    transparency:   "real";
+    location:       center;
+    anchor:         center;
+    width: 40%;
+    x-offset:       0px;
+    y-offset:       0px;
+
+    border-radius:  12px;
+    border:         2px 2px 0 2px 
+    solid;
+    padding:        0;
+
+    background-color: @lightbg;
+}
+
+mainbox {
+    margin: 0;
+    padding: 0;
+    border:  0;
+    spacing: 0;
+    orientation: horizontal;
+    children: ["listbox"];
+}
+
+listbox {
+    margin: 0px;
+    children: ["inputbar","listview"];
+}
+
+
+
+listview {
+    padding: 10px;
+    enabled:                     true;
+    columns:                     4;
+    lines:                       3;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                false;
+    fixed-columns:               false;
+    border:        2px 0 2px 0px solid;
+    border-radius: 12px;
+    border-color:  @separatorcolor;
+    background-color: @background;
+    orientation:    vertical;
+}
+
+element {
+    padding: 10px;
+    margin: 5px;
+    cursor:  pointer;
+    border:  0;
+    orientation:    vertical;
+}
+
+element normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+element normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+element normal.active {
+    background-color: @normal-background;
+    text-color:       @active-foreground;
+}
+element selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+    border-radius:    10;
+}
+element selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+    border-radius:    10;
+}
+element selected.active {
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
+    border-radius:    10;
+}
+element alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+element alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @alternate-urgent-foreground;
+}
+element alternate.active {
+    background-color: @alternate-active-background;
+    text-color:       @alternate-active-foreground;
+}
+
+element-text {
+    vertical-align:              0.5;
+    horizontal-align: 0.5;
+    background-color: transparent;
+    text-color:       inherit;
+    highlight:        inherit;
+    cursor:           inherit;
+}
+
+element-icon {
+    size:             64px;
+    background-color: transparent;
+    text-color:       inherit;
+    cursor:           inherit;
+}
+
+message {
+    padding:      1px;
+    border:       2px dash 0px 0px;
+    border-color: @separatorcolor;
+}
+
+textbox {
+    text-color: @foreground;
+}
+
+
+sidebar {
+    border:       2px dash 0px 0px;
+    border-color: @separatorcolor;
+}
+
+button {
+    padding:     5px 30px 5px 30px;
+    spacing:    0;
+    border-radius: 10px;
+    cursor:     pointer;
+    text-color: @foreground;
+    background-color: @secondary;
+}
+
+button selected {
+    background-color: @main;
+    text-color:       @selected-normal-foreground;
+    border: 1px solid;
+    broder-color: @selected-normal-background;
+}
+
+inputbar {
+    padding: 10px 10px 0 10px;
+    background-color: transparent;
+    spacing:    0px;
+    text-color: @normal-foreground;
+    children:   ["entry"];
+}
+
+entry {
+    vertical-align: 0;
+    padding: 5px;
+    text-color:        @normal-foreground;
+    placeholder:       "  Search";
+    placeholder-color: @lightfg;
+    cursor:            text;
+    spacing:           0;
+}
+
+case-indicator {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+
