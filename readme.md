@@ -1,6 +1,8 @@
 # HYPERLAB
 
-**My approach to a comfortable Hyprland Setup**
+**My Hyprland Setup**
+
+![Tokyo Night Theme](/assets/exemples/terminal.png "Tokyo Night Theme")
 
 ## Features
 
