@@ -4,9 +4,15 @@
 
 ![Tokyo Night Theme](/assets/exemples/terminal.png "Tokyo Night Theme")
 
+<video width="640" controls>
+  <source src="assets/exemples/presentation.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Features
 
 - Themes switcher
+- Waybar Themes swicther
 - Wallpapers switcher
 - Complete Rofi menu for almost everything
 - Neovim
