@@ -4,7 +4,7 @@
 
 ![Tokyo Night Theme](/assets/exemples/terminal.png "Tokyo Night Theme")
 
-https://github.com/Sash1ro/HyprLab/blob/main/assets/exemples/presentation.mp4
+https://github.com/Sash1ro/HyprLab/blob/main/assets/exemples/present.mp4
 
 ## Features
 
