@@ -7,8 +7,14 @@ echo " Rechargement commencé..."
 echo "󰑓 Hyprland"
 hyprctl reload >/dev/null && echo "OK" || echo "Erreur"
 
-#nautilus
 
+if pgrep -x cava > /dev/null; then
+    echo "󰑓 Cava"
+    pkill -USR1 cava 2>/dev/null || pkill cava
+fi
+
+
+#nautilus
 if pgrep -x "nautilus" >/dev/null; then
     echo "󰑓 Nautilus"
     nautilus -q >/dev/null && echo "OK" || echo "Erreur"

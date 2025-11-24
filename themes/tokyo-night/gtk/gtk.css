@@ -1,48 +1,45 @@
-/*
-* GTK Colors
-* 
-*/
-
 * {
-    font-weight: 500;
-    font-family: "SF Pro Text", sans-serif;
+  font-weight: 500;
+  font-family: "SF Pro Text", sans-serif;
 }
 
-/* Tokyonight theme
-based on the solarized dark colours from adw-colors: https://github.com/lassekongo83/adw-colors/tree/main/themes/solarized-dark */
+/*
+*
+*TOKYO NIGHT
+*
+*/
 
-/* Catppuccin colors */
 @define-color accent #7aa2f7;
 @define-color red #f7768e;
 @define-color green #9ece6a;
 @define-color text #a9b1d6;
-@define-color surface_0 #24283b;
-@define-color base #1a1b26;
-@define-color mantle #24283b;
-@define-color crust #1a1b26;
+@define-color alt #24283b;
+@define-color bg #1a1b26;
+@define-color alt_bg #24283b;
+@define-color alt_bg2 #1a1b26;
 
 /* Adwaita stuff */
 @define-color accent_color @accent;
 @define-color accent_bg_color @accent;
-@define-color accent_fg_color @crust;
+@define-color accent_fg_color @alt_bg2;
 
-@define-color window_bg_color @base;
+@define-color window_bg_color @bg;
 @define-color window_fg_color @text;
 
-@define-color headerbar_bg_color @base;
+@define-color headerbar_bg_color @bg;
 @define-color headerbar_fg_color @text;
 
-@define-color popover_bg_color @base;
+@define-color popover_bg_color @bg;
 @define-color popover_fg_color @text;
 
 @define-color dialog_bg_color @popover_bg_color;
 @define-color dialog_fg_color @popover_fg_color;
 
-@define-color sidebar_bg_color @mantle;
+@define-color sidebar_bg_color @alt_bg;
 @define-color sidebar_fg_color @text;
-@define-color sidebar_backdrop_color @base;
-@define-color sidebar_shade_color @surface_0;
-@define-color sidebar_border_color @surface_0;
+@define-color sidebar_backdrop_color @bg;
+@define-color sidebar_shade_color @alt;
+@define-color sidebar_border_color @alt;
 
 @define-color secondary_sidebar_bg_color @sidebar_backdrop_color;
 @define-color secondary_sidebar_fg_color @text;
@@ -50,13 +47,13 @@ based on the solarized dark colours from adw-colors: https://github.com/lassekon
 @define-color secondary_sidebar_shade_color @sidebar_shade_color;
 @define-color secondary_sidebar_border_color @sidebar_border_color;
 
-@define-color view_bg_color @base;
+@define-color view_bg_color @bg;
 @define-color view_fg_color @text;
 
-@define-color card_bg_color @surface_0;
+@define-color card_bg_color @alt;
 @define-color card_fg_color @text;
 
-@define-color thumbnail_bg_color @surface_0;
+@define-color thumbnail_bg_color @alt;
 @define-color thumbnail_fg_color @text;
 
 @define-color warning_bg_color @red;
@@ -69,14 +66,13 @@ based on the solarized dark colours from adw-colors: https://github.com/lassekon
 @define-color success_fg_color @text;
 @define-color success_color @green;
 @define-color destructive_bg_color @red;
-@define-color destructive_fg_color @crust;
+@define-color destructive_fg_color @alt_bg2;
 @define-color destructive_color @red;
 
 @define-color hover_color @accent;
 @define-color active_color @accent;
 
 :root {
-
   --hover-color: @hover_color;
   --active-color: @active_color;
 

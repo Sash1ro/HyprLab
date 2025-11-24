@@ -32,41 +32,20 @@
     "seperate-outputs": true,
     "rewrite": {
       "  ": "  Hyprland",
-      "(.*)org.gnome.Nautilus": "  Nautilus",
       "(.*)Firefox(.*)": "  Firefox",
-      "(.*)obs(.*)": "  OBS"
+      "(.*)zen(.*)": "  Zen"
     },
     "on-click-middle": "pkill waybar && hyprctl dispatch exec waybar",
     "on-click": "~/.config/hyprlab/scripts/menu.sh"
   },
 
-  "mpris": {
-    "player": "chromium",
-    "format-playing": "{player_icon}  {title} - {artist}",
-    "format-paused": "{status_icon} <i>{title} - {artist}</i>",
-    "format-stopped": "{status_icon} Aucun Media",
-    "title-len": 30,
-    "artist-len": 25,
-    "tooltip-format": "{player} - {status}",
-    "player-icons": {
-      "default": "󰎆"
-    },
-    "status-icons": {
-      "paused": "",
-      "stopped": "󰱶 "
-    },
-    "ignored-players": ["firefox"],
-    "on-click": "playerctl play-pause",
-    "on-click-middle": "sleep 2 && playerctl previous",
-    "on-click-right": "sleep 2 && playerctl next"
-  },
-
   "custom/media": {
+    "format": "{}",
     "exec": "~/.config/hyprlab/scripts/song.sh",
     "on-click": "playerctl play-pause",
     "on-click-middle": "playerctl previous",
     "on-click-right": "playerctl next",
-    "interval": 1
+    "interval": 2
   },
 
   "wlr/taskbar": {

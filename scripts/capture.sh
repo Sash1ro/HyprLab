@@ -2,12 +2,12 @@
 
 source $HOME/.config/hyprlab/scripts/data/conf.env
 
-videoFolder="$HOME/Videos"
+videoFolder=$(xdg-user-dir VIDEOS)
 
 recording_flag="$SCRIPT_DIR/cache/wf-recorder-active"
 
 if [ ! -d $videoFolder ]; then 
-    mkdir $videoFolder
+    mkdir "$HOME/Videos"
 fi
 
 # Menu options

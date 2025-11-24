@@ -1,2 +1,12 @@
 install.sh
 dots.sh
+.vscode
+hyprland/conf/colors.conf
+themes/catppuccin-mocha/wallpaper
+themes/everforest/wallpaper
+themes/nord/wallpaper
+themes/rose-pine/wallpaper
+themes/tokyo-night/wallpaper
+themes/.darker/wallpaper
+themes/current
+waybar/themes/current

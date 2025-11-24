@@ -1,0 +1,7 @@
+@import "colors.rasi"
+@import "list.rasi"
+
+
+window {
+    width: 30%;
+}

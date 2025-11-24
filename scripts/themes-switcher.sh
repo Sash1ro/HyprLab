@@ -11,7 +11,6 @@ SIZE_DIR="$THEMES_DIR/size"
 GTK4="$CONFIG/gtk-4.0/gtk.css"
 GTK3="$CONFIG/gtk-3.0/gtk.css"
 CODIUM="$CONFIG/VSCodium/User/settings.json"
-CODE="$CONFIG/Code/User/settings.json"
 HYPR="$CONFIG/hyprlab/hyprland/conf/colors.conf"
 RELOAD="$CONFIG/hyprlab/scripts/reload.sh"
 WAYBAR="$CONFIG/waybar/colors.css"
@@ -20,12 +19,8 @@ ROFI="$CONFIG/rofi/colors.rasi"
 STARSHIP="$CONFIG/starship.toml"
 VESTOP="$CONFIG/vesktop/themes/current.theme.css"
 NVIM="$CONFIG/nvim/lua/plugins/colors.lua"
-BTOP="$CONFIG/btop/themes/current.theme"
 CAVA="$CONFIG/cava/themes/current"
 FISH="$CONFIG/fish/themes/current.theme"
-
-FIREFOX_PROFILE=$(ls "$HOME/.mozilla/firefox" | grep '\.default-release-' | head -n1 || true)
-FIREFOX="$HOME/.mozilla/firefox/$FIREFOX_PROFILE/chrome/colors.css"
 
 OK=""
 FAIL="󰅙"
@@ -93,24 +88,27 @@ appliquer_theme() {
   lien_conf "$WAYBAR" "$dossier/waybar/colors.css" "Waybar"
   lien_conf "$ROFI" "$dossier/rofi/colors.rasi" "Rofi"
   lien_conf "$CODIUM" "$dossier/vscode/settings.json" "VSCodium"
-  lien_conf "$CODE" "$dossier/vscode/settings.json" "VSCode"
   lien_conf "$KITTY" "$dossier/kitty/colors.conf" "Kitty"
-  lien_conf "$FIREFOX" "$dossier/firefox/colors.css" "Firefox"
   lien_conf "$GTK3" "$dossier/gtk/gtk.css" "GTK3"
   lien_conf "$GTK4" "$dossier/gtk/gtk.css" "GTK4"
   lien_conf "$STARSHIP" "$dossier/starship/starship.toml" "Starship"
   lien_conf "$VESTOP" "$dossier/vesktop/current.theme.css" "Vesktop"
   lien_conf "$NVIM" "$dossier/nvim/colors.lua" "Nvim"
-  lien_conf "$BTOP" "$dossier/btop/theme.theme" "btop"
   lien_conf "$CAVA" "$dossier/cava/theme" "cava"
 
   set_couleur_fish 
 
   msg_ok "Changing wallpaper..."
   verif_cmd swww
+
+  first_file=$(printf '%s\n' "$dossier"/wallpapers/* | head -n 1)
+  if [[ ! -f "$dossier/wallpaper"  ]];then 
+     ln -sfn $first_file "$dossier/wallpaper"
+  fi
+  
   swww img "$dossier/wallpaper" --transition-type grow --transition-fps 60 || msg_fail "Error while changing wallpaper"
 
-  msg_info "Restart firefox, gtk apps to see changes"
+  msg_info "Restart gtk apps to see changes"
   [[ -x "$RELOAD" ]] && "$RELOAD"
 
    msg_info "Applying Papirus icon theme"

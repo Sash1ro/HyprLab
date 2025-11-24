@@ -39,11 +39,12 @@
   },
 
   "custom/media": {
+    "format": "{}",
     "exec": "~/.config/hyprlab/scripts/song.sh",
     "on-click": "playerctl play-pause",
     "on-click-middle": "playerctl previous",
     "on-click-right": "playerctl next",
-    "interval": 1
+    "interval": 2
   },
 
   "custom/clip": {
@@ -120,7 +121,7 @@
     "format-connected": "󰂰 {device_alias}",
     "format-off": "",
     "interval": 30,
-    "on-click": "pkill blueman-manager && hyprctl dispatch exec blueman- || hyprctl dispatch exec blueman-manager",
+    "on-click": "pkill blueman-manager && hyprctl dispatch exec blueman-manager || hyprctl dispatch exec blueman-manager",
     "format-no-controller": ""
   },
 

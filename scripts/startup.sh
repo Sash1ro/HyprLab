@@ -7,7 +7,7 @@ ts="$scripts/themes-switcher.sh"
 
 nvim --headless -c "TransparentEnable" -c "qa!" && echo "error"
 
-swww-daemon & waybar & swaync
+swww-daemon & waybar & swaync 
 
 hyprctl monitors | grep -E "DP-[2-9]+" && $ts -s 2 || $ts -s 1 
 

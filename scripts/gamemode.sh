@@ -4,6 +4,16 @@ source $HOME/.config/hyprlab/scripts/data/conf.env
 HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
 ICON="$HOME/.config/hyprlab/assets/hypr.svg"
 
+if [[ $1 == "status" ]]; then
+    if [ "$HYPRGAMEMODE" = 1 ]; then
+        echo "false"
+        exit 0
+    else
+        echo "true"
+        exit 0
+    fi
+fi
+
 if [ "$HYPRGAMEMODE" = 1 ] ; then
     hyprctl --batch "\
         keyword animations:enabled 0;\
@@ -15,10 +25,10 @@ if [ "$HYPRGAMEMODE" = 1 ] ; then
         keyword general:gaps_out 0;\
         keyword general:border_size 1;\
         keyword decoration:rounding 0"
-    notify-send -a "Hyprland" "Modes" "GameMode activé !" -i $ICON
+    notify-send -a "Hyprland" "Modes" "GameMode on !" -i $ICON
     exit
 else
-    notify-send -a "Hyprland" "Modes" "GameMode Désactivé !" -i $ICON
+    notify-send -a "Hyprland" "Modes" "GameMode off !" -i $ICON
     hyprctl reload
     exit 0
 fi

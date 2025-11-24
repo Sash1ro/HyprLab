@@ -1,38 +1,46 @@
 #!/usr/bin/env bash
 
-source $HOME/.config/hyprlab/scripts/data/conf.env
+BLOCKED_PLAYERS=("firefox")
+MAX_LEN=30
 
-players=$(playerctl -l 2>/dev/null | grep -vE "\bfirefox\b")
+PLAYER=$(playerctl -l 2>/dev/null | head -n 1)
 
-player=$(echo "$players" | head -n 1)
-
-if [ -z "$player" ]; then
-    echo "󰱶 Aucune Musique"
+if [[ -z "$PLAYER" ]]; then
+    echo "󰱶  No Music"
     exit 0
 fi
 
-status=$(playerctl -p $player status 2>/dev/null)
 
-truncate_text() {
-    local text="$1"
-    local max="$2"
-    local len=${#text}
-    if [ "$len" -gt "$max" ]; then
-        echo "${text:0:$max}…"
-    else
-        echo "$text"
+status=$(playerctl -p "$PLAYER" status 2>/dev/null)
+
+
+title=$(playerctl -p "$PLAYER" metadata title 2>/dev/null)
+artist=$(playerctl -p "$PLAYER" metadata artist 2>/dev/null)
+
+
+if [[ -z "$title" ]]; then
+    echo "󰱶  No Music"
+    exit 0
+fi
+
+for blocked in "${BLOCKED_PLAYERS[@]}"; do
+    if [[ "$PLAYER" == *"$blocked"* ]] && [[ "$title" != *"music"* ]]; then
+        echo "󰱶  No Music"
+        exit 0
     fi
-}
+done
 
-song=$(playerctl -p $player metadata --format '{{title}}')
-artist=$(playerctl -p $player metadata --format '{{artist}}')
-Fsong=$(truncate_text "$song" 25)
-Fartist=$(truncate_text "$artist" 25)
+if (( ${#artist} > MAX_LEN )); then
+    artist="${artist:0:MAX_LEN}…"
+fi
 
-FORMAT=" ${Fsong} - ${Fartist}"
+if (( ${#title} > MAX_LEN )); then
+    title="${title:0:MAX_LEN}…"
+fi
 
 case "$status" in
-    "Playing") echo -e "󰎆 $FORMAT";;
-    "Paused")  echo -e " ${FORMAT}";;
-    "Stopped"|"") echo -e "󰱶 Aucune Musique";;
+    Playing) echo "󰽴  $artist - $title" ;;
+    Paused)  echo "  $artist - $title" ;;
+    *)       echo "  $artist - $title" ;;
 esac
+

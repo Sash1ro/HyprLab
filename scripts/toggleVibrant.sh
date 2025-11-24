@@ -1,26 +1,36 @@
 #!/usr/bin/env bash
 
-source $HOME/.config/hyprlab/scripts/data/conf.env
+source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
-file="$SCRIPT_DIR/cache/currentVibrant.txt"
+file="$SCRIPT_DIR/cache/currentVibrant"
 ICON="$HYPRLAB/assets/hypr.svg"
 
-if [ -f "$file" ]; then
-    current=$(cat "$file")
-else
-    current=0
-fi
+get_status() {
+    if [[ -f "$file" ]]; then
+        echo "true"
+    else
+        echo "false"
+    fi
+}
 
 activate_vibrant() {
     nvibrant 512 512 512 512
     echo 1 > "$file"
-    notify-send -a "Hyprland" "Paramètres" "Vibrant activé" -i $ICON
+    notify-send -a "Hyprland" "Paramètres" "Vibrant activé" -i "$ICON"
 }
 
 deactivate_vibrant() {
+    rm -f "$file"
     nvibrant 0 0 0 0
-    echo 0 > "$file"
-    notify-send -a "Hyprland" "Paramètres" "Vibrant désactivé" -i $ICON
+    notify-send -a "Hyprland" "Paramètres" "Vibrant désactivé" -i "$ICON"
+}
+
+toggle_vibrant() {
+    if [[ -f "$file" ]]; then
+        deactivate_vibrant
+    else
+        activate_vibrant
+    fi
 }
 
 case "$1" in
@@ -30,15 +40,14 @@ case "$1" in
     off)
         deactivate_vibrant
         ;;
+    toggle)
+        toggle_vibrant
+        ;;
     status)
-        if [ "$current" -eq 1 ]; then
-            echo "true"
-        else
-            echo "false"
-        fi
+        get_status
         ;;
     *)
-        echo "Usage : $0 {on|off|status}"
+        echo "Usage: $0 {on|off|toggle|status}"
         exit 1
         ;;
 esac
