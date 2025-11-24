@@ -4,10 +4,7 @@
 
 ![Tokyo Night Theme](/assets/exemples/terminal.png "Tokyo Night Theme")
 
-<video width="640" controls>
-  <source src="assets/exemples/presentation.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/Sash1ro/HyprLab/blob/main/assets/exemples/presentation.mp4
 
 ## Features
 
