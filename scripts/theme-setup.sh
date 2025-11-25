@@ -1,25 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source $HOME/.config/hyprlab/scripts/data/conf.env
+# Load configuration
+source "$HOME/.config/hyprlab/scripts/data/conf.env"
+
 CONFIG="$HOME/.config"
-newCONFIG="$HYPRLAB/dots/"
 
-for d in "$newCONFIG"/*; do
-    if [[ -d "$d" ]]; then
-        dirname=$(basename "$d")
-        cp -r "$d/." "$CONFIG/$dirname/"
-    fi
-done
+swww-daemon &>/dev/null &
+waybar &>/dev/null &
+swaync &>/dev/null &
 
-mkdir -p "$CONFIG/fish/themes"
-mkdir -p "$CONFIG/cava/themes"
+find "$HYPRLAB" -type l -exec rm -f {} \; || true
 
-swww-daemon & waybar & swaync
-
-find $HYPRLAB -type l -exec rm -f {} \;
-
-#Tokyo Night by default
-$SCRIPT_DIR/themes-switcher.sh -t "tokyo-night" || echo "Error while applying default theme"
-$SCRIPT_DIR/waybar-switcher.sh -t "minimalist" || echo "Error while applying default theme"
-
+# Apply default themes
+"$SCRIPT_DIR/themes-switcher.sh" -t "tokyo-night" || echo "Error while applying default theme"
+"$SCRIPT_DIR/waybar-switcher.sh" -t "minimalist" || echo "Error while applying default theme"
