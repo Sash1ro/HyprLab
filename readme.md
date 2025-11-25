@@ -2,14 +2,14 @@
 
 **My Hyprland Setup**
 
-![Tokyo Night Theme](/assets/exemples/terminal.png "Tokyo Night Theme")
+![](/assets/exemples/terminal.png "Tokyo Night Theme")
 
-![](/assets/exemples/present.gif "Tokyo Night Theme")
+![](/assets/exemples/present.gif "Theme Switcher")
 
 ## Features
 
 - Themes switcher
-- Waybar Themes swicther
+- Waybar Themes switcher
 - Wallpapers switcher
 - Complete Rofi menu for almost everything
 - Neovim

@@ -8,6 +8,18 @@ alias r="yay -Rns"
 alias search="yay -s"
 alias cleanup="sudo pacman -Rns $(pacman -Qtdq)"
 
+function push
+    if test (count $argv) -eq 0
+        echo "Usage: push \"message\""
+        return 1
+    end
+
+    git add .
+    git commit -m "$argv"
+    git push
+end
+
+
 alias god="sudo"
 
 #EZA

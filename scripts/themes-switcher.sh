@@ -39,12 +39,8 @@ existe() { [[ -e "$1" ]]; }
 
 lien_conf() {
   local cible="$1" lien="$2" app="$3"
-  if existe "$cible" && [[ -n "$lien" && -e "$lien" ]]; then
-    ln -sfn "$lien" "$cible"
-    msg_ok "Link updated for $app"
-  else
-    msg_fail "Missing files for $app"
-  fi
+  ln -sfn "$lien" "$cible"
+  msg_ok "Link updated for $app"
 }
 
 verif_cmd() {

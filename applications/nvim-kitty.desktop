@@ -1,9 +1,10 @@
 [Desktop Entry]
-Name=Neovim (Kitty)
+Name=Open in Neovim 
 Comment=Edit files in Neovim terminal
-Exec=kitty -e nvim %F
+Exec=sh -c "$TERMINAL -e nvim %F"
 Icon=utilities-terminal
 Terminal=false
+NoDisplay=true
 Type=Application
 Categories=Utility;TextEditor;
 MimeType=text/plain;

@@ -1,18 +1,8 @@
 #!/usr/bin/env bash
-#─────────────────────────────────────────────────────────────
-#  🎨 Waybar Switcher
-#─────────────────────────────────────────────────────────────
-#  Hyprland, Waybar, Rofi, VSCode, Kitty, GTK, Starship, Fish, etc.
-#  Gère aussi les tailles et le fond d’écran via swww.
-#─────────────────────────────────────────────────────────────
-
 set -euo pipefail
 
 source $HOME/.config/hyprlab/scripts/data/conf.env
 
-#─────────────────────────────────────────────────────────────
-#  CHEMINS DE CONFIGURATION
-#─────────────────────────────────────────────────────────────
 CONFIG="$HOME/.config"
 WAYBAR="$CONFIG/waybar"
 THEMES="$CONFIG/hyprlab/waybar/themes"
@@ -21,11 +11,6 @@ CURRENT="$THEMES/current"
 WAYBAR_CONF="$WAYBAR/config.jsonc"
 WAYBAR_CSS="$WAYBAR/style.css"
 
-
-
-#─────────────────────────────────────────────────────────────
-#  ICONES + COULEURS
-#─────────────────────────────────────────────────────────────
 OK=""
 FAIL="󰅙"
 INFO=""
@@ -35,9 +20,6 @@ C_GREEN="\e[32m"
 C_RED="\e[31m"
 C_BLUE="\e[34m"
 
-#─────────────────────────────────────────────────────────────
-#  OUTILS
-#─────────────────────────────────────────────────────────────
 msg_ok() { echo -e "${C_GREEN}${OK}${C_RESET} $*"; }
 msg_fail() { echo -e "${C_RED}${FAIL}${C_RESET} $*"; }
 msg_info() { echo -e "${C_BLUE}${INFO}${C_RESET} $*"; }
@@ -45,13 +27,8 @@ msg_info() { echo -e "${C_BLUE}${INFO}${C_RESET} $*"; }
 existe() { [[ -e "$1" ]]; }
 
 lien_conf() {
-  local cible="$1" lien="$2" app="$3"
-  if existe "$cible" && [[ -n "$lien" && -e "$lien" ]]; then
-    ln -sfn "$lien" "$cible"
-    msg_ok "Lien mis à jour pour $app"
-  else
-    msg_fail "Fichiers manquants pour $app"
-  fi
+  ln -sfn "$lien" "$cible"
+  msg_ok "Lien mis à jour pour $app"
 }
 
 verif_cmd() {
@@ -61,9 +38,6 @@ verif_cmd() {
   }
 }
 
-#─────────────────────────────────────────────────────────────
-#  APPLICATION DU THÈME
-#─────────────────────────────────────────────────────────────
 appliquer_theme() {
   local dossier="$1"
 
@@ -82,10 +56,6 @@ appliquer_theme() {
   pkill waybar && hyprctl dispatch exec waybar
 }
 
-
-#─────────────────────────────────────────────────────────────
-#  AIDE ET LISTE DES THEMES
-#─────────────────────────────────────────────────────────────
 aide() {
   cat <<EOF
 Utilisation : $(basename "$0") [options]
@@ -110,9 +80,6 @@ selected_theme() {
   echo $themeName
 }
 
-#─────────────────────────────────────────────────────────────
-#  MAIN
-#─────────────────────────────────────────────────────────────
 theme="off"
 
 while [[ $# -gt 0 ]]; do
