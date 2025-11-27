@@ -13,7 +13,6 @@ if pgrep -x cava > /dev/null; then
     pkill -USR1 cava 2>/dev/null || pkill cava
 fi
 
-
 #nautilus
 if pgrep -x "nautilus" >/dev/null; then
     echo "󰑓 Nautilus"

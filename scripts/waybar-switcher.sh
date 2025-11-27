@@ -27,6 +27,7 @@ msg_info() { echo -e "${C_BLUE}${INFO}${C_RESET} $*"; }
 existe() { [[ -e "$1" ]]; }
 
 lien_conf() {
+  local cible="$1" lien="$2" app="$3"
   ln -sfn "$lien" "$cible"
   msg_ok "Lien mis à jour pour $app"
 }

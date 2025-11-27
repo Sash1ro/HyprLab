@@ -11,19 +11,25 @@ fi
 clip=" Clipboard"
 capture=" Capture"
 opt=" Options"
+tam=" TaskManager"
 keys="󰌌 Keybinds"
 power="⏻ Power"
+lofi="󰎇 Online Music"
+emoji="󰱰 Emoji Picker"
 custom=" Customizations"
 
 prompt="$clip
 $capture
+$tam
+$lofi
+$emoji
 $opt
 $keys
 $power
 $custom"
 
 #POP ROFI
-v=$(echo -e "$prompt" | rofi -dmenu -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
+v=$(echo -e "$prompt" | rofi -dmenu -l 20 -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
 
 custom_menu() {
     local theme=" Themes"
@@ -112,9 +118,15 @@ opt_menu() {
 case $v in
     "$clip") "$SCRIPT_DIR/clip.sh" &;;
 
+    "$emoji")"$SCRIPT_DIR/emoji-picker.sh" &;;
+
+    "$lofi") "$SCRIPT_DIR/lofi.sh" &;;
+
     "$keys") "$SCRIPT_DIR/keybinds.sh" &;;
 
     "$capture") "$SCRIPT_DIR/capture.sh" &;;
+
+    "$tam") "$SCRIPT_DIR/btop.sh" &;;
 
     "$opt") opt_menu;;
 
