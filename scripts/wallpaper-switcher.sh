@@ -4,12 +4,16 @@ source $HOME/.config/hyprlab/scripts/data/conf.env
 
 current="$THEMES_DIR/current"
 currentWallpaper="$current/wallpaper"
-CACHE_ROOT="$THEMES_DIR/.cache/cached_imgs"
+CACHE_ROOT="$SCRIPT_DIR/cache/cached_imgs"
 WALLPAPER_ROOT="$current/wallpapers"
+
+case $1 in
+    "all")WALLPAPER_ROOT="$HYPRLAB/wallpapers";;
+    *);;
+esac
 
 notifIcon="$HYPRLAB/assets/hypr.svg"
 
-rm -rf $CACHE_ROOT
 [ ! -d $CACHE_ROOT ] && mkdir -p $CACHE_ROOT
 
 mapfile -t originPath < <(find ${WALLPAPER_ROOT} -maxdepth 1 -type f)
