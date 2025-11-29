@@ -50,6 +50,10 @@ case "$COMMAND" in
         shift 1
         "$SCRIPT_DIR/utils/waybar-switcher.sh" "${@:-}"
         ;;
+    wallpaper)
+        shift 1
+        "$SCRIPT_DIR/utils/wallpaper.sh" "${@:-}"
+        ;;
     message)
         shift 1
         "$SCRIPT_DIR/utils/messages.sh" "${@:-}"

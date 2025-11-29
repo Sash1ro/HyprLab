@@ -2,7 +2,6 @@
 set -euo pipefail
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
-export PATH="$SCRIPT_DIR/bin:$PATH"
 
 CONFIG="$HOME/.config"
 CURRENT="$THEMES_DIR/current"

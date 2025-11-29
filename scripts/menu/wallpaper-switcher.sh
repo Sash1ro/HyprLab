@@ -80,9 +80,6 @@ if [ -z "$selected" ]; then
     exit 0
 fi
 
-ln -sf "${bgresult[$selected]}" "$currentWallpaper"
+# ln -sf "${bgresult[$selected]}" "$currentWallpaper"
 
-if swww img "$currentWallpaper" --transition-type grow --transition-fps 60 >/dev/null; then 
-    notify-send -a "Hyprland" "Fond d'écran modifié" "Actuel : $selected" -i $notifIcon
-    echo "Thème appliqué : $selected"
-fi
+hyprlab wallpaper set "${bgresult[$selected]}" || hyprlab message fail "Error while applying wallpaper"
