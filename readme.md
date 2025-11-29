@@ -6,17 +6,18 @@
 
 ## Features
 
-- Unified CLI commands
+- Unified CLI commands (hyprlab --help)
 - Unified Menu (SUPER + ALT + SPACE)
-- Themes switcher
-- Waybar Themes switcher
-- Wallpapers switcher
+- Themes Switcher
+- Waybar Switcher
+- Wallpapers Switcher
+- Usefull scripts
 - Neovim
 - And more...
 
 ## Requirements
 
-- Hyprland and its dependencies
+- Hyprland and dependencies
 - an Arch Distro (for now)
 
 All other dependencies will be installed automatically.
