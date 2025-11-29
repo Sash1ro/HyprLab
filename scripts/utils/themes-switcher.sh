@@ -61,7 +61,7 @@ appliquer_theme() {
   local dossier="$1"
 
   if [[ ! -d "$dossier" ]]; then
-    hyprlab message fail "Unknown theme : $(basename $dossier)"
+    hyprlab message fail "Unknown theme : $(basename "$dossier")"
     exit 1
   fi
 
@@ -85,7 +85,8 @@ appliquer_theme() {
   hyprlab message ok "Changing wallpaper..."
   verif_cmd swww
 
-  first_file=$(echo "$dossier"/wallpapers/default.* | awk '{print $1}')
+  local themeName=$(basename "$dossier")
+  first_file=$(echo "$dossier"/wallpapers/$themeName.* | awk '{print $1}')
   if [[ ! -f "$dossier/wallpaper"  ]];then 
      hyprlab wallpaper set "$first_file"
   else
@@ -189,6 +190,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[[ "$theme" != "off" ]] && appliquer_theme "$THEMES_DIR/$theme" && hyprlab notify normal "Hyprlab" "Updated theme" "Actual : $theme" -i "hypr"
-[[ "$taille" != "off" ]] && appliquer_taille "$taille" && hyprlab notify normal "Hyprlab" "Updated size profile" "Actual : $taille" -i "hypr"
+[[ "$theme" != "off" ]] && appliquer_theme "$THEMES_DIR/$theme" && hyprlab notify normal "Hyprlab" "Updated theme" "Actual : $theme" -i "set"
+[[ "$taille" != "off" ]] && appliquer_taille "$taille" && hyprlab notify normal "Hyprlab" "Updated size profile" "Actual : $taille" -i "set"
 hyprlab reload

@@ -22,13 +22,13 @@ activate() {
             keyword general:gaps_out 0;\
             keyword general:border_size 1;\
             keyword decoration:rounding 0"
-        hyprlab notify normal Hyprlab Modes "Gamemode ON" -i hypr
+        hyprlab notify normal Hyprlab Options "Gamemode ON" -i adjust
         hyprlab message ok "Gamemode ON"
         exit 0
 }
 
 desactivate() {
-    hyprlab notify normal Hyprlab Modes "Gamemode OFF" -i hypr
+    hyprlab notify normal Hyprlab Options "Gamemode OFF" -i adjust
     hyprlab message ok "Gamemode OFF"
     hyprctl reload
     exit 0
