@@ -15,22 +15,22 @@ get_status() {
 activate_vibrant() {
     nvibrant 512 512 512 512
     touch "$file"
-    hyprlab notify normal Hyprlab Modes "Vibrant on" -i hypr
-    hyprlab message ok "Vibrant on"
+    hyprlab notify normal Hyprlab Modes "Vibrant ON" -i hypr
+    hyprlab message ok "Vibrant ON"
     exit 0
 }
 
-deactivate_vibrant() {
+desactivate_vibrant() {
     rm -f "$file"
     nvibrant 0 0 0 0
-    hyprlab notify normal Hyprlab Modes "Vibrant off" -i hypr
-    hyprlab message ok "Vibrant off"
+    hyprlab notify normal Hyprlab Modes "Vibrant OFF" -i hypr
+    hyprlab message ok "Vibrant OFF"
     exit 0
 }
 
 toggle_vibrant() {
     if [[ -f "$file" ]]; then
-        deactivate_vibrant
+        desactivate_vibrant
     else
         activate_vibrant
     fi
@@ -55,7 +55,7 @@ case "$1" in
         activate_vibrant
         ;;
     off)
-        deactivate_vibrant
+        desactivate_vibrant
         ;;
     toggle)
         toggle_vibrant

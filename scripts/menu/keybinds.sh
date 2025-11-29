@@ -18,7 +18,7 @@ while IFS= read -r line; do
     
     [[ -z "$line" || "$line" =~ ^# ]] && continue
 
-    if [[ "$line" =~ ^bind\ *= ]]; then
+    if [[ "$line" =~ ^bind\ *= ]] ; then
      
         comment=""
         if [[ "$line" == *"#"* ]]; then
@@ -41,6 +41,7 @@ while IFS= read -r line; do
         [[ "$key1" == '$shiftMod' ]] && key1="SHIFT"
         [[ "$key2" == '$shiftMod' ]] && key2="SHIFT"
         [[ "$key1" == '$mainMod SHIFT' ]] && key1="SUPER + SHIFT"
+        [[ "$key1" == '$mainMod ALT' ]] && key1="SUPER + ALT"
        
         if [[ -z "$key1" ]]; then
             keys="$key2"

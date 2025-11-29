@@ -85,18 +85,17 @@ appliquer_theme() {
   hyprlab message ok "Changing wallpaper..."
   verif_cmd swww
 
-  first_file=$(printf '%s\n' "$dossier"/wallpapers/* | head -n 1)
+  first_file=$(echo "$dossier"/wallpapers/default.* | awk '{print $1}')
   if [[ ! -f "$dossier/wallpaper"  ]];then 
-     ln -sfn $first_file "$dossier/wallpaper"
+     hyprlab wallpaper set "$first_file"
+  else
+    swww img "$dossier/wallpaper" --transition-type grow --transition-fps 60 || hyprlab message fail "Error while changing wallpaper"
   fi
-  
-  swww img "$dossier/wallpaper" --transition-type grow --transition-fps 60 || hyprlab message fail "Error while changing wallpaper"
 
   hyprlab message info "Restart gtk apps to see changes"
   
-
-   hyprlab message info "Applying Papirus icon theme"
-   appliquer_icon "$dossier"
+  hyprlab message info "Applying Papirus icon theme"
+  appliquer_icon "$dossier"
 }
 
 

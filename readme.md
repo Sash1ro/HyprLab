@@ -4,14 +4,13 @@
 
 ![](/assets/exemples/terminal.png "Tokyo Night Theme")
 
-![](/assets/exemples/present.gif "Theme Switcher")
-
 ## Features
 
+- Unified CLI commands
+- Unified Menu (SUPER + ALT + SPACE)
 - Themes switcher
 - Waybar Themes switcher
 - Wallpapers switcher
-- Complete Rofi menu for almost everything
 - Neovim
 - And more...
 

@@ -15,16 +15,16 @@ get_status() {
 activate() {
     hyprctl hyprsunset temperature 5000
     touch "$file"
-    hyprlab notify normal Hyprlab Modes "NightMode on" -i hypr
-    hyprlab message ok "NightMode on"
+    hyprlab notify normal Hyprlab Modes "NightMode ON" -i hypr
+    hyprlab message ok "NightMode ON"
     exit 0
 }
 
 desactivate() {
     hyprctl hyprsunset temperature 6200
     rm -f "$file"
-    hyprlab notify normal Hyprlab Modes "NightMode off" -i hypr
-    hyprlab message ok "NightMode off"
+    hyprlab notify normal Hyprlab Modes "NightMode OFF" -i hypr
+    hyprlab message ok "NightMode OFF"
     exit 0
 }
 
