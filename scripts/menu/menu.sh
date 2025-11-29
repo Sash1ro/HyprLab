@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source $HOME/.config/hyprlab/scripts/data/conf.env
+source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
 #KILL ROFI
 if pgrep -x "rofi" >/dev/null; then
@@ -35,26 +35,28 @@ custom_menu() {
     local theme=" Themes"
     local waybar=" Waybar themes"
     local wallpaper="󰸉 Wallpapers"
-    local p="$theme\n$waybar\n$wallpaper"
+    local wallpaperall="󰸉 All Wallpapers"
+    local p="$theme\n$waybar\n$wallpaper\n$wallpaperall"
 
     local v=$(echo -e "$p" | rofi -dmenu -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
 
     case $v in 
-        "$theme") "$SCRIPT_DIR/theme-picker.sh" &;;
-        "$wallpaper") "$SCRIPT_DIR/wallpaper-switcher.sh" &;;
-        "$waybar") "$SCRIPT_DIR/waybar-picker.sh" &;;
+        "$theme") "$SCRIPT_DIR/menu/theme-picker.sh";;
+        "$wallpaper") "$SCRIPT_DIR/menu/wallpaper-switcher.sh";;
+        "$wallpaperall") "$SCRIPT_DIR/menu/wallpaper-switcher.sh" all;;
+        "$waybar") "$SCRIPT_DIR/menu/waybar-picker.sh";;
         *)exit 0
     esac
 }
 
 other_menu() {
     local vibrant="󰌁 Turn vibrant on"
-    if [[ "$($SCRIPT_DIR/toggleVibrant.sh status)" == "true" ]]; then
+    if [[ "$($SCRIPT_DIR/options/toggleVibrant.sh status)" == "true" ]]; then
         vibrant="󰹊 Turn vibrant off"
     fi
 
     local gamemode="󰊗 Turn gamemode on"
-    if [[ "$($SCRIPT_DIR/gamemode.sh status)" == "true" ]]; then
+    if [[ "$($SCRIPT_DIR/options/gamemode.sh status)" == "true" ]]; then
         gamemode="󰊗 Turn gamemode off"
     fi
     local clip="󱘜 Clear Clipboard"
@@ -63,9 +65,9 @@ other_menu() {
     local v=$(echo -e "$p" | rofi -dmenu -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
 
     case $v in 
-        "$vibrant") "$SCRIPT_DIR/toggleVibrant.sh" toggle &;;
-        "$gamemode") "$SCRIPT_DIR/gamemode.sh" &;;
-        "$clip") "$SCRIPT_DIR/clip.sh" w &;;
+        "$vibrant") "$SCRIPT_DIR/options/toggleVibrant.sh" toggle;;
+        "$gamemode") "$SCRIPT_DIR/options/gamemode.sh";;
+        "$clip") "$SCRIPT_DIR/menu/clip.sh" w;;
         *)exit 0
     esac
 }
@@ -104,7 +106,7 @@ opt_menu() {
 
     case $v in
     "$hypr")hypr_menu;;
-    "$wifi") "$SCRIPT_DIR/wifi.sh" &;;
+    "$wifi") "$SCRIPT_DIR/menu/wifi.sh" &;;
     "$conn")pkill nm-connection-editor && hyprctl dispatch exec nm-connection-editor || hyprctl dispatch exec nm-connection-editor;;
     "$bt")pkill blueman-manager && hyprctl dispatch exec blueman-manager || hyprctl dispatch exec blueman-manager;;
     "$sound")pkill pavucontrol && hyprctl dispatch exec pavucontrol || hyprctl dispatch exec pavucontrol;;
@@ -116,17 +118,17 @@ opt_menu() {
 
 #SETTING UP OPTIONS 
 case $v in
-    "$clip") "$SCRIPT_DIR/clip.sh" &;;
+    "$clip") "$SCRIPT_DIR/menu/clip.sh";;
 
-    "$emoji")"$SCRIPT_DIR/emoji-picker.sh" &;;
+    "$emoji")"$SCRIPT_DIR/menu/emoji-picker.sh";;
 
-    "$lofi") "$SCRIPT_DIR/lofi.sh" &;;
+    "$lofi") "$SCRIPT_DIR/menu/lofi.sh";;
 
-    "$keys") "$SCRIPT_DIR/keybinds.sh" &;;
+    "$keys") "$SCRIPT_DIR/menu/keybinds.sh";;
 
-    "$capture") "$SCRIPT_DIR/capture.sh" &;;
+    "$capture") "$SCRIPT_DIR/menu/capture.sh";;
 
-    "$tam") "$SCRIPT_DIR/btop.sh" &;;
+    "$tam") "$SCRIPT_DIR/apps/btop.sh";;
 
     "$opt") opt_menu;;
 

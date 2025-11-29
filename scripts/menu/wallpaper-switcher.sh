@@ -6,13 +6,13 @@ current="$THEMES_DIR/current"
 currentWallpaper="$current/wallpaper"
 CACHE_ROOT="$SCRIPT_DIR/cache/cached_imgs"
 WALLPAPER_ROOT="$current/wallpapers"
+l=1
 
 case $1 in
-    "all")WALLPAPER_ROOT="$HYPRLAB/wallpapers";;
+    "all") WALLPAPER_ROOT="$HYPRLAB/wallpapers" 
+           l=3;;
     *);;
 esac
-
-notifIcon="$HYPRLAB/assets/hypr.svg"
 
 [ ! -d $CACHE_ROOT ] && mkdir -p $CACHE_ROOT
 
@@ -74,7 +74,7 @@ for fName in "${bgnames[@]}"; do
 done
 
 
-selected=$(echo -en "${strrr}" | rofi -dmenu -i -p "Choisir un fond d'écran" -theme $ROFI_THEME/wallpapersPicker.rasi )
+selected=$(echo -en "${strrr}" | rofi -dmenu -i -l $l -theme $ROFI_THEME/wallpapersPicker.rasi )
 
 if [ -z "$selected" ]; then
     exit 0

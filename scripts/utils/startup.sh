@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $HOME/.config/hyprlab/scripts/data/conf.env
+source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
 nvim --headless -c "TransparentEnable" -c "qa!" && echo "error"
 

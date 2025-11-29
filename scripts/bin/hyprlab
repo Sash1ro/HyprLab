@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(dirname "$0")"
+ENV_FILE="$HOME/.config/hyprlab/scripts/data/conf.env"
+
+[[ -f "$ENV_FILE" ]] && source "$ENV_FILE"
+
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+BLUE="\033[34m"
+RESET="\033[0m"
+
+show_help() {
+cat <<EOF
+Usage:
+  $(basename $0) <command>
+
+Commands :
+    menu        -> Show the unified menu
+    theme       -> themes manager
+    waybar      -> waybar themes manager
+    wallpaper   -> wallpaper manager
+    notify      -> Send notification using notify-send
+    message     -> Show messages 
+    reload      -> reload hyprland and some apps
+    record      -> screen recording
+    power       -> power commands like shutdown/reboot...
+    -h, --help  -> Show this message
+EOF
+}
+
+COMMAND="${1:-}"
+
+case "$COMMAND" in
+    menu)
+        shift 1
+        "$SCRIPT_DIR/menu/menu.sh"
+        ;;
+    notify)
+        shift 1
+        "$SCRIPT_DIR/utils/notify.sh" "${@:-}"
+        ;;
+    theme)
+        shift 1
+        "$SCRIPT_DIR/utils/themes-switcher.sh" "${@:-}"
+        ;;
+    waybar)
+        shift 1
+        "$SCRIPT_DIR/utils/waybar-switcher.sh" "${@:-}"
+        ;;
+    message)
+        shift 1
+        "$SCRIPT_DIR/utils/messages.sh" "${@:-}"
+        ;;
+    reload)
+        shift 1
+        "$SCRIPT_DIR/utils/reload.sh"
+        ;;
+    power)
+        shift 1
+        "$SCRIPT_DIR/utils/power.sh" "${@:-}"
+        ;;
+    record)
+        shift 1
+        "$SCRIPT_DIR/utils/record.sh" "${@:-}"
+        ;;
+    option)
+        shift 1
+        "$SCRIPT_DIR/utils/options.sh" "${@:-}"
+        ;;
+    "" | -h | --help )
+        show_help
+        ;;
+    *)
+        echo -e "${RED}Unknown command${RESET}: $COMMAND"
+        ;;
+esac

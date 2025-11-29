@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
-
 file="$HYPRLAB/hyprland/conf/keybinds.conf"
+
 keybinds=()
 max_len=0
 extra_space=3

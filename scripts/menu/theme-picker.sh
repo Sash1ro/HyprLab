@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-source $HOME/.config/hyprlab/scripts/data/conf.env
+source "$HOME/.config/hyprlab/scripts/data/conf.env"
+export PATH="$SCRIPT_DIR/bin:$PATH"
 
-themeSwitcher="$SCRIPT_DIR/themes-switcher.sh"
 currentLink="$THEMES_DIR/current"
-
-notifIcon="$HYPRLAB/assets/hypr.svg"
 
 if pgrep -x "rofi" >/dev/null; then
     pkill rofi
@@ -15,11 +13,6 @@ if [ -L "$currentLink" ]; then
     currentTheme=$(basename "$(readlink -f "$currentLink")")
 else
     currentTheme="Aucun"
-fi
-
-if [ ! -f "$themeSwitcher" ]; then
-    echo "Script introuvable !"
-    exit 1
 fi
 
 if [ ! -d "$THEMES_DIR" ]; then
@@ -53,9 +46,7 @@ if [ -z "$selected" ] || [[ "$selected" == ">>"* ]]; then
     exit 0
 fi
 
-$themeSwitcher -t $selected >/dev/null
-notify-send -a "Hyprland" "Thème modifié" "Actuel : $selected" -i $notifIcon
-echo "Thème appliqué : $selected"
+hyprlab theme -t $selected
 
 
 

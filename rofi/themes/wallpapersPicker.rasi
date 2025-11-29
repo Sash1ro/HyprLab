@@ -9,7 +9,8 @@ configuration{
 }
 
 listview{
-    dynamic:                     false;
+    dynamic:                     true;
+    fixed-width: none;
     spacing: 0px;
     columns:                     5;
     lines: 1;

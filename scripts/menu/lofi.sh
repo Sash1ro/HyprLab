@@ -4,12 +4,8 @@ declare -A menu_options=(
   ["Lofi Girl ☕️🎶"]="https://play.streamafrica.net/lofiradio"
   ["Chillhop ☕️🎶"]="http://stream.zeno.fm/fyn8eh3h5f8uv"
   ["SmoothChill ☕️🎶"]="https://media-ssl.musicradio.com/SmoothChill"
-  ["Minecraft Relax"]="https://www.youtube.com/watch?v=yJ6Lbsmb1lY"
+  ["Minecraft Relax ☕️🎶"]="https://www.youtube.com/watch?v=yJ6Lbsmb1lY"
 )
-
-notification() {
-  notify-send -u normal "Playing now: $@"
-}
 
 main() {
   choice=$(printf "%s\n" "${!menu_options[@]}" | rofi -i -dmenu -theme ~/.config/hyprlab/rofi/themes/list.rasi )
@@ -20,7 +16,7 @@ main() {
 
   link="${menu_options[$choice]}"
 
-  notification "$choice"
+  hyprlab notify low "Hyprlab" "Media" "Playing now $choice"
   
   if [[ $link == *playlist* || $link == *watch* ]]; then
     mpv --shuffle --vid=no --volume=75 "$link"
@@ -29,4 +25,4 @@ main() {
   fi
 }
 
-pkill mpv && notify-send -u low "Online Music stopped" || main
+pkill mpv && hyprlab notify low "Hyprlab" "Media" "Online Music stopped" || main
