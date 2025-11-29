@@ -6,7 +6,10 @@
 
 ## Features
 
-- Unified CLI commands (hyprlab --help)
+- Unified CLI commands
+  ```
+  hyprlab --help
+  ```
 - Unified Menu (SUPER + ALT + SPACE)
 - Themes Switcher
 - Waybar Switcher
