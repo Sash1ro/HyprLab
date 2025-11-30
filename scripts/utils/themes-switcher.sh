@@ -93,6 +93,7 @@ appliquer_theme() {
     swww img "$dossier/wallpaper" --transition-type grow --transition-fps 60 || hyprlab message fail "Error while changing wallpaper"
   fi
 
+  hyprlab reload
   hyprlab message info "Restart gtk apps to see changes"
   
   hyprlab message info "Applying Papirus icon theme"
@@ -114,14 +115,14 @@ appliquer_taille() {
     lien_conf "$CONFIG/waybar/size.css" "$SIZE_DIR/size.css" "Taille Waybar"
     lien_conf "$CONFIG/rofi/size.rasi" "$SIZE_DIR/size.rasi" "Taille Rofi"
     changer_police_gtk 'SF Pro Display Bold 10' || hyprlab message fail "Error while applying gtk font"
-    
+    hyprlab reload
     ;;
   2)
     lien_conf "$CONFIG/kitty/size.conf" "$SIZE_DIR/size2k.conf" "Taille Kitty (2K)"
     lien_conf "$CONFIG/waybar/size.css" "$SIZE_DIR/size2k.css" "Taille Waybar (2K)"
     lien_conf "$CONFIG/rofi/size.rasi" "$SIZE_DIR/size2k.rasi" "Taille Rofi (2K)"
     changer_police_gtk 'SF Pro Display Bold 13' || hyprlab message fail "Error while applying gtk font"
-    
+    hyprlab reload
     ;;
   *)
     hyprlab message fail "Unknown profile size : $s"
@@ -192,4 +193,3 @@ done
 
 [[ "$theme" != "off" ]] && appliquer_theme "$THEMES_DIR/$theme" && hyprlab notify normal "Hyprlab" "Updated theme" "Actual : $theme" -i preferences-theme
 [[ "$taille" != "off" ]] && appliquer_taille "$taille" && hyprlab notify normal "Hyprlab" "Updated size profile" "Actual : $taille" -i preferences-theme
-hyprlab reload

@@ -9,19 +9,23 @@ Usage:
   $(basename "$0") <command>
 
 Commands :
-    add <file path> [options]   -> copy your wallpaper into hyprlab wallpapers folder and theme if provided
-    remove <filename> (theme)   -> remove a wallpaper from everywhere or only from a theme if provided
-    set <file path>             -> set the wallpaper for the current theme
-    -h, --help                  -> Show this message
+    add <file path> [options]       -> copy your wallpaper into hyprlab wallpapers folder and theme if provided
+    add-all <folder path> [-t, -r]  -> add all wallpaper from a folder
+    remove <filename> (theme)       -> remove a wallpaper from everywhere or only from a theme if provided
+    set <file path>                 -> set the wallpaper for the current theme
+    clear                           -> clear cache used for rofi menu
+    -h, --help                      -> Show this message
 Options :
-    -t, --theme                 -> theme name
-    -n, --name                  -> file name
-    -r, --remove                -> remove the original file
+    -t, --theme                     -> theme name
+    -n, --name                      -> file name
+    -r, --remove                    -> remove the original file
 EOF
 }
 
 add() {
     local choice=${1:-}
+    local filename
+    filename=$(basename "$choice")
 
     if [[ -z "$choice" ]]; then
         hyprlab message fail "No file provided"
@@ -29,12 +33,14 @@ add() {
     fi
 
     if [[ ! -f "$choice" ]]; then
-        hyprlab message fail "This file doesn't exist"
-        exit 1
+        if [[ -f "$HYPRLAB/wallpapers/$filename" ]]; then
+            choice="$HYPRLAB/wallpapers/$filename"
+        else
+            hyprlab message fail "This file doesn't exist"
+            exit 1
+        fi
     fi
 
-    local filename
-    filename=$(basename "$choice")
     local remove=0
     local success=0
     local name=""
@@ -134,10 +140,65 @@ setW() {
     fi
 }
 
+add_all() {
+    local choice=${1:-}
+    shift
+
+    if [[ -z "$choice" ]]; then
+        hyprlab message fail "No folder provided"
+        exit 1
+    fi
+
+    if [[ ! -d "$choice" ]]; then
+        hyprlab message fail "This folder doesn't exist"
+        exit 1
+    fi
+
+    local remove=0
+    local theme=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -t|--theme) theme=$2; shift 2;;
+            -r|--remove) remove=1; shift;;
+            *) hyprlab message fail "Unknown option: $1"; help; exit 1;;
+        esac
+    done
+
+    local opts=()
+    [[ $remove -eq 1 ]] && opts+=("-r")
+    [[ -n $theme ]] && opts+=("-t" "$theme")
+
+    local extensions="jpg|jpeg|png|bmp|webp"
+
+    for fichier in "$choice"/*; do
+        if [[ -f "$fichier" ]]; then
+            ext="${fichier##*.}"
+            ext="${ext,,}"
+            if [[ $ext =~ ^($extensions)$ ]]; then
+                add "$fichier" "${opts[@]}"
+            fi
+        fi
+    done
+}
+
+clear() {
+    local cache="$SCRIPT_DIR/cache/cached_imgs"
+    rm -rf $cache/*
+}
+
 case "${1:-}" in
     add)
         shift 1
         add "$@"
+        ;;
+    add-all)
+        shift 1
+        add_all "$@"
+        ;;
+    clear)
+        shift 1
+        clear
         ;;
     remove)
         shift 1 

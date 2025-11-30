@@ -25,6 +25,11 @@ if pgrep -x "waybar" >/dev/null; then
     hyprctl dispatch exec waybar >/dev/null && hyprlab message ok "Waybar reloaded" || hyprlab message fail "Error while reloading Waybar"
 fi
 
+if pgrep -x "nautilus" >/dev/null; then
+    hyprlab message info "Reloading nautilus, closing all window"
+    nautilus -q && hyprlab message ok "Nautilus reloaded" || hyprlab message fail "Error while reloading Nautilus"
+fi
+
 #SWAYNC
 if pgrep -x "swaync" >/dev/null; then
     hyprlab message info "Reloading Swaync"

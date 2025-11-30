@@ -58,12 +58,16 @@ for pathIDX in "${!cachedPath[@]}"; do
     cachedresult["${filename}"]="${cachedPath[$pathIDX]}"
 done
 
-
+test=0
 for fName in "${bgnames[@]}"; do
     if [[ -v cachedresult[$fName] ]] 
     then
         :
     else
+        if [[ $test -eq 0 ]]; then
+            hyprlab notify normal "Hyprlab" "Caching images" "This operation could take some times.."
+            test=1
+        fi
         cachedresult[$fName]=$(cacheImg "${bgresult[$fName]}" "${CACHE_ROOT}/${fName}.png")
     fi
 done
