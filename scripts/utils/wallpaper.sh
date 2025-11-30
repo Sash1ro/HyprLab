@@ -127,7 +127,7 @@ setW() {
     if [[ -f "$file" ]]; then
         ln -sf "$file" "$current"
         swww img $current --transition-type grow --transition-fps 60 >/dev/null \
-             && hyprlab notify normal Hyprlab "Wallpaper Updated" "Actual : $filename" -i picture \
+             && hyprlab notify normal Hyprlab "Wallpaper Updated" "Actual : $filename" -i image \
              || hyprlab message fail "Error while applying $filename"
     else 
         hyprlab message fail "$filename dont exist" && exit 1

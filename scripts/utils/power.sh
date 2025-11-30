@@ -43,15 +43,15 @@ goExit() {
 
 goLock() {
 	echo ":: Lock"
-	hyprlab notify normal Hyprlab Hyprlab "Locking hyprland" -i adjust
+	hyprlab notify normal Hyprlab Hyprlab "Locking ..." -i preferences-system
 	sleep 0.5
 	hyprlock
-	hyprlab notify normal Hyprlab Hyperlab "Welcome Back" -i hypr
+	hyprlab notify normal Hyprlab Hyperlab "Welcome Back" -i hand
 }
 
 goReboot() {
 	echo ":: Reboot"
-	hyprlab notify normal Hyprlab Hyprlab "Rebooting hyprland" -i adjust
+	hyprlab notify normal Hyprlab Hyprlab "Rebooting ..." -i preferences-system
 	terminate_clients
 	sleep 0.5
 	systemctl reboot
@@ -59,7 +59,7 @@ goReboot() {
 
 goShutdown() {
 	echo ":: Shutdown"
-	hyprlab notify normal Hyprlab Hyprlab "Turning off hyprland" -i adjust
+	hyprlab notify normal Hyprlab Hyprlab "Shutting down ..." -i preferences-system
 	terminate_clients
 	sleep 0.5
 	systemctl poweroff
@@ -67,14 +67,14 @@ goShutdown() {
 
 goSuspend() {
 	echo ":: Suspend"
-	hyprlab notify normal Hyprlab Hyprlab "Suspending hyprland" -i adjust
+	hyprlab notify normal Hyprlab Hyprlab "Suspending ..." -i preferences-system
 	sleep 0.5
 	systemctl suspend
 }
 
 goHibernate() {
 	echo ":: Hibernate"
-	hyprlab notify normal Hyprlab Hyprlab "Hibernating hyprland" -i adjust
+	hyprlab notify normal Hyprlab Hyprlab "Hibernating ..." -i preferences-system
 	sleep 1
 	systemctl hibernate
 }

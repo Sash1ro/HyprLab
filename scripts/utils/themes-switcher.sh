@@ -190,6 +190,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[[ "$theme" != "off" ]] && appliquer_theme "$THEMES_DIR/$theme" && hyprlab notify normal "Hyprlab" "Updated theme" "Actual : $theme" -i "set"
-[[ "$taille" != "off" ]] && appliquer_taille "$taille" && hyprlab notify normal "Hyprlab" "Updated size profile" "Actual : $taille" -i "set"
+[[ "$theme" != "off" ]] && appliquer_theme "$THEMES_DIR/$theme" && hyprlab notify normal "Hyprlab" "Updated theme" "Actual : $theme" -i preferences-theme
+[[ "$taille" != "off" ]] && appliquer_taille "$taille" && hyprlab notify normal "Hyprlab" "Updated size profile" "Actual : $taille" -i preferences-theme
 hyprlab reload

@@ -96,4 +96,4 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[[ "$theme" != "off" ]] && apply_theme "$THEMES/$theme" && hyprlab notify normal "Hyprlab" "Updated waybar" "Actual : $theme" -i "set"
+[[ "$theme" != "off" ]] && apply_theme "$THEMES/$theme" && hyprlab notify normal "Hyprlab" "Updated waybar" "Actual : $theme" -i preferences-theme

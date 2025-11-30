@@ -47,6 +47,7 @@ CONTENT="$4"
 shift 4
 
 PLAY_SOUND=""
+ICON_NAME=""
 ICON=""
 
 [[ ! -d "$ICON_DIR" ]] && echo -e "${YELLOW}Warning:${RESET} Icon directory missing: $ICON_DIR"
@@ -55,7 +56,7 @@ while [[ $# -gt 0 ]]; do
     case "$1" in
         -i|--icon)
             ICON_NAME="$2"
-            ICON="$ICON_DIR/$ICON_NAME.svg"
+            ICON="$ICON_DIR/$ICON_NAME"
             shift 2
             ;;
         -s|--sound)
@@ -81,12 +82,12 @@ esac
 
 
 if [[ -n "$ICON" ]]; then
-    if [[ ! -f "$ICON" ]]; then
-        if [[ -f "${ICON%.svg}.png" ]]; then
-            ICON="${ICON%.svg}.png"
+    if [[ ! -f "$ICON.svg" ]]; then
+        if [[ -f "$ICON.png" ]]; then
+            ICON="$ICON.png"
         else
-            echo -e "${YELLOW}Warning:${RESET} Icon not found, using default."
-            ICON="$ICON_DIR/hypr.svg"
+            echo -e "${YELLOW}Warning:${RESET} Icon not found, using default icon theme."
+            ICON=$ICON_NAME
         fi
     fi
 fi
