@@ -16,6 +16,10 @@
     {
       "name": "Qt-5.15.17-linux-g++_from_PATH",
       "path": "/usr/bin/qmake"
+    },
+    {
+      "name": "Qt-5.15.18-linux-g++_from_PATH",
+      "path": "/usr/bin/qtpaths"
     }
   ],
   "workbench.view.showQuietly": {
@@ -37,5 +41,6 @@
   "editor.scrollbar.horizontalScrollbarSize": 6,
   "editor.scrollbar.horizontal": "auto",
   "window.zoomLevel": 0,
-  "workbench.statusBar.visible": false
+  "workbench.statusBar.visible": false,
+  "qt-qml.qmlls.useQmlImportPathEnvVar": true
 }

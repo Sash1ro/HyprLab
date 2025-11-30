@@ -41,7 +41,8 @@
 -------------------------------------- */
 .notification {
   background: alpha(@back-alt, 0.7);
-  border: 1px solid @accent;
+  min-width: 300px;
+  border: 1px solid #45475a;
   border-radius: 12px;
   padding: 6px 10px;
   margin-bottom: 6px;

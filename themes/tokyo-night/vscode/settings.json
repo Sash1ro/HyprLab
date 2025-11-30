@@ -16,6 +16,10 @@
     {
       "name": "Qt-5.15.17-linux-g++_from_PATH",
       "path": "/usr/bin/qmake"
+    },
+    {
+      "name": "Qt-5.15.18-linux-g++_from_PATH",
+      "path": "/usr/bin/qtpaths"
     }
   ],
   "workbench.view.showQuietly": {

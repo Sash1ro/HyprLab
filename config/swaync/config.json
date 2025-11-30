@@ -9,7 +9,7 @@
   "layer-shell": true,
   "control-center-width": 375,
   "control-center-margin-top": 10,
-  "control-center-margin-bottom": 15,
+  "control-center-margin-bottom": 500,
   "control-center-margin-right": 10,
   "control-center-margin-left": 0,
   "notification-window-width": 320,
@@ -26,15 +26,14 @@
   "transition-time": 200,
   "hide-on-clear": false,
   "hide-on-action": true,
-  "text-empty": "Aucune Notifications",
+  "text-empty": "No Notifications",
   "script-fail-notify": true,
   "widgets": [
     "title",
     "buttons-grid",
     "volume",
     "dnd",
-    "notifications",
-    "mpris"
+    "notifications"
   ],
   "widget-config": {
     "mpris": {
@@ -54,7 +53,7 @@
       "show-per-app-label": false
     },
     "dnd": {
-      "text": "Ne pas déranger"
+      "text": "DND"
     },
     "title": {
       "text": "Notifications",
@@ -75,8 +74,8 @@
           "label": "󰂯",
           "type": "toggle",
           "active": true,
-          "command": "sh -c '~/.config/hyprlab/scripts/toggleBluetooth.sh'",
-          "update-command": "sh -c '~/.config/hyprlab/scripts/toggleBluetooth.sh status'"
+          "command": "sh -c 'hyprlab option -b toggle'",
+          "update-command": "sh -c 'hyprlab option -b status'"
         },
 
         {
@@ -87,11 +86,11 @@
           "update-command": "sh -c '[[ $(pactl get-source-mute @DEFAULT_SOURCE@) == *yes* ]] && echo true || echo false'"
         },
         {
-          "label": "󰌁",
+          "label": "",
           "type": "toggle",
           "active": false,
-          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && ~/.config/hyprlab/scripts/toggleVibrant.sh on || ~/.config/hyprlab/scripts/toggleVibrant.sh off '",
-          "update-command": "sh -c '~/.config/hyprlab/scripts/toggleVibrant.sh status'"
+          "command": "sh -c 'hyprlab option -n toggle'",
+          "update-command": "sh -c 'hyprlab option -n status'"
         }
       ]
     }

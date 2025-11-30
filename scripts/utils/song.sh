@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
 BLOCKED_PLAYERS=("firefox")
-MAX_LEN=30
+MAX_LEN=0
+
+case ${1:-} in 
+    none)MAX_LEN=999999;;
+    "")MAX_LEN=30;;
+    *)MAX_LEN=$1;;
+esac
+
 
 PLAYER=$(playerctl -l 2>/dev/null | head -n 1)
 

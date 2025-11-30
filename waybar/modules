@@ -12,31 +12,46 @@
     "on-click": "hyprlab menu",
     "on-click-right": "~/.config/hyprlab/scripts/apps/info.sh"
   },
-
   "hyprland/workspaces": {
     "rotate": 0,
     "all-outputs": false,
     "active-only": false,
-    "on-click": "activate",
     "disable-scroll": false,
     "on-scroll-up": "hyprctl dispatch workspace -1",
     "on-scroll-down": "hyprctl dispatch workspace +1",
     "persistent-workspaces": {
-      "*": [1, 2, 3, 4, 5],
-      "DP-2": [1, 2, 3, 4, 5],
-      "DP-3": [6, 7, 8, 9, 10]
+      "*": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "DP-2": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "DP-3": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
     }
   },
-
   "custom/media": {
     "format": "{}",
     "exec": "~/.config/hyprlab/scripts/utils/song.sh",
     "on-click": "playerctl play-pause",
     "on-click-middle": "playerctl previous",
     "on-click-right": "playerctl next",
+    "markup": false,
     "interval": 2
   },
-
   "wlr/taskbar": {
     "format": "{icon}",
     "icon-size": 18,
@@ -44,39 +59,32 @@
     "on-click": "activate",
     "on-click-middle": "close"
   },
-
   "clock": {
     "format": "{:%A ~ %H:%M}",
     "timezone": "Europe/Paris",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%d-%m-%Y}"
   },
-
   "tray": {
     "icon-size": 19,
     "spacing": 10,
     "show-passive-items": false
   },
-
   "cpu": {
     "format": "{usage}%",
     "tooltip": true,
     "on-click": "~/.config/hyprlab/scripts/apps/btop.sh"
   },
-
   "memory": {
     "format": "{}%",
     "on-click": "~/.config/hyprlab/scripts/apps/btop.sh"
   },
-
   "cpu#icon": {
     "format": ""
   },
-
   "memory#icon": {
     "format": "󰾆"
   },
-
   "bluetooth": {
     "format": "󰂯",
     "format-disabled": "󰂲",
@@ -86,7 +94,6 @@
     "on-click": "pkill blueman-manager && hyprctl dispatch exec blueman-manager || hyprctl dispatch exec blueman-manager",
     "format-no-controller": ""
   },
-
   "network": {
     "format-wifi": " ",
     "format-ethernet": "",
@@ -95,7 +102,6 @@
     "format-disconnected": "<span foreground='#f38ba8'> Disconnected</span>",
     "on-click": "pkill nm-connection-editor && hyprctl dispatch exec nm-connection-editor || hyprctl dispatch exec nm-connection-editor"
   },
-
   "pulseaudio": {
     "format": "{icon}",
     "format-bluetooth": "{icon}",
@@ -104,34 +110,35 @@
     "format-icons": {
       "headphone": "",
       "portable": "",
-      "default": ["", ""]
+      "default": [
+        "",
+        ""
+      ]
     },
     "scroll-step": 1,
     "on-click": "pkill pavucontrol && hyprctl dispatch exec pavucontrol || hyprctl dispatch exec pavucontrol",
     "on-click-middle": "pactl set-sink-mute 0 toggle",
-    "ignored-sinks": ["Easy Effects Sink"]
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ]
   },
-
   "custom/icon": {
     "format": "",
     "on-click": "hyprlab menu",
     "on-click-right": "~/.config/hyprlab/scripts/apps/info.sh",
     "on-click-middle": "pkill waybar && hyprctl dispatch exec waybar"
   },
-
   "custom/clip": {
     "format": "󱉧",
     "tooltip": false,
     "on-click": "~/.config/hyprlab/scripts/menu/clip.sh",
     "on-click-middle": "~/.config/hyprlab/scripts/menu/clip.sh w"
   },
-
   "custom/shot": {
     "format": "󱣴",
     "tooltip": false,
     "on-click": "~/.config/hyprlab/scripts/menu/capture.sh"
   },
-
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
@@ -152,13 +159,11 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-
   "custom/exit": {
     "format": "",
     "on-click": "wlogout -b 4 -P 0",
     "tooltip": false
   },
-
   "custom/record": {
     "exec": "~/.config/hyprlab/scripts/utils/record-tray.sh",
     "tooltip": true,
@@ -166,32 +171,42 @@
     "on-click": "hyprlab record stop",
     "interval": 1
   },
-
   "custom/tray": {
     "format": "",
     "tooltip": false
   },
-
   "group/bar": {
     "orientation": "horizontal",
-    "modules": ["mpris"]
+    "modules": [
+      "mpris"
+    ]
   },
-
   "group/first": {
     "orientation": "horizontal",
-    "modules": ["clock", "custom/notification", "custom/exit"]
+    "modules": [
+      "clock",
+      "custom/notification",
+      "custom/exit"
+    ]
   },
-
   "group/utils": {
     "orientation": "horizontal",
-    "modules": ["group/traybox", "pulseaudio", "bluetooth", "network"]
+    "modules": [
+      "group/traybox",
+      "pulseaudio",
+      "bluetooth",
+      "network"
+    ]
   },
-
   "group/perfs": {
     "orientation": "horizontal",
-    "modules": ["cpu#icon", "cpu", "memory#icon", "memory"]
+    "modules": [
+      "cpu#icon",
+      "cpu",
+      "memory#icon",
+      "memory"
+    ]
   },
-
   "group/right": {
     "orientation": "horizontal",
     "modules": [
@@ -204,7 +219,6 @@
       "custom/exit"
     ]
   },
-
   "group/traybox": {
     "drawer": {
       "transition-left-to-right": false,
@@ -212,6 +226,9 @@
       "children-class": "element"
     },
     "orientation": "horizontal",
-    "modules": ["custom/tray", "tray"]
+    "modules": [
+      "custom/tray",
+      "tray"
+    ]
   }
 }
