@@ -41,7 +41,5 @@
   "workbench.statusBar.visible": false,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "everforest.darkContrast": "hard",
-  "everforest.darkWorkbench": "high-contrast"
+  }
 }

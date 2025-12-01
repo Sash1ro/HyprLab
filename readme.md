@@ -2,7 +2,12 @@
 
 **My Hyprland Setup**
 
-![](/assets/exemples/terminal.png "Tokyo Night Theme")
+![](/assets/exemples/catppuccin.png "Catppuccin Mocha Theme")
+![](/assets/exemples/tokyo-night.png "Tokyo Night Theme")
+![](/assets/exemples/gruvbox.png "Gruvbox Theme")
+![](/assets/exemples/rose-pine.png "Rose Pine Theme")
+![](/assets/exemples/nord.png "Nord Theme")
+![](/assets/exemples/everforest.png "Everforest Theme")
 
 ## Features
 

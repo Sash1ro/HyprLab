@@ -4,6 +4,8 @@ set -euo pipefail
 # Load configuration
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
+export hyprlab="$HYPRLAB/bin/hyprlab"
+
 swww-daemon &>/dev/null &
 waybar &>/dev/null &
 swaync &>/dev/null &
