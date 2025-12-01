@@ -13,9 +13,24 @@
   ```
 
 - Unified Menu (SUPER + ALT + SPACE)
-- Themes Switcher
-- Waybar Switcher
-- Wallpapers Switcher
+- Themes Switcher (SUPER + T)
+
+  ```
+  hyprlab theme --help
+  ```
+
+- Waybar Switcher (SUPER + W)
+
+  ```
+  hyprlab waybar --help
+  ```
+
+- Wallpapers Switcher (SUPER + X | SUPER + C)
+
+  ```
+  hyprlab wallpaper --help
+  ```
+
 - Usefull scripts
 - Neovim
 - And more...
@@ -45,6 +60,6 @@ The script will:
 
 - Install the HYPERLAB configuration
 
-- Set default themes and wallpapers
+- Set default themes
 
 - Restart your graphical session (optional)
