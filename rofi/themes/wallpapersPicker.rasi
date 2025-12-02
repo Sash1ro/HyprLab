@@ -12,7 +12,7 @@ listview{
     dynamic:                     true;
     fixed-width: none;
     spacing: 0px;
-    columns:                     5;
+    columns:                     8;
     lines: 1;
 }
 
@@ -50,5 +50,7 @@ window{
     anchor:         center;
     x-offset: 0;
     y-offset: 0;
-    width: 60%;
+    width: 100%; 
+    border: 1px 0px;
+    border-radius: 0;
 }

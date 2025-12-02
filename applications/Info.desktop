@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Info
 Comment=Show fastfetch
-Exec=sh -c "$HOME/.config/hyprlab/scripts/info.sh"
+Exec=sh -c "$HOME/.config/hyprlab/scripts/apps/info.sh"
 Icon=utilities-terminal
 Terminal=false
 NoDisplay=true
