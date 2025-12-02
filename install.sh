@@ -312,7 +312,7 @@ setupGpu #Nvidia setup
 export hyprlab="$HYPRLAB/bin/hyprlab"
 
 "$HYPRLAB/scripts/others/theme-setup.sh" || msg_fail "Error running theme setup"
-
+"$HYPRLAB/scripts/utils/screen.sh" || msg_fail "Failed to auto generate monitors configuration"
 msg_ok "HyprLab setup complete! Please reboot to apply all changes."
 notify-send "HyprLab installed successfully" "Reboot is required"
 
