@@ -68,3 +68,6 @@ The script will:
 - Set default themes
 
 - Restart your graphical session (optional)
+
+> [!CAUTION]
+> ⚠️ My dotfiles are designed for a 2k resolution and multiple monitors, you may need to adapt to your need.

@@ -12,13 +12,13 @@ listview{
     dynamic:                     true;
     fixed-width: none;
     spacing: 0px;
-    columns:                     8;
+    columns:                     6;
     lines: 1;
 }
 
 element-icon {
     vertical-align: 0.0;
-    size:           300px;
+    size: 26%;
     border-radius:  10px;
     padding:        0px;
     margin:         0px;
@@ -50,7 +50,6 @@ window{
     anchor:         center;
     x-offset: 0;
     y-offset: 0;
-    width: 100%; 
-    border: 1px 0px;
-    border-radius: 0;
+    width: 90%; 
+    border: 1px ;
 }
