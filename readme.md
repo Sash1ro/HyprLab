@@ -9,7 +9,7 @@
 ![](/assets/exemples/nord.png "Nord Theme")
 ![](/assets/exemples/everforest.png "Everforest Theme")
 
-## Features
+## 🚀 Features
 
 - Unified CLI commands
 
@@ -38,6 +38,7 @@
 
 - Usefull scripts
 - Neovim
+- Auto Monitors Setup (you may change screen position)
 - And more...
 
 ## Requirements
