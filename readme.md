@@ -50,7 +50,7 @@ All other dependencies will be installed automatically.
 
 ## Installation
 
-download the installation script and run :
+Run the command below :
 
 ```
 curl https://raw.githubusercontent.com/Sash1ro/HyprLab/refs/heads/main/install.sh --output install.sh | sh
