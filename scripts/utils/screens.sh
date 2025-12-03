@@ -23,6 +23,19 @@ PRIMARY=$(hyprctl -j monitors all | jq -r '
   ) | .name
 ')
 
+SECONDARY=$(hyprctl -j monitors all | jq -r '
+  sort_by(
+    -(
+      (.width * .height) * 100000 +
+      (.availableModes
+        | map(capture("@(?<hz>[0-9.]+)Hz").hz | tonumber)
+        | max
+      )
+    )
+  )[1].name
+')
+
+
 file="$HYPRLAB/hyprland/conf/monitors.conf"
 lines=""
 # Example usage
@@ -32,5 +45,6 @@ done
 
 printf "%s\n" "${lines[@]}" > "$file"
 echo "\$PRIMARY=$PRIMARY" >> "$file"
-echo "\$ENV=PRIMARY,\$PRIMARY" >> "$file"
+echo "\$SECOND=$SECONDARY" >> "$file"
+echo "env=PRIMARY,$PRIMARY" >> "$file"
 
