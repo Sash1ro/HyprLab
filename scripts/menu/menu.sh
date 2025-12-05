@@ -66,7 +66,7 @@ other_menu() {
 
     case $v in 
         "$vibrant") "$SCRIPT_DIR/options/toggleVibrant.sh" toggle;;
-        "$gamemode") "$SCRIPT_DIR/options/gamemode.sh";;
+        "$gamemode") "$SCRIPT_DIR/options/gamemode.sh" toggle;;
         "$clip") "$SCRIPT_DIR/menu/clip.sh" w;;
         *)exit 0
     esac
