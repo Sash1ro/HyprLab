@@ -33,6 +33,7 @@ terminate_clients() {
 	done
 }
 
+
 goExit() {
 	echo ":: Exit"
 	terminate_clients

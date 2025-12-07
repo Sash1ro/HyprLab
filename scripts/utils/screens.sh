@@ -6,7 +6,7 @@ source "$HOME/.config/hyprlab/scripts/data/conf.env"
 mapfile -t NAMES < <(hyprctl -j monitors all | jq -r '.[].name')
 mapfile -t WIDTH < <(hyprctl -j monitors all | jq -r '.[].width')
 mapfile -t HEIGHT < <(hyprctl -j monitors all | jq -r '.[].height')
-mapfile -t POSITIONS < <(hyprctl -j monitors | jq -r '.[] | "\(.x)x\(.y)"')
+mapfile -t POSITIONS < <(hyprctl -j monitors all | jq -r '.[] | "\(.x)x\(.y)"')
 
 mapfile -t HZ < <(hyprctl -j monitors all | jq -r '
   .[] |
@@ -38,12 +38,12 @@ SECONDARY=$(hyprctl -j monitors all | jq -r '
 
 file="$HYPRLAB/hyprland/conf/monitors.conf"
 lines=""
-# Example usage
+printf ""> "$file"
+
 for i in "${!NAMES[@]}"; do
-  lines+="monitor=${NAMES[$i]},${WIDTH[$i]}x${HEIGHT[$i]}@${HZ[$i]},${POSITIONS[$i]},auto"
+  echo "monitor=${NAMES[$i]},${WIDTH[$i]}x${HEIGHT[$i]}@${HZ[$i]},${POSITIONS[$i]},auto" >> "$file"
 done
 
-printf "%s\n" "${lines[@]}" > "$file"
 echo "\$PRIMARY=$PRIMARY" >> "$file"
 echo "\$SECOND=$SECONDARY" >> "$file"
 echo "env=PRIMARY,$PRIMARY" >> "$file"

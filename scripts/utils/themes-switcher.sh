@@ -86,11 +86,17 @@ appliquer_theme() {
   verif_cmd swww
 
   local themeName=$(basename "$dossier")
+
   first_file=$(echo "$dossier"/wallpapers/$themeName.* | awk '{print $1}')
-  if [[ ! -f "$dossier/wallpaper"  ]];then 
-     hyprlab wallpaper set "$first_file"
-  else
-    swww img "$dossier/wallpaper" --transition-type grow --transition-fps 60 || hyprlab message fail "Error while changing wallpaper"
+
+  if [[ ! -f "$dossier/wallpaper"  ]];then
+      ln -sf "$first_file" "$dossier/wallpaper"
+  fi
+  
+  if [[ "$themeName" == "matugen" ]]; then
+      matugen image "$dossier/wallpaper"
+  else 
+      swww img "$dossier/wallpaper" --transition-type grow --transition-fps 60 || hyprlab message fail "Error while changing wallpaper"
   fi
 
   hyprlab reload

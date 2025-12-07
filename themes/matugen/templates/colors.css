@@ -1,0 +1,27 @@
+/*
+* Css Colors
+* Generated with Matugen
+*/
+
+@define-color back-alt @background;
+
+@define-color inactive @surface_container_high;
+
+@define-color border @outline_variant;
+
+@define-color foreground @on_background;
+
+@define-color accent @primary;
+
+@define-color pink @primary;
+@define-color red @primary;
+@define-color yellow @primary;
+@define-color green @primary;
+@define-color blue @primary;
+
+<* for name, value in colors *>
+    @define-color {{name}} {{value.default.hex}};
+<* endfor *>
+
+
+@define-color background @surface_container_low;

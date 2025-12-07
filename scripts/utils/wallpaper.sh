@@ -3,6 +3,11 @@ set -euo pipefail
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
+fish="$HOME/.config/fish/themes/current.themes"
+hFish="$HYPRLAB/themes/matugen/fish/theme.theme"
+vesktop="$HOME/.config/vesktop/themes/current.theme.css"
+hVesktop="$HYPRLAB/themes/matugen/vesktop/current.theme.css"
+
 help() {
 cat <<EOF
 Usage:
@@ -125,6 +130,9 @@ setW() {
     local theme="$THEMES_DIR/current"
     local current="$theme/wallpaper"
 
+    local link=$(readlink $theme)
+    local themeName=$(basename $link)
+
     if [[ -z "$file" ]]; then
         hyprlab message fail "No file provided"
         exit 1
@@ -132,9 +140,19 @@ setW() {
 
     if [[ -f "$file" ]]; then
         ln -sf "$file" "$current"
-        swww img $current --transition-type grow --transition-fps 60 >/dev/null \
-             && hyprlab notify normal Hyprlab "Wallpaper Updated" "Actual : $filename" -i image \
-             || hyprlab message fail "Error while applying $filename"
+
+        if [[ "$themeName" == "matugen" ]]; then
+            (matugen image "$current" >/dev/null \
+            && ln -sfn "$hFish" "$fish" && printf "y\n" | fish -c "fish_config theme save current" >/dev/null 2>&1  \
+            && ln -sfn "$hVesktop" "$vesktop" \
+            && hyprlab reload \
+            && hyprlab notify normal Hyprlab "Wallpaper Updated" "Actual : $filename" -i image) \
+            || hyprlab message fail "Error while applying $filename"
+        else 
+            (swww img "$current" --transition-type grow --transition-fps 60 >/dev/null \
+            && hyprlab notify normal Hyprlab "Wallpaper Updated" "Actual : $filename" -i image) \
+            || hyprlab message fail "Error while applying $filename"
+        fi
     else 
         hyprlab message fail "$filename dont exist" && exit 1
     fi
