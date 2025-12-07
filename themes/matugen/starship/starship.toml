@@ -16,35 +16,45 @@ palette = "colors"
 
 [palettes.colors]
 mustard = '#af8700' # example
-color1 = '#99ccfa'
-color2 = '#003351'
-color3 = '#c2c7ce'
-color4 = '#1c2024'
-color5 = '#003351'
-color6 = '#101418'
-color7 = '#101418'
-color8 = '#99ccfa'
-color9 = '#d1bfe7'
+color1 = '#acc7ff'
+color2 = '#0f2f60'
+color3 = '#c4c6d0'
+color4 = '#1e2025'
+color5 = '#0f2f60'
+color6 = '#111318'
+color7 = '#111318'
+color8 = '#acc7ff'
+color9 = '#debcdf'
 
 [directory]
-style = "fg:#99ccfa bold" # color1
-read_only = " 󰌾"
-read_only_style = "fg:#ea6962" # dark blue
-truncation_length = 0
-truncate_to_repo = false
+style = "fg:#acc7ff bold" 
+home_symbol = "  "
+read_only = " 󰌾 "
+read_only_style = "fg:#ea6962" 
+fish_style_pwd_dir_length = 2
 format = "[$path]($style)[$read_only]($read_only_style)"
 
 [directory.substitutions]
-'~/100xCodes/Cohort-3-WebDev' = 'Learning'
-'~/Testing-repo' = 'work-project'
+"Desktop" = "   "
+"Documents" = "  "
+"Downloads" = "  "
+"Music" = " 󰎈 "
+"Pictures" = "  "
+"Images" = "  "
+"Videos" = "  "
+"Vidéos" = "  "
+"GitHub" = " 󰊤 "
+"vaults" = " 󰂺 "
+"personal" = " 󰛓 "
+".config" = "  "
 
 [character]
-success_symbol = '[❯](fg:#99ccfa bold)'
-error_symbol = '[❯](fg:#ffb4ab bold)'
-vicmd_symbol = '[❮](fg:#101418 bold)'
+success_symbol = '[](fg:#acc7ff bold)'
+error_symbol = '[](fg:#ffb4ab bold)'
+vicmd_symbol = '[](fg:#111318 bold)'
 
 [git_branch]
-style = "fg:#d1bfe7 bold" # color9 (red)
+style = "fg:#debcdf bold" # color9 (red)
 format = '[$symbol$branch]($style) '
 
 [git_status]
@@ -56,7 +66,7 @@ format = '[[($all_status$ahead_behind )](fg:#ea6962)]($style)'
 
 [os]
 format = "[$symbol]($style)"
-style = "fg:#99ccfa bold" # color8
+style = "fg:#acc7ff bold" # color8
 disabled = false
 
 [os.symbols]
@@ -108,7 +118,7 @@ Windows = "󰍲 "
 
 [time]
  disabled = false
- format = '[[ $time ](fg:#d1bfe7 )]($style)'
+ format = '[[ $time ](fg:#bec6dc )]($style)'
  time_format = "%R"
 
 [line_break]
