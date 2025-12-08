@@ -7,21 +7,8 @@ CONFIG="$HOME/.config"
 CURRENT="$THEMES_DIR/current"
 SIZE_DIR="$THEMES_DIR/size"
 
-
-GTK4="$CONFIG/gtk-4.0/gtk.css"
-GTK3="$CONFIG/gtk-3.0/gtk.css"
-CODIUM="$CONFIG/VSCodium/User/settings.json"
-HYPR="$CONFIG/hyprlab/hyprland/conf/colors.conf"
-RELOAD="$CONFIG/hyprlab/scripts/reload.sh"
-WAYBAR="$CONFIG/waybar/colors.css"
-KITTY="$CONFIG/kitty/colors.conf"
-ROFI="$CONFIG/rofi/colors.rasi"
-STARSHIP="$CONFIG/starship.toml"
-VESTOP="$CONFIG/vesktop/themes/current.theme.css"
-NVIM="$CONFIG/nvim/lua/plugins/colors.lua"
-CAVA="$CONFIG/cava/themes/current"
-FISH="$CONFIG/fish/themes/current.theme"
-
+updateLink="$HYPRLAB/scripts/others/updateLink.sh"
+updateFish="$HYPRLAB/scripts/others/setFish.sh"
 
 existe() { [[ -e "$1" ]]; }
 
@@ -38,17 +25,6 @@ verif_cmd() {
   }
 }
 
-set_couleur_fish() {
-
-  if ! command -v fish >/dev/null; then
-    hyprlab message fail "Fish is not installed"
-    return
-  fi
-
-  lien_conf "$FISH" "$dossier/fish/theme.theme" "fish"
-  printf "y\n" | fish -c "fish_config theme save current" >/dev/null 2>&1 
-}
-
 appliquer_icon() {
   local file="$1/folder"
   local icon=$(<"$file") 
@@ -59,6 +35,7 @@ appliquer_icon() {
 
 appliquer_theme() {
   local dossier="$1"
+  local themeName=$(basename "$dossier")
 
   if [[ ! -d "$dossier" ]]; then
     hyprlab message fail "Unknown theme : $(basename "$dossier")"
@@ -68,24 +45,11 @@ appliquer_theme() {
   hyprlab message info "Applying theme : $(basename "$dossier")"
   ln -sfn "$dossier" "$CURRENT"
 
-  lien_conf "$HYPR" "$dossier/hypr/colors.conf" "Hyprland"
-  lien_conf "$WAYBAR" "$dossier/waybar/colors.css" "Waybar"
-  lien_conf "$ROFI" "$dossier/rofi/colors.rasi" "Rofi"
-  lien_conf "$CODIUM" "$dossier/vscode/settings.json" "VSCodium"
-  lien_conf "$KITTY" "$dossier/kitty/colors.conf" "Kitty"
-  lien_conf "$GTK3" "$dossier/gtk/gtk.css" "GTK3"
-  lien_conf "$GTK4" "$dossier/gtk/gtk.css" "GTK4"
-  lien_conf "$STARSHIP" "$dossier/starship/starship.toml" "Starship"
-  lien_conf "$VESTOP" "$dossier/vesktop/current.theme.css" "Vesktop"
-  lien_conf "$NVIM" "$dossier/nvim/colors.lua" "Nvim"
-  lien_conf "$CAVA" "$dossier/cava/theme" "cava"
-
-  set_couleur_fish 
+  $updateLink 
+  $updateFish 
 
   hyprlab message ok "Changing wallpaper..."
   verif_cmd swww
-
-  local themeName=$(basename "$dossier")
 
   first_file=$(echo "$dossier"/wallpapers/$themeName.* | awk '{print $1}')
 
@@ -101,9 +65,13 @@ appliquer_theme() {
 
   hyprlab reload
   hyprlab message info "Restart gtk apps to see changes"
-  
   hyprlab message info "Applying Papirus icon theme"
   appliquer_icon "$dossier"
+
+  hyprlab message info "Reloading Neovim"
+  for pid in $(pgrep nvim); do
+    kill -USR1 "$pid"
+  done
 }
 
 
@@ -199,3 +167,4 @@ done
 
 [[ "$theme" != "off" ]] && appliquer_theme "$THEMES_DIR/$theme" && hyprlab notify normal "Hyprlab" "Updated theme" "Actual : $theme" -i preferences-theme
 [[ "$taille" != "off" ]] && appliquer_taille "$taille" && hyprlab notify normal "Hyprlab" "Updated size profile" "Actual : $taille" -i preferences-theme
+

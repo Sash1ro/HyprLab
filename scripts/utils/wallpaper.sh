@@ -3,11 +3,6 @@ set -euo pipefail
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
-fish="$HOME/.config/fish/themes/current.themes"
-hFish="$HYPRLAB/themes/matugen/fish/theme.theme"
-vesktop="$HOME/.config/vesktop/themes/current.theme.css"
-hVesktop="$HYPRLAB/themes/matugen/vesktop/current.theme.css"
-
 help() {
 cat <<EOF
 Usage:
@@ -143,18 +138,23 @@ setW() {
 
         if [[ "$themeName" == "matugen" ]]; then
             (matugen image "$current" >/dev/null \
-            && ln -sfn "$hFish" "$fish" && printf "y\n" | fish -c "fish_config theme save current" >/dev/null 2>&1  \
-            && ln -sfn "$hVesktop" "$vesktop" \
+            && "$SCRIPT_DIR/others/updateLink.sh" \
+            && "$SCRIPT_DIR/others/setFish.sh" \
             && hyprlab reload \
             && hyprlab notify normal Hyprlab "Wallpaper Updated" "Actual : $filename" -i image) \
             || hyprlab message fail "Error while applying $filename"
+
+            hyprlab message info "Reloading Neovim"
+            for pid in $(pgrep nvim); do
+                kill -USR1 "$pid"
+            done
         else 
             (swww img "$current" --transition-type grow --transition-fps 60 >/dev/null \
             && hyprlab notify normal Hyprlab "Wallpaper Updated" "Actual : $filename" -i image) \
             || hyprlab message fail "Error while applying $filename"
         fi
     else 
-        hyprlab message fail "$filename dont exist" && exit 1
+        hyprlab message fail "no file : $filename" && exit 1
     fi
 }
 

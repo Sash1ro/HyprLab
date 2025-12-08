@@ -22,12 +22,15 @@ Commands :
     theme       -> themes manager
     waybar      -> waybar themes manager
     wallpaper   -> wallpaper manager
+    fastfetch   -> manage fastfetch
     notify      -> Send notification using notify-send
     message     -> Show messages 
     reload      -> reload hyprland and some apps
     record      -> screen recording
     power       -> power commands like shutdown/reboot...
     -h, --help  -> Show this message
+
+    <command> --help -> more info about a command 
 EOF
 }
 
@@ -37,6 +40,10 @@ case "$COMMAND" in
     menu)
         shift 1
         "$SCRIPT_DIR/menu/menu.sh"
+        ;;
+    fastfetch)
+        shift 1
+        "$SCRIPT_DIR/utils/fastfetch.sh" "${@:-}"
         ;;
     notify)
         shift 1
