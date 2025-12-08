@@ -28,6 +28,7 @@ pkgs=(
   "eza"
   "fish"
   "wl-clipboard"
+  "python3"
   "cliphist"
   "base-devel"
   "git"

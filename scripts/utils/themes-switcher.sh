@@ -26,11 +26,7 @@ verif_cmd() {
 }
 
 appliquer_icon() {
-  local file="$1/folder"
-  local icon=$(<"$file") 
-  if command -v papirus-folders >/dev/null; then
-    papirus-folders -C "$icon" 
-  fi
+  "$HYPRLAB/scripts/utils/folderColors.sh"
 }
 
 appliquer_theme() {

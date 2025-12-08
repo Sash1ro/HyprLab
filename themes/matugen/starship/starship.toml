@@ -16,7 +16,7 @@ palette = "colors"
 
 [palettes.colors]
 mustard = '#af8700' # example
-color1 = '#87d6bc'
+primary = '#87d6bc'
 color2 = '#00382b'
 color3 = '#bfc9c3'
 color4 = '#1b211e'

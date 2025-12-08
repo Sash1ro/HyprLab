@@ -119,6 +119,10 @@ remove() {
     fi
 }
 
+appliquer_icon() {
+  "$HYPRLAB/scripts/utils/folderColors.sh"
+}
+
 setW() {
     local file=${1:-}
     local filename=$(basename $file)
@@ -142,12 +146,14 @@ setW() {
             && "$SCRIPT_DIR/others/setFish.sh" \
             && hyprlab reload \
             && hyprlab notify normal Hyprlab "Wallpaper Updated" "Actual : $filename" -i image) \
-            || hyprlab message fail "Error while applying $filename"
+            || (hyprlab message fail "Error while applying $filename" && return)
 
             hyprlab message info "Reloading Neovim"
             for pid in $(pgrep nvim); do
                 kill -USR1 "$pid"
             done
+
+            appliquer_icon
         else 
             (swww img "$current" --transition-type grow --transition-fps 60 >/dev/null \
             && hyprlab notify normal Hyprlab "Wallpaper Updated" "Actual : $filename" -i image) \
