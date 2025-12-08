@@ -21,7 +21,6 @@ window#waybar {
 tooltip {
   background-color: @background;
   border: 1px solid @border;
-  transition: all 200ms ease-out;
 }
 
 /* ---- Workspaces ---- */
@@ -29,16 +28,18 @@ tooltip {
 #workspaces {
   margin: 10px 0 10px 1rem;
   background-color: transparent;
-  transition: all 200ms ease-out;
+  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 #workspaces button {
   opacity: 0.5;
   margin: 0 6px;
+  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 #workspaces button:not(.empty):not(.active) {
   opacity: 1;
+  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 #workspaces button.active {
@@ -48,12 +49,13 @@ tooltip {
   background-color: @accent;
   min-width: 20px;
   border-radius: 2px;
+  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 #custom-media,
 #custom-record,
 #custom-icon,
-#clock,
+#middle,
 #right {
   margin-left: 5px;
   margin-right: 5px;
@@ -65,6 +67,27 @@ tooltip {
 
 #custom-icon {
   margin-left: 1rem;
+}
+
+#cpu.icon,
+#memory.icon {
+  color: @accent;
+  margin-right: 1px;
+}
+
+#cpu,
+#memory {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+#perfs {
+  margin-left: 1rem;
+}
+
+#drawer-perfs {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #bluetooth,

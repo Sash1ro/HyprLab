@@ -52,39 +52,39 @@
     "markup": false,
     "interval": 2
   },
-  "wlr/taskbar": {
-    "format": "{icon}",
-    "icon-size": 18,
-    "tooltip-format": "{title}",
-    "on-click": "activate",
-    "on-click-middle": "close"
-  },
+
   "clock": {
     "format": "{:%A ~ %H:%M}",
     "timezone": "Europe/Paris",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%d-%m-%Y}"
   },
+
   "tray": {
     "icon-size": 19,
     "spacing": 10,
     "show-passive-items": false
   },
+
   "cpu": {
     "format": "{usage}%",
     "tooltip": true,
     "on-click": "~/.config/hyprlab/scripts/apps/btop.sh"
   },
+
   "memory": {
     "format": "{}%",
     "on-click": "~/.config/hyprlab/scripts/apps/btop.sh"
   },
+
   "cpu#icon": {
     "format": ""
   },
+
   "memory#icon": {
     "format": "󰾆"
   },
+
   "bluetooth": {
     "format": "󰂯",
     "format-disabled": "󰂲",
@@ -94,6 +94,7 @@
     "on-click": "pkill blueman-manager && hyprctl dispatch exec blueman-manager || hyprctl dispatch exec blueman-manager",
     "format-no-controller": ""
   },
+
   "network": {
     "format-wifi": " ",
     "format-ethernet": "",
@@ -102,6 +103,7 @@
     "format-disconnected": "<span foreground='#f38ba8'> Disconnected</span>",
     "on-click": "pkill nm-connection-editor && hyprctl dispatch exec nm-connection-editor || hyprctl dispatch exec nm-connection-editor"
   },
+
   "pulseaudio": {
     "format": "{icon}",
     "format-bluetooth": "{icon}",
@@ -122,23 +124,27 @@
       "Easy Effects Sink"
     ]
   },
+
   "custom/icon": {
     "format": "",
     "on-click": "hyprlab menu",
     "on-click-right": "~/.config/hyprlab/scripts/apps/info.sh",
     "on-click-middle": "pkill waybar && hyprctl dispatch exec waybar"
   },
+
   "custom/clip": {
     "format": "󱉧",
     "tooltip": false,
     "on-click": "~/.config/hyprlab/scripts/menu/clip.sh",
     "on-click-middle": "~/.config/hyprlab/scripts/menu/clip.sh w"
   },
+
   "custom/shot": {
     "format": "󱣴",
     "tooltip": false,
     "on-click": "~/.config/hyprlab/scripts/menu/capture.sh"
   },
+
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
@@ -159,11 +165,13 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
+
   "custom/exit": {
     "format": "",
     "on-click": "wlogout -b 4 -P 0",
     "tooltip": false
   },
+
   "custom/record": {
     "exec": "~/.config/hyprlab/scripts/utils/record-tray.sh",
     "tooltip": true,
@@ -171,54 +179,12 @@
     "on-click": "hyprlab record stop",
     "interval": 1
   },
+
   "custom/tray": {
     "format": "",
     "tooltip": false
   },
-  "group/bar": {
-    "orientation": "horizontal",
-    "modules": [
-      "mpris"
-    ]
-  },
-  "group/first": {
-    "orientation": "horizontal",
-    "modules": [
-      "clock",
-      "custom/notification",
-      "custom/exit"
-    ]
-  },
-  "group/utils": {
-    "orientation": "horizontal",
-    "modules": [
-      "group/traybox",
-      "pulseaudio",
-      "bluetooth",
-      "network"
-    ]
-  },
-  "group/perfs": {
-    "orientation": "horizontal",
-    "modules": [
-      "cpu#icon",
-      "cpu",
-      "memory#icon",
-      "memory"
-    ]
-  },
-  "group/right": {
-    "orientation": "horizontal",
-    "modules": [
-      "custom/record",
-      "group/traybox",
-      "bluetooth",
-      "network",
-      "pulseaudio",
-      "custom/notification",
-      "custom/exit"
-    ]
-  },
+
   "group/traybox": {
     "drawer": {
       "transition-left-to-right": false,

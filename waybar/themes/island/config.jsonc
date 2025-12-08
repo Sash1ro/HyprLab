@@ -14,31 +14,9 @@
   "gtk-layer-shell": true,
 
   // MODULES POSITIONS
-  "modules-left": ["custom/icon", "hyprland/workspaces", "custom/media"],
+  "modules-left": ["group/left"],
   "modules-center": ["group/middle"],
   "modules-right": ["group/right"],
-
-  "group/right": {
-    "orientation": "horizontal",
-    "modules": [
-      "custom/record",
-      "group/traybox",
-      "bluetooth",
-      "network",
-      "pulseaudio",
-      "custom/notification",
-      "custom/exit"
-    ]
-  },
-
-  "group/perfs": {
-    "orientation": "horizontal",
-    "modules": ["cpu#icon", "cpu", "memory#icon", "memory"]
-  },
-
-  "custom/perficon": {
-    "format": ""
-  },
 
   "group/drawer-perfs": {
     "orientation": "horizontal",
@@ -53,5 +31,31 @@
   "group/middle": {
     "orientation": "horizontal",
     "modules": ["clock", "group/drawer-perfs"]
+  },
+
+  "group/right": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/record",
+      "group/traybox",
+      "bluetooth",
+      "network",
+      "pulseaudio",
+      "custom/notification",
+      "custom/exit"
+    ]
+  },
+  "group/left": {
+    "orientation": "horizontal",
+    "modules": ["custom/icon", "hyprland/workspaces", "custom/media"]
+  },
+
+  "group/perfs": {
+    "orientation": "horizontal",
+    "modules": ["cpu#icon", "cpu", "memory#icon", "memory"]
+  },
+
+  "custom/perficon": {
+    "format": ""
   }
 }
