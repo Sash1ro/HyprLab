@@ -1,25 +1,25 @@
 #Matugen
 
 # Syntax Highlighting Colors
-fish_color_normal e8e0e8
-fish_color_command deb8f7
-fish_color_keyword f4b7bb
-fish_color_quote d2c1d9
-fish_color_redirection e8e0e8
+fish_color_normal dfe3e7
+fish_color_command 8ccff0
+fish_color_keyword c7c2ea
+fish_color_quote b4cad6
+fish_color_redirection dfe3e7
 fish_color_end ff9e64
-fish_color_option f4b7bb
+fish_color_option c7c2ea
 fish_color_error ffb4ab
-fish_color_param f4b7bb
-fish_color_comment cdc3ce
-fish_color_selection --background=deb8f7
-fish_color_search_match --background=deb8f7
+fish_color_param c7c2ea
+fish_color_comment c0c8cd
+fish_color_selection --background=8ccff0
+fish_color_search_match --background=8ccff0
 fish_color_operator 9ece6a
-fish_color_escape f4b7bb
-fish_color_autosuggestion cdc3ce
+fish_color_escape c7c2ea
+fish_color_autosuggestion c0c8cd
 
 # Completion Pager Colors
-fish_pager_color_progress cdc3ce
-fish_pager_color_prefix deb8f7
-fish_pager_color_completion cdc3ce
-fish_pager_color_description cdc3ce
-fish_pager_color_selected_background --background=1e1a20
+fish_pager_color_progress c0c8cd
+fish_pager_color_prefix 8ccff0
+fish_pager_color_completion c0c8cd
+fish_pager_color_description c0c8cd
+fish_pager_color_selected_background --background=171c1f

@@ -78,7 +78,7 @@ for fName in "${bgnames[@]}"; do
 done
 
 
-selected=$(echo -en "${strrr}" | rofi -dmenu -i -l $l -theme $ROFI_THEME/wallpapersPicker.rasi )
+selected=$(echo -en "${strrr}" | sort | rofi -dmenu -disable-history -i -l $l -theme $ROFI_THEME/wallpapersPicker.rasi)
 
 if [ -z "$selected" ]; then
     exit 0
