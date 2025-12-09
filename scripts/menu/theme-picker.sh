@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
-export PATH="$SCRIPT_DIR/bin:$PATH"
 
 currentLink="$THEMES_DIR/current"
 

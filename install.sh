@@ -58,11 +58,25 @@ msg_ok() { echo -e "${C_GREEN}${OK}${C_RESET} $*"; }
 msg_fail() { echo -e "${C_RED}${FAIL}${C_RESET} $*"; }
 msg_info() { echo -e "${C_BLUE}${INFO}${C_RESET} $*"; }
 
+msg_ok ┏┓━┏┓┏┓━━┏┓┏━━━┓┏━━━┓┏━━━┓┏┓━━━┏━━━┓┏━━┓━
+msg_ok ┃┃━┃┃┃┗┓┏┛┃┃┏━┓┃┃┏━━┛┃┏━┓┃┃┃━━━┃┏━┓┃┃┏┓┃━
+msg_ok ┃┗━┛┃┗┓┗┛┏┛┃┗━┛┃┃┗━━┓┃┗━┛┃┃┃━━━┃┃━┃┃┃┗┛┗┓
+msg_ok ┃┏━┓┃━┗┓┏┛━┃┏━━┛┃┏━━┛┃┏┓┏┛┃┃━┏┓┃┗━┛┃┃┏━┓┃
+msg_ok ┃┃━┃┃━━┃┃━━┃┃━━━┃┗━━┓┃┃┃┗┓┃┗━┛┃┃┏━┓┃┃┗━┛┃
+msg_ok ┗┛━┗┛━━┗┛━━┗┛━━━┗━━━┛┗┛┗━┛┗━━━┛┗┛━┗┛┗━━━┛
+msg_info ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+msg_fail ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 TERMINAL="${TERMINAL:-kitty}"
 gitURL="https://github.com/Sash1ro/HyprLab.git"
 CONFIG="$HOME/.config"
 HYPRLAB="$CONFIG/hyprlab"
 BACKUP_DIR="$HOME/conf-backups"
+
+if [ "$EUID" -eq 0 ]; then
+    msg_fail "Error: Do not run this script as root."
+    exit 1
+fi
 
 if ! command -v pacman >/dev/null; then
   msg_fail "This setup is only compatible (for now) with Arch Linux based distros"
@@ -73,8 +87,6 @@ if ! pacman -Qi hyprland >/dev/null 2>&1; then
   msg_fail "Please install hyprland first!"
   exit 1
 fi
-
-mkdir -p "$BACKUP_DIR"
 
 if [[ ! -d "$CONFIG" ]]; then
   msg_fail "No config folder found in: $CONFIG"
@@ -94,11 +106,14 @@ if [[ $EUID -ne 0 ]]; then
   done 2>/dev/null &
 fi
 
+# --- BACKUP User Config ---
 backup() {
   dirs=("hypr" "fish" "fastfetch" "kitty" "swaync" "waybar" "wlogout" "rofi" "nvim" "cava" "gtk-3.0" "gtk-4.0" "btop")
   files=("starship.toml")
 
   msg_info "Backing up your configs"
+
+  mkdir -p "$BACKUP_DIR"
 
   for d in "${dirs[@]}"; do
     if [[ -d "$CONFIG/$d" ]]; then
@@ -288,6 +303,7 @@ setupCodium() {
   msg_ok "Codium setup complete"
 }
 
+# --- Default Configs ---
 configSetup() {
   mkdir -p "$CONFIG/fish/themes"
   mkdir -p "$CONFIG/cava/themes"

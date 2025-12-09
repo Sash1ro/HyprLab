@@ -18,6 +18,13 @@
   "modules-center": ["hyprland/workspaces"],
   "modules-right": ["group/perfs", "group/right", "group/middle"],
 
+  "clock": {
+    "format": "{:%H:%M}",
+    "timezone": "Europe/Paris",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%d-%m-%Y}"
+  },
+
   "group/right": {
     "orientation": "horizontal",
     "modules": [

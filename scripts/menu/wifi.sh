@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 config="$HOME/.config/hyprlab/rofi/themes/list.rasi"
+source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
 # --------------------------
 # Functions
@@ -51,12 +52,13 @@ if [[ -z "$enable_test" ]]; then
     if [[ $? -eq 0 ]]; then
         nmcli radio wifi on
         notify "WiFi Enabled" "WiFi has been turned ON"
+    else
+        exit 0
     fi
-    exit 0
-else
-    toggle="󰤭 $toggle_entry off"
-    notify-send "WiFi" "Fetching avaible connections..." -i network-wireless -t 2000
 fi
+toggle="󰤭 $toggle_entry off"
+notify-send "WiFi" "Fetching avaible connections..." -i network-wireless -t 2000
+
 
 fields="SSID,BARS,SECURITY"
 lines_full=$(nmcli --terse --fields $fields dev wifi)
