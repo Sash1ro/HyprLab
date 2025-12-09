@@ -5,8 +5,11 @@
     "seperate-outputs": true,
     "rewrite": {
       "  ": "  Hyprland",
+      "(.*)fish(.*)" : "  Fish",
+      "(.*)Discord(.*)": " Discord",
       "(.*)Firefox(.*)": "  Firefox",
-      "(.*)zen(.*)": "  Zen"
+      "(.*)zen(.*)": "  Zen",
+      "(.*)Codium(.*)": "  Codium"
     },
     "on-click-middle": "pkill waybar && hyprctl dispatch exec waybar",
     "on-click": "hyprlab menu",

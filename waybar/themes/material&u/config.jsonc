@@ -14,9 +14,9 @@
   "gtk-layer-shell": true,
 
   // MODULES POSITIONS
-  "modules-left": ["custom/icon", "custom/media"],
+  "modules-left": ["hyprland/window", "custom/media"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": ["group/right", "group/middle"],
+  "modules-right": ["group/perfs", "group/right", "group/middle"],
 
   "group/right": {
     "orientation": "horizontal",
@@ -26,8 +26,7 @@
       "bluetooth",
       "network",
       "pulseaudio",
-      "custom/notification",
-      "custom/exit"
+      "custom/notification"
     ]
   },
 
@@ -36,18 +35,8 @@
     "modules": ["cpu#icon", "cpu", "memory#icon", "memory"]
   },
 
-  "group/drawer-perfs": {
-    "orientation": "horizontal",
-    "drawer": {
-      "transition-left-to-right": true,
-      "transition-duration": 300,
-      "children-class": "element"
-    },
-    "modules": ["custom/perf-icon", "group/perfs"]
-  },
-
   "group/middle": {
     "orientation": "horizontal",
-    "modules": ["clock", "group/drawer-perfs"]
+    "modules": ["clock", "custom/exit"]
   }
 }

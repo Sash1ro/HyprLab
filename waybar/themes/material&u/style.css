@@ -52,28 +52,27 @@ tooltip {
   opacity: 1;
   color: @background;
   background-color: alpha(@accent, 1);
-  min-width: 60px;
+  min-width: 50px;
   border-radius: 20px;
   transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 #custom-media,
+#window,
 #custom-record,
 #custom-icon,
 #middle,
+#perfs,
 #right {
   margin: 8px;
-  border-radius: 20px;
+  border-radius: 15px;
   background-color: @inactive;
   padding: 5px 10px;
   margin-left: 5px;
   margin-right: 5px;
 }
 
-#custom-icon {
-  padding: 2px 10px;
-  margin-left: 0.5rem;
-  border-radius: 100%;
+#window {
   background-color: @accent;
   color: @background;
 }
@@ -84,19 +83,17 @@ tooltip {
   margin-right: 1px;
 }
 
+#memory.icon {
+  margin-left: 10px;
+}
+
 #cpu,
 #memory {
   margin-left: 2px;
-  margin-right: 10px;
 }
 
-#perfs {
-  margin-left: 1rem;
-}
-
-#drawer-perfs {
-  margin-left: 10px;
-  margin-right: 10px;
+#custom-exit {
+  color: @accent;
 }
 
 #bluetooth,
