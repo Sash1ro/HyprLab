@@ -1,45 +1,27 @@
-# HYPERLAB
-
-**My Hyprland Setup**
-
-![](/assets/exemples/catppuccin.png "Catppuccin Mocha Theme")
-![](/assets/exemples/tokyo-night.png "Tokyo Night Theme")
-![](/assets/exemples/gruvbox.png "Gruvbox Theme")
-![](/assets/exemples/rose-pine.png "Rose Pine Theme")
-![](/assets/exemples/nord.png "Nord Theme")
-![](/assets/exemples/everforest.png "Everforest Theme")
+**┏┓━┏┓┏┓━━┏┓┏━━━┓┏━━━┓┏━━━┓┏┓━━━┏━━━┓┏━━┓━**\
+**┃┃━┃┃┃┗┓┏┛┃┃┏━┓┃┃┏━━┛┃┏━┓┃┃┃━━━┃┏━┓┃┃┏┓┃━**\
+**┃┗━┛┃┗┓┗┛┏┛┃┗━┛┃┃┗━━┓┃┗━┛┃┃┃━━━┃┃━┃┃┃┗┛┗┓**\
+**┃┏━┓┃━┗┓┏┛━┃┏━━┛┃┏━━┛┃┏┓┏┛┃┃━┏┓┃┗━┛┃┃┏━┓┃**\
+**┃┃━┃┃━━┃┃━━┃┃━━━┃┗━━┓┃┃┃┗┓┃┗━┛┃┃┏━┓┃┃┗━┛┃**\
+**┗┛━┗┛━━┗┛━━┗┛━━━┗━━━┛┗┛┗━┛┗━━━┛┗┛━┗┛┗━━━┛**\
+**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**\
+**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
 
 ## 🚀 Features
 
 - Unified CLI commands
-
-  ```
-  hyprlab --help
-  ```
-
-- Unified Menu (SUPER + ALT + SPACE)
-- Themes Switcher (SUPER + T)
-
-  ```
-  hyprlab theme --help
-  ```
-
-- Waybar Switcher (SUPER + W)
-
-  ```
-  hyprlab waybar --help
-  ```
-
-- Wallpapers Switcher (SUPER + X | SUPER + C)
-
-  ```
-  hyprlab wallpaper --help
-  ```
-
+- Unified Menu
+- Themes Switcher
+- Waybar Switcher
+- Wallpapers Switcher
 - Usefull scripts
 - Neovim
 - Auto Monitors Setup (you may change screen position)
 - And more...
+
+  ```
+  hyprlab --help
+  ```
 
 ## Requirements
 
@@ -53,7 +35,7 @@ All other dependencies will be installed automatically.
 Run the command below :
 
 ```
-curl https://raw.githubusercontent.com/Sash1ro/HyprLab/refs/heads/main/install.sh --output install.sh | sh
+curl -o install.sh https://raw.githubusercontent.com/Sash1ro/HyprLab/refs/heads/main/install.sh | sh
 ```
 
 restart after the installation
@@ -71,4 +53,4 @@ The script will:
 - Restart your graphical session (optional)
 
 > [!CAUTION]
-> ⚠️ My dotfiles are designed for a 2k resolution and multiple monitors, you may need to adapt to your need.
+> ⚠️ My dotfiles are designed for me, you may need to adapt to your need.
