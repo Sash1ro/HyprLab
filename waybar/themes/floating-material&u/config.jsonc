@@ -1,0 +1,42 @@
+// -*- mode: jsonc -*-
+{
+  //INIT
+  "include": "~/.config/hyprlab/waybar/modules",
+  "layer": "top",
+  "position": "top",
+  "mod": "dock",
+  "spacing": 0,
+  "margin-left": 10,
+  "margin-right": 10,
+  "margin-top": 5,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+
+  // MODULES POSITIONS
+  "modules-left": ["hyprland/window", "custom/media"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["group/perfs", "group/right", "group/middle"],
+
+  "group/right": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/record",
+      "group/traybox",
+      "bluetooth",
+      "network",
+      "pulseaudio",
+      "custom/notification"
+    ]
+  },
+
+  "group/perfs": {
+    "orientation": "horizontal",
+    "modules": ["cpu#icon", "cpu", "memory#icon", "memory"]
+  },
+
+  "group/middle": {
+    "orientation": "horizontal",
+    "modules": ["clock", "custom/exit"]
+  }
+}
