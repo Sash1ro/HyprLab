@@ -12,8 +12,11 @@
 - Unified CLI commands
 - Unified Menu
 - Themes Switcher
+- Matugen
+- Static themes
 - Waybar Switcher
 - Wallpapers Switcher
+- FastFetch logo switcher
 - Usefull scripts
 - Neovim
 - Auto Monitors Setup (you may change screen position)
