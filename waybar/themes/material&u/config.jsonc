@@ -14,9 +14,9 @@
   "gtk-layer-shell": true,
 
   // MODULES POSITIONS
-  "modules-left": ["custom/icon", "hyprland/workspaces", "custom/media"],
-  "modules-center": ["group/middle"],
-  "modules-right": ["group/right"],
+  "modules-left": ["custom/icon", "custom/media"],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["group/right", "group/middle"],
 
   "group/right": {
     "orientation": "horizontal",

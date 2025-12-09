@@ -25,7 +25,7 @@
       "transition-duration": 300,
       "children-class": "element"
     },
-    "modules": ["custom/perficon", "group/perfs"]
+    "modules": ["custom/perf-icon", "group/perfs"]
   },
 
   "group/middle": {
@@ -53,9 +53,5 @@
   "group/perfs": {
     "orientation": "horizontal",
     "modules": ["cpu#icon", "cpu", "memory#icon", "memory"]
-  },
-
-  "custom/perficon": {
-    "format": ""
   }
 }

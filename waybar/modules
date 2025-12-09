@@ -196,5 +196,9 @@
       "custom/tray",
       "tray"
     ]
+  },
+
+  "custom/perf-icon": {
+    "format": ""
   }
 }
