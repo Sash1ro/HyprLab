@@ -7,6 +7,8 @@
 **━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**\
 **━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
 
+![preview](assets/exemples/preview.png)
+
 ## 🚀 Features
 
 - Unified CLI commands
