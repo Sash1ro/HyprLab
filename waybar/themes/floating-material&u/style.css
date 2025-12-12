@@ -59,7 +59,6 @@ tooltip {
 
 #custom-media,
 #window,
-#custom-record,
 #custom-icon,
 #middle,
 #perfs,
@@ -76,6 +75,7 @@ tooltip {
 #network,
 #clock,
 #pulseaudio,
+#custom-record,
 #custom-notification,
 #custom-exit,
 #custom-tray {
