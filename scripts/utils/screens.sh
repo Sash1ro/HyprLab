@@ -35,8 +35,13 @@ SECONDARY=$(hyprctl -j monitors all | jq -r '
   )[1].name
 ')
 
+arg=${1:-}
+file="$HYPRLAB/hyprland/monitors_profile/current"
 
-file="$HYPRLAB/hyprland/conf/monitors.conf"
+if [ -n "$arg" ] && [ -f "$arg" ]; then
+  file=$arg
+fi
+
 lines=""
 printf ""> "$file"
 

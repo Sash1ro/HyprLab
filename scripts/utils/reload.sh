@@ -7,6 +7,7 @@ hyprlab message info "Rechargement commencé..."
 hyprlab message info "Reloading Hyprland"
 hyprctl reload >/dev/null && hyprlab message ok "Hyprland reloaded" || hyprlab message fail "Error while reloading Hyprland"
 
+touch "$HOME/.config/hypr/hyprlock.conf"
 
 if pgrep -x cava > /dev/null; then
     hyprlab message info "Reloading Cava"
@@ -32,8 +33,7 @@ fi
 
 #SWAYNC
 if pgrep -x "swaync" >/dev/null; then
-    hyprlab message info "Reloading Swaync"
-    swaync-client -R -rs >/dev/null && hyprlab message ok "Swaync reloaded" || hyprlab message fail "Error while reloading Swaync"
+    "$SCRIPT_DIR/utils/update-swaync.sh"
 fi
 
 #Kitty

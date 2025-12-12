@@ -73,7 +73,7 @@ other_menu() {
 }
 
 hypr_menu() {
-    local options=("$HYPRLAB/hyprland/conf/"*)
+    local options=("$HYPRLAB/hyprland/profiles/current/"*)
     local p=""
 
     for conf in "${options[@]}"; do
