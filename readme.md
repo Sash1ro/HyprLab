@@ -58,4 +58,6 @@ The script will:
 
 https://github.com/user-attachments/assets/7f0d39b5-1801-48d1-a7ef-b60c9c42ea9a
 
+-Rofi App launcher
+
 ![rofi](assets/exemples/rofi.png)
