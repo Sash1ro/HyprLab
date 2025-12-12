@@ -61,4 +61,4 @@ The script will:
 
 ## Preview
 
-[![Watch the video](https://raw.githubusercontent.com/Sash1ro/HyprLab/main/assets/exemples/video/thumbnail1.png)](https://raw.githubusercontent.com/Sash1ro/HyprLab/main/assets/exemples/video/themes-switcher.mp4)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ks68npt3CxM" title="Project Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
