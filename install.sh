@@ -316,6 +316,10 @@ configSetup() {
       cp -r "$d/." "$CONFIG/$dirname/" || msg_fail "Error copying config $dirname"
     fi
   done
+
+  ln -sfn "$HYPRLAB/hyprland/profiles/default" "$HYPRLAB/hyprland/profiles/current"
+  ln -sfn "$HYPRLAB/hyprland/monitors_profile/default.conf" "$HYPRLAB/hyprland/monitors_profile/current"
+  ln -sfn "$HYPRLAB/assets/fastfetch" "$HYPRLAB/themes/current/fastfetch"
 }
 
 # --- Run all ---

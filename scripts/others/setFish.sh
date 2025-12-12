@@ -18,4 +18,3 @@ set_couleur_fish() {
 
 set_couleur_fish
 
- 
