@@ -61,4 +61,4 @@ The script will:
 
 ## Preview
 
-[![Watch the video](https://raw.githubusercontent.com/username/repository/branch/path/to/thumbnail.jpg)](https://raw.githubusercontent.com/username/repository/branch/path/to/video.mp4)
+[![Watch the video](https://raw.githubusercontent.com/Sash1ro/HyprLab/main/assets/exemples/video/thumbnail1.png)](https://raw.githubusercontent.com/Sash1ro/HyprLab/main/assets/exemples/video/themes-switcher.mp4)
