@@ -8,20 +8,20 @@
   font-family: "SF Pro Text", sans-serif;
 }
 
-@define-color accent_color #87d6bc;
-@define-color accent_fg_color #002018;
-@define-color accent_bg_color #87d6bc;
-@define-color window_bg_color #0f1512;
-@define-color window_fg_color #dee4e0;
-@define-color headerbar_bg_color #0f1512;
-@define-color headerbar_fg_color #dee4e0;
-@define-color popover_bg_color #0f1512;
-@define-color popover_fg_color #dee4e0;
-@define-color view_bg_color #0f1512;
-@define-color view_fg_color #dee4e0;
-@define-color card_bg_color #0f1512;
-@define-color card_fg_color #dee4e0;
-@define-color sidebar_bg_color #171d1a;
+@define-color accent_color #b3c5ff;
+@define-color accent_fg_color #001849;
+@define-color accent_bg_color #b3c5ff;
+@define-color window_bg_color #121318;
+@define-color window_fg_color #e3e2e9;
+@define-color headerbar_bg_color #121318;
+@define-color headerbar_fg_color #e3e2e9;
+@define-color popover_bg_color #121318;
+@define-color popover_fg_color #e3e2e9;
+@define-color view_bg_color #121318;
+@define-color view_fg_color #e3e2e9;
+@define-color card_bg_color #121318;
+@define-color card_fg_color #e3e2e9;
+@define-color sidebar_bg_color #1a1b21;
 @define-color sidebar_fg_color @window_fg_color;
 @define-color sidebar_border_color @window_bg_color;
 @define-color sidebar_backdrop_color @window_bg_color;

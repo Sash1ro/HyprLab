@@ -214,14 +214,10 @@ hyprlabClone() {
     msg_info "HyprLab already cloned"
   fi
   msg_ok "HyprLab download complete"
-
-  if ! zenity --question --title="HyprLab" --text="Do you have an AZERTY keyboard ?" --width=250; then
-    sed -i "s/^[[:space:]]*kb_layout[[:space:]]*=.*/kb_layout = en/" "$HYPRLAB/hyprland/conf/input.conf"
-  fi
 }
 
 # --- Font setup ---
-FONT_DIR="$HYPRLAB/fonts/SF-Pro"
+FONT_DIR="$HYPRLAB/assets/fonts/SF-Pro"
 SYSTEM_FONT_DIR="/usr/local/share/fonts/otf"
 
 fontSetup() {
