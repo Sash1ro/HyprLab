@@ -28,7 +28,7 @@ element-text {
     horizontal-align: 0;
 }
 inputbar {
-    children:   ["entry"];
+    children:   ["prompt", "entry"];
 }
 
 prompt {
@@ -39,5 +39,5 @@ prompt {
 }
 
 entry {
-    placeholder:       "  Search";
+    placeholder:       "search";
 }

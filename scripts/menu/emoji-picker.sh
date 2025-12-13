@@ -12,7 +12,7 @@ if pidof rofi > /dev/null; then
 fi
 
 sed '1,/^# # DATA # #$/d' "$0" | \
-rofi -i -dmenu -mesg "$msg" -theme $rofi_theme | \
+rofi -i -dmenu -mesg "$msg" -p "Emoji : " -theme $rofi_theme | \
 awk '{print $1}' | \
 head -n 1 | \
 tr -d '\n' | \

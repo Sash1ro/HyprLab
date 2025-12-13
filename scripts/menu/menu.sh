@@ -11,6 +11,7 @@ fi
 clip=" Clipboard"
 capture=" Capture"
 opt=" Options"
+prof=" Profiles" 
 tam=" TaskManager"
 keys="󰌌 Keybinds"
 power="⏻ Power"
@@ -23,6 +24,7 @@ $capture
 $tam
 $lofi
 $emoji
+$prof
 $opt
 $keys
 $power
@@ -38,7 +40,7 @@ custom_menu() {
     local wallpaperall="󰸉 All Wallpapers"
     local p="$theme\n$waybar\n$wallpaper\n$wallpaperall"
 
-    local v=$(echo -e "$p" | rofi -dmenu -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
+    local v=$(echo -e "$p" | rofi -dmenu -i -p "Customizations : " -theme $ROFI_THEME/list.rasi)
 
     case $v in 
         "$theme") "$SCRIPT_DIR/menu/theme-picker.sh";;
@@ -62,7 +64,7 @@ other_menu() {
     local clip="󱘜 Clear Clipboard"
 
     local p="$vibrant\n$gamemode\n$clip"
-    local v=$(echo -e "$p" | rofi -dmenu -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
+    local v=$(echo -e "$p" | rofi -dmenu -i -p "Other : " -theme $ROFI_THEME/list.rasi)
 
     case $v in 
         "$vibrant") "$SCRIPT_DIR/options/toggleVibrant.sh" toggle;;
@@ -73,24 +75,109 @@ other_menu() {
 }
 
 hypr_menu() {
-    local options=("$HYPRLAB/hyprland/profiles/current/"*)
-    local p=""
+    local options=("$HYPRLAB/hyprland/profiles/current/"*.conf)
+    local target
+    target=$(readlink -f "$HYPRLAB/hyprland/monitors_profile/current")
+
+    declare -A map
 
     for conf in "${options[@]}"; do
-        p+=" $(basename "$conf")\n"
+        map[" $(basename "${conf%.conf}")"]="$conf"
     done
-    p="${p%$'\n'}"
 
-    local v
-    v=$(echo -e "$p" | rofi -dmenu -i -l 10 -p "MENU : " -theme "$ROFI_THEME/list.rasi")
+    map[" monitors"]="$target"
 
-    local filename="${v# }"
-    local selected_file="$HYPRLAB/hyprland/conf/$filename"
+    local choice
+    choice=$(
+        printf '%s\n' "${!map[@]}" \
+        | sort \
+        | rofi -dmenu -i -p "Hyprland : " -l 12 -theme "$ROFI_THEME/list.rasi"
+    )
+
+    local selected_file=${map[$choice]}
     if [[ -f "$selected_file" ]]; then
-        kitty --class float nvim "$selected_file"
+        $TERMINAL --class float nvim "$selected_file"
     fi
 }
 
+profile_menu() {
+    local profiles=("$HYPRLAB/hyprland/profiles/"*)
+    local name;local selected
+    declare -A map
+
+    for conf in "${profiles[@]}"; do 
+        [ -L $conf ] && continue
+
+
+        name=$(basename "$conf")
+        selected=$(hyprlab profile selected)
+        
+
+        if [ "$name" == "$selected" ]; then
+            map[" $name"]="$name"
+        else
+            map["󰘼 $name"]="$name"
+        fi
+    done
+
+    choice=$(
+        printf '%s\n' "${!map[@]}" \
+        | sort \
+        | rofi -dmenu -i -p "System : " -l 12 -theme "$ROFI_THEME/list.rasi"
+    )
+
+    if [ ! -z "$choice" ]; then 
+        hyprlab profile set ${map[$choice]}
+    fi
+
+}
+
+monitor_menu() {
+    local profiles=("$HYPRLAB/hyprland/monitors_profile/"*)
+    local name;local selected
+    declare -A map
+
+    for conf in "${profiles[@]}"; do 
+        [ -L $conf ] && continue
+
+
+        name=$(basename "$conf")
+        name=${name%.conf}
+        selected=$(hyprlab profile -m selected)
+        
+
+        if [ "$name" == "$selected" ]; then
+            map[" $name"]="$name"
+        else
+            map["󰘼 $name"]="$name"
+        fi
+    done
+
+    choice=$(
+        printf '%s\n' "${!map[@]}" \
+        | sort \
+        | rofi -dmenu -i -p "Monitors : " -l 12 -theme "$ROFI_THEME/list.rasi"
+    )
+
+    if [ ! -z "$choice" ]; then 
+        hyprlab profile -m set ${map[$choice]}
+    fi
+
+}
+
+prof_menu() {
+    local p=" System profiles"
+    local m="󰍹 Monitors profiles"
+    local s="$p\n$m"
+    local choice
+    choice=$(echo -e "$s" | rofi -dmenu -i -p "Profiles :" -theme $ROFI_THEME/list.rasi)
+
+    case $choice in
+        $p)profile_menu;;
+        $m)monitor_menu;;
+        *) exit 0
+    esac
+}
 
 opt_menu() {
     local hypr=" Hyprland"
@@ -102,7 +189,7 @@ opt_menu() {
 
     local p="$hypr\n$wifi\n$conn\n$bt\n$sound\n$other"
 
-    local v=$(echo -e "$p" | rofi -dmenu -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
+    local v=$(echo -e "$p" | rofi -dmenu -i -p "Options : " -theme $ROFI_THEME/list.rasi)
 
     case $v in
     "$hypr")hypr_menu;;
@@ -131,6 +218,8 @@ case $v in
     "$tam") "$SCRIPT_DIR/apps/btop.sh";;
 
     "$opt") opt_menu;;
+
+    "$prof") prof_menu;;
 
     "$custom") custom_menu;;
 

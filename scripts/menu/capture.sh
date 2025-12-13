@@ -13,7 +13,7 @@ op4="  Record region"
 menu="$op1\n$op2\n$op3\n$op4"
 [ -f "$recording_flag" ] && menu="$menu\nStop record"
 
-choice=$(printf "%b" "$menu" | rofi -dmenu -i -p "MENU : " -theme "$ROFI_THEME/list.rasi")
+choice=$(printf "%b" "$menu" | rofi -dmenu -i -p "Capture : " -theme "$ROFI_THEME/list.rasi")
 
 
 # Handle choice

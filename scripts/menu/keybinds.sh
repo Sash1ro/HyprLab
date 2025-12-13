@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
-file="$HYPRLAB/hyprland/conf/keybinds.conf"
+file="$HYPRLAB/hyprland/profiles/current/keybinds.conf"
 
 keybinds=()
 max_len=0
@@ -64,4 +64,4 @@ for line in "${keybinds[@]}"; do
     keys="${line%%|*}"
     comment="${line#*|}"
     printf "%-$((max_len + extra_space))s -> %s\n" "$keys" "$comment"
-done | rofi -dmenu -i -p "MENU : " -l 10 -theme "$ROFI_THEME/keyslist.rasi"
+done | rofi -dmenu -i -p "Keybinds : " -l 10 -theme "$ROFI_THEME/keyslist.rasi"

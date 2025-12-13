@@ -8,7 +8,7 @@ declare -A menu_options=(
 )
 
 main() {
-  choice=$(printf "%s\n" "${!menu_options[@]}" | rofi -i -dmenu -theme ~/.config/hyprlab/rofi/themes/list.rasi )
+  choice=$(printf "%s\n" "${!menu_options[@]}" | rofi -i -dmenu -theme ~/.config/hyprlab/rofi/themes/list.rasi -p "Music : ")
 
   if [ -z "$choice" ]; then
     exit 1

@@ -13,7 +13,7 @@ if pgrep -x "rofi" >/dev/null; then
 fi
 
 get_match() {
-    selection=$(echo -e "$1" | rofi -dmenu -i -p "$2" -theme "$config")
+    selection=$(echo -e "$1" | rofi -dmenu -i -p "$2" -theme "$config" -p "WIFI : ")
     [[ $? -ne 0 ]] && return 1
     [[ -z "$selection" ]] && return 1
     does_match_=$(echo -e "$1" | grep -Fx "$selection")
