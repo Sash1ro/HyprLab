@@ -6,6 +6,7 @@ clear
 
 pkgs=(
   "nautilus"
+  "kitty"
   "adw-gtk-theme"
   "vesktop"
   "vscodium"
@@ -334,7 +335,7 @@ iconApply         #Applying papirus icons
 setupApplications #Copying .desktops
 setupGpu          #Nvidia setup
 
-export hyprlab="$HYPRLAB/bin/hyprlab"
+export PATH="$HYPRLAB/bin:$PATH" #Exporting hyprlab CLI to use it after
 
 "$HYPRLAB/scripts/others/theme-setup.sh" || msg_fail "Error running theme setup"
 "$HYPRLAB/scripts/utils/screen.sh" || msg_fail "Failed to auto generate monitors configuration"
@@ -342,8 +343,5 @@ msg_ok "HyprLab setup complete! Please reboot to apply all changes."
 notify-send "HyprLab installed successfully" "Reboot is required"
 
 msg_info "Starting Neovim for LazyVim installation"
-if command -v "$TERMINAL" >/dev/null 2>&1; then
-  "$TERMINAL" nvim
-else
-  msg_info "Please start Neovim manually to setup LazyVim!"
-fi
+nvim --headless +Lazy! +qall || msg_fail "Failed to auto setup LazyVim, do it manually"
+
