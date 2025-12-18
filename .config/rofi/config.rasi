@@ -1,0 +1,5 @@
+@import "colors.rasi"
+@import "size.rasi"
+
+@import "~/.config/hyprlab/rofi/themes/config.rasi"
+

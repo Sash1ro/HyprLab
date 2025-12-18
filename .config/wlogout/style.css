@@ -1,0 +1,71 @@
+@import "../waybar/colors.css";
+
+/* ─────────────────────────────────────────────── */
+/* Global                                          */
+/* ─────────────────────────────────────────────── */
+
+* {
+  all: unset;
+  background-image: none;
+  border: 0;
+  border-color: transparent;
+  transition: 10ms;
+}
+
+window {
+  background-color: transparent;
+  border: 0;
+  font-size: 14px;
+}
+
+/* ─────────────────────────────────────────────── */
+/* Base Button                                     */
+/* ─────────────────────────────────────────────── */
+
+button {
+  margin: 200px 0;
+  font-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20%;
+
+  background-color: alpha(@background, 0.6);
+  color: @text;
+
+  border: 0;
+  border-radius: 0;
+  border-color: transparent;
+
+  transition: margin 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
+    background-size 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+}
+
+/* Hover / Focus / Active shared */
+button:hover,
+button:focus,
+button:active {
+  background-color: alpha(@accent, 0.2);
+  color: @text;
+  margin: 150px 0;
+  border-radius: 50px;
+  background-size: 25%;
+  transition: margin 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
+    background-size 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+}
+
+/* ─────────────────────────────────────────────── */
+/* Button Icons                                    */
+/* ─────────────────────────────────────────────── */
+
+#lock {
+  background-image: image(url("icons/lock_white.png"));
+}
+#logout {
+  background-image: image(url("icons/logout_white.png"));
+}
+#shutdown {
+  background-image: image(url("icons/shutdown_white.png"));
+}
+#reboot {
+  background-image: image(url("icons/reboot_white.png"));
+}
