@@ -11,14 +11,11 @@ Usage:
   fastfetch.sh <command>
 
 Commands :
-    logo, -l <options>         -> manage fastfetch logo
-    current, -c                -> show actual fastfetch logo/dir path
-    -h, --help                 -> Show this message
-
-Options :
-    random, -r             -> random anime png
-    distro, -d             -> distro logo
-    custom, -c <path>      -> your custom logo or dir
+    random                     -> Set random anime png 
+    distro                     -> Set distro logo
+    custom                     -> Set a custom folder or file 
+    current                    -> show actual fastfetch logo/dir path
+    help                       -> Show this message
 EOF
 }
 
@@ -60,6 +57,7 @@ mode() {
         *) hyprlab message fail "Unknown option : $1" && help
         exit 1;;
     esac
+    exit 0
 }
 
 current() {
@@ -73,9 +71,9 @@ current() {
 }
 
 case ${1:-} in 
-    logo | -l) shift 1 && mode "${@:-}";;
-    current | -c) shift 1 && current;;
-    "" | -h | --help) help && exit 0;;
+    random|distro|custom) mode ${@:-};;
+    current) shift 1 && current;;
+    "" | help) help && exit 0;;
     *) hyprlab message fail "Unknown option : $1" && help
     exit 1;;
 esac

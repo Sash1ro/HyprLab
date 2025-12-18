@@ -9,7 +9,7 @@ hyprctl reload >/dev/null && hyprlab message ok "Hyprland reloaded" || hyprlab m
 
 touch "$HOME/.config/hypr/hyprlock.conf"
 
-if pgrep -x cava > /dev/null; then
+if pgrep -x cava >/dev/null; then
     hyprlab message info "Reloading Cava"
     pkill -USR1 cava 2>/dev/null || pkill cava
 fi
@@ -23,7 +23,7 @@ hyprlab message info "For gtk4 apps, restart them to see any changes !"
 if pgrep -x "waybar" >/dev/null; then
     hyprlab message info "Reloading Waybar"
     pkill waybar
-    hyprctl dispatch exec waybar >/dev/null && hyprlab message ok "Waybar reloaded" || hyprlab message fail "Error while reloading Waybar"
+    hyprctl -q dispatch exec waybar && hyprlab message ok "Waybar reloaded" || hyprlab message fail "Error while reloading Waybar"
 fi
 
 if pgrep -x "nautilus" >/dev/null; then

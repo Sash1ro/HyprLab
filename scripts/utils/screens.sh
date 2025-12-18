@@ -3,53 +3,74 @@ set -euo pipefail
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
-mapfile -t NAMES < <(hyprctl -j monitors all | jq -r '.[].name')
-mapfile -t WIDTH < <(hyprctl -j monitors all | jq -r '.[].width')
-mapfile -t HEIGHT < <(hyprctl -j monitors all | jq -r '.[].height')
-mapfile -t POSITIONS < <(hyprctl -j monitors all | jq -r '.[] | "\(.x)x\(.y)"')
+last=""
+if [ -n $(printenv "$PRIMARY") ]; then
+    last=$PRIMARY
+fi
 
-mapfile -t HZ < <(hyprctl -j monitors all | jq -r '
+json=$(hyprctl -j monitors all)
+
+number=$(jq '. | length' <<< "$json")
+
+mapfile -t NAMES < <(jq -r '.[].name' <<< "$json")
+mapfile -t WIDTH < <(jq -r '.[].width' <<< "$json")
+mapfile -t HEIGHT < <(jq -r '.[].height' <<< "$json")
+mapfile -t POSITIONS < <(jq -r '.[] | "\(.x)x\(.y)"' <<< "$json")
+mapfile -t HZ < <(jq -r '
   .[] |
   (.availableModes
     | map(capture("@(?<hz>[0-9.]+)Hz").hz | tonumber)
     | max
   )
-')
+' <<< "$json")
 
-PRIMARY=$(hyprctl -j monitors all | jq -r '
+
+PRIMARY=$(jq -r '
   max_by(
     (.width * .height) * 100000 +
     (.availableModes | map(capture("@(?<hz>[0-9.]+)Hz").hz | tonumber) | max)
   ) | .name
-')
+' <<< "$json")
 
-SECONDARY=$(hyprctl -j monitors all | jq -r '
-  sort_by(
-    -(
-      (.width * .height) * 100000 +
-      (.availableModes
-        | map(capture("@(?<hz>[0-9.]+)Hz").hz | tonumber)
-        | max
+
+if [ "$number" -gt 1 ]; then
+  SECONDARY=$(jq -r '
+    sort_by(
+      -(
+        (.width * .height) * 100000 +
+        (.availableModes | map(capture("@(?<hz>[0-9.]+)Hz").hz | tonumber) | max)
       )
-    )
-  )[1].name
-')
-
-arg=${1:-}
-file="$HYPRLAB/hyprland/monitors_profile/current"
-
-if [ -n "$arg" ] && [ -f "$arg" ]; then
-  file=$arg
+    )[1].name
+  ' <<< "$json")
 fi
 
-lines=""
-printf ""> "$file"
+
+arg=${1:-}
+
+if [ -n "$arg" ] && [ "$arg" == "detect" ]; then
+  echo $last
+  echo $PRIMARY
+  if [ ! "$PRIMARY" == "$last" ]; then
+    hyprlab notify normal "Hyprlab" "Monitors" "Another primary monitor detected" 
+  fi
+  exit 0
+fi
+
+file="$HYPRLAB/hyprland/monitors_profile/current"
+[ -n "$arg" ] && [ -f "$arg" ] && file=$arg
+
+: > "$file"
+
 
 for i in "${!NAMES[@]}"; do
   echo "monitor=${NAMES[$i]},${WIDTH[$i]}x${HEIGHT[$i]}@${HZ[$i]},${POSITIONS[$i]},auto" >> "$file"
 done
 
+
 echo "\$PRIMARY=$PRIMARY" >> "$file"
-echo "\$SECOND=$SECONDARY" >> "$file"
 echo "env=PRIMARY,$PRIMARY" >> "$file"
 
+if [ ! -z ${SECONDARY:-} ]; then 
+  echo "\$SECOND=$SECONDARY" >> "$file"
+  echo "env=SECONDARY,$SECONDARY" >> "$file"
+fi

@@ -1,20 +1,26 @@
 @import "colors.css";
 @import "size.css";
 
-/* ---- Global Defaults ---- */
+/* =========================
+   Global Defaults
+========================= */
 * {
-  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
-  min-height: 0;
-  font-weight: bold;
-  border: 0;
   margin: 0;
   padding: 0;
+  border: 0;
+
+  min-height: 0;
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  font-weight: bold;
 }
 
+/* =========================
+   Waybar & Tooltip
+========================= */
 window#waybar {
   background: alpha(@background, 0.75);
-  border-radius: 0;
   color: @foreground;
+  border-radius: 0;
   box-shadow: none;
 }
 
@@ -23,42 +29,47 @@ tooltip {
   border: 1px solid @border;
 }
 
-/* ---- Workspaces ---- */
-
+/* =========================
+   Workspaces
+========================= */
 #workspaces {
   margin: 10px 0 10px 1rem;
   background-color: transparent;
+
   transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 #workspaces button {
-  opacity: 0.5;
   margin: 0 6px;
-  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
+  opacity: 0.5;
+
+  transition: inherit;
 }
 
 #workspaces button:not(.empty):not(.active) {
   opacity: 1;
-  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
 #workspaces button.active {
-  opacity: 1;
   margin: 0 7px;
+  min-width: 20px;
+
   color: @background;
   background-color: @accent;
-  min-width: 20px;
+  opacity: 1;
+
   border-radius: 2px;
-  transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
+/* =========================
+   Shared Module Spacing
+========================= */
 #custom-media,
 #custom-record,
 #custom-icon,
 #middle,
 #right {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 0 5px;
 }
 
 #custom-media {
@@ -69,33 +80,39 @@ tooltip {
   margin-left: 1rem;
 }
 
+/* =========================
+   CPU & Memory
+========================= */
 #cpu.icon,
 #memory.icon {
-  color: @accent;
   margin-right: 1px;
+  color: @accent;
 }
 
 #cpu,
 #memory {
-  margin-left: 2px;
-  margin-right: 10px;
+  margin: 0 10px 0 2px;
 }
 
+/* =========================
+   Perfs
+========================= */
 #perfs {
   margin-left: 1rem;
 }
 
 #drawer-perfs {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 10px;
 }
 
+/* =========================
+   Right Modules
+========================= */
 #bluetooth,
 #network,
 #pulseaudio,
 #custom-notification,
 #custom-exit,
 #custom-tray {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 10px;
 }

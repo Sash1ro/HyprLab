@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MONITORS_CONF="$HOME/.config/hyprlab/hyprland/conf/monitors.conf"
+MONITORS_CONF="$HOME/.config/hyprlab/hyprland/monitors_profile/current"
 
 
 if [[ -z "$PRIMARY" ]];then 

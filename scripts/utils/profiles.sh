@@ -12,16 +12,17 @@ monitor=false
 help() {
 cat <<EOF
 Usage:
-  profiles <command>
+  profiles <command> [options]
 
 Commands :
-    monitors, -m [options]  -> manage monitors profile
-    set, -s <name>          -> set profile
-    new, -n <name>          -> create new profile
-    delete, -d <name>       -> delete a profile
-    list, -l                -> list all profiles
-    selected, -e            -> show the selected profile
-    -h, --help              -> Show this message
+    set <name>              -> set profile
+    new <name>              -> create new profile
+    delete <name>           -> delete a profile
+    list                    -> list all profiles
+    selected                -> show the selected profile
+    help                    -> Show this message
+Options: 
+    monitors, -m            -> Monitors profiles
 EOF
 }
 
@@ -55,8 +56,9 @@ set() {
         name="$name".conf
     fi
     ln -sfn "$profiles/$name" "$profiles/current" 
-    touch "$HOME/.config/hypr/hyprlock.conf"
-    hyprctl reload && exit 0
+    touch "$HOME/.config/hypr/hyprlock.conf" >/dev/null
+    hyprlab message ok "Profile $name applied"
+    hyprctl -q reload && exit 0
 } 
 
 new() {
@@ -76,6 +78,7 @@ new() {
         touch "$profiles/$name".conf
         "$SCRIPT_DIR/utils/screens.sh" "$profiles/$name".conf
     fi
+    hyprlab message ok "Profile $name created"
     exit 0
 } 
 
@@ -83,7 +86,6 @@ del() {
     local name="${1:-}"
     verif "$name"
     local selected=$(selected)
-    echo $selected
     if [ "$selected" == "$name" ]; then
         set default
     fi
@@ -93,20 +95,27 @@ del() {
     else 
         rm -rf "$profiles/$name.conf" 
     fi
+    hyprlab message ok "Profile $name deleted"
     exit 0
 } 
 
-
-
-while [[ $# -gt 0 ]]; do
-    case ${1:-} in 
-        list | -l)list && exit 0;;
-        selected | -e) selected && exit 0;;
-        monitors | -m)shift 1 && profiles=$mProfiles;;
-        set | -s)shift 1 && set "${@:-}";;
-        new | -n)shift 1 && new "${@:-}";;
-        delete | -d)shift 1 && del "${@:-}";;
-        -h | --help | "") help && exit 0;;
-        *)hyprlab message fail "Unknow option : $1" && help && exit 1;;
+for arg in "$@"; do
+    case "$arg" in
+        -m|monitors)
+            profiles=$mProfiles
+            [[ "$1" == "$arg" ]] && shift
+            break
+            ;;
     esac
 done
+
+
+case ${1:-} in 
+        list)list && exit 0;;
+        selected) selected && exit 0;;
+        set)shift 1 && set "${@:-}";;
+        new)shift 1 && new "${@:-}";;
+        delete)shift 1 && del "${@:-}";;
+        help | "") help && exit 0;;
+        *)hyprlab message fail "Unknow option : $1" && help && exit 1;;
+esac
