@@ -84,8 +84,6 @@ if [ -z "$selected" ]; then
     exit 0
 fi
 
-# ln -sf "${bgresult[$selected]}" "$currentWallpaper"
-
 themeName=$(basename "$current")
 
 hyprlab wallpaper set "${bgresult[$selected]}" || hyprlab message fail "Error while applying wallpaper"

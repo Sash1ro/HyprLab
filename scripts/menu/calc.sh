@@ -24,7 +24,7 @@ run () {
 
     if [ -z "$*" ]; then
         echo -en "\0prompt\x1fCalc : \n"
-        echo -en "\0message\x1fType an expression\n"
+        echo -en "\0message\x1fType an expression\nCTRL+ENTER to validate"
 
         if [ -s "$HISTORY_FILE" ]; then
             echo "Clear History"

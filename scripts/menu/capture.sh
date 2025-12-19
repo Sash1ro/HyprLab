@@ -4,6 +4,11 @@ source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
 recording_flag="$SCRIPT_DIR/cache/wf-recorder-active"
 
+if pgrep -x "rofi" >/dev/null; then
+    pkill rofi
+    exit 0
+fi
+
 # Menu options
 op1="  Screenshot screen"
 op2="  Screenshot region"
@@ -15,8 +20,6 @@ menu="$op1\n$op2\n$op3\n$op4"
 
 choice=$(printf "%b" "$menu" | rofi -dmenu -i -p "Capture : " -theme "$ROFI_THEME/list.rasi")
 
-
-# Handle choice
 case "$choice" in
     "$op1") hyprshot -m output ;;
     "$op2") hyprshot -m region ;;

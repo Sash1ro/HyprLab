@@ -11,7 +11,7 @@ fi
 if [ -L "$currentLink" ]; then
     currentTheme=$(basename "$(readlink -f "$currentLink")")
 else
-    currentTheme="Aucun"
+    currentTheme=""
 fi
 
 if [ ! -d "$THEMES_DIR" ]; then

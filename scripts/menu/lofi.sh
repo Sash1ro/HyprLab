@@ -1,5 +1,7 @@
 #SCRIPT from jakoolit's hyprland dots
 
+source "$HOME/.config/hyprlab/scripts/data/conf.env"
+
 declare -A menu_options=(
   ["Lofi Girl ☕️🎶"]="https://play.streamafrica.net/lofiradio"
   ["Chillhop ☕️🎶"]="http://stream.zeno.fm/fyn8eh3h5f8uv"
@@ -8,7 +10,7 @@ declare -A menu_options=(
 )
 
 main() {
-  choice=$(printf "%s\n" "${!menu_options[@]}" | rofi -i -dmenu -theme ~/.config/hyprlab/rofi/themes/list.rasi -p "Music : ")
+  choice=$(printf "%s\n" "${!menu_options[@]}" | rofi -i -dmenu -theme "$ROFI_THEME/list.rasi" -p "Music : ")
 
   if [ -z "$choice" ]; then
     exit 1

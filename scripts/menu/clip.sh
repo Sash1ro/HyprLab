@@ -9,7 +9,7 @@ fi
 
 
 case $1 in
-    d) cliphist list | rofi -dmenu -i -theme $ROFI_THEME/clip.rasi | cliphist delete
+    d) cliphist list | rofi -dmenu -i -theme $ROFI_THEME/list.rasi | cliphist delete
        ;;
 
     w) if [ `echo -e "Clear\nCancel" | rofi -dmenu -p "Effacer l'historique ?" -theme $ROFI_THEME/confirm.rasi` == "Clear" ] ; then
@@ -17,6 +17,6 @@ case $1 in
        fi
        ;;
 
-    *) cliphist list | rofi -dmenu -display-columns 2 -theme $ROFI_THEME/clip.rasi  | cliphist decode | wl-copy
+    *) cliphist list | rofi -dmenu -p "Clipboard : " -display-columns 2 -theme $ROFI_THEME/list.rasi  | cliphist decode | wl-copy
        ;;
 esac
