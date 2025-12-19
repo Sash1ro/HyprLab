@@ -1,0 +1,19 @@
+/*Horizon*/
+
+@define-color background #241b2f;
+
+@define-color back-alt #241b2f;
+
+@define-color inactive #2b213a;
+
+@define-color border rgba(255, 255, 255, 0.102);
+
+@define-color foreground #ffffff;
+
+@define-color accent #ff71ce;
+
+@define-color pink #ff71ce;
+@define-color red #f1009c;
+@define-color yellow #f3e70f;
+@define-color green #05ffa1;
+@define-color blue #01cdfe;
