@@ -3,20 +3,20 @@
 
 * {
     background-color: transparent;
-    margin: 0;
 }
 
 window {
     fullscreen:       false;
     width: 80%;
-    padding:          2em;
-    children:         [ listview-split, wrap];
+    height: 80%;
+    padding:          4em;
+    children:         [ wrap, listview-split];
+    spacing:          1em;
 }
 
 listview-split {
   orientation: horizontal;
   spacing: 0.4em;
-  margin: 0;
   children: [listview];
 }
 
@@ -26,7 +26,6 @@ wrap {
     children: [ inputbar, message ];
     border: 3px;
     border-radius: 0.4em;
-    margin: 0;
 }
 
 icon-ib {
@@ -36,23 +35,26 @@ icon-ib {
     horizontal-align: 0.5;
     size: 1em;
 }
-
 inputbar {
     spacing: 0.4em;
     padding: 0.4em;
-    margin: 0;
     children: [ icon-ib, entry ];
 }
 entry {
     placeholder: "Search";
 }
+message {
+    border: 3px 0px 0px 0px;
+    padding: 0.4em;
+    spacing: 0.4em;
+}
 
 listview {
+    flow: horizontal;
     fixed-columns: true;
-    margin: 0;
     columns: 7;
-    lines: 4;
-    spacing: 0.5em;
+    lines: 5;
+    spacing: 1.0em;
 }
 
 element {
@@ -74,19 +76,25 @@ element-text {
 }
 
 element selected {
+    border: 3px;
     border-radius: 0.4em;
 }
 
+/**
+ * Launching rofi with environment PREVIEW set to true
+ * will split the screen and show a preview widget.
+ */
 @media ( enabled: env(PREVIEW, false)) {
+  // preview widget
   icon-current-entry {
     expand:          true;
     size:            80%;
   }
-  
+  // override the children of `listview-split`
   listview-split {
     children: [listview, icon-current-entry];
   }
- 
+  // Reduce to 4 columns
   listview {
     columns: 4;
   }

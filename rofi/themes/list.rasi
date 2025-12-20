@@ -1,43 +1,160 @@
 @import "colors.rasi"
-@import "alt.rasi"
-
+@import "size.rasi"
 
 configuration {
     show-icons: false;
+    window-format:              "{w} · {c} · {t}";
 }
 
 window {
+    transparency:   "real";
     location:       center;
     anchor:         center;
     width: 15%;
+    x-offset:       0px;
+    y-offset:       0px;
+
+    border-radius:  12px;
+    border: 2px solid;
+    border-color: @main;
+    padding:        0;
+
     layout: vertical;
+
+    background-color: @trans-bg;
+}
+
+mainbox {
+    margin: 0;
+    padding: 0;
+    border:  0;
+    spacing: 0;
+    orientation: horizontal;
+    children: ["listbox"];
+    background-color: transparent;
 }
 
 listbox {
     margin: 0px;
-    children: ["inputbar","message","listview"];
+    children: ["inputbar","listview"];
 }
+
+listview {
+    padding: 10px;
+    enabled:                     true;
+    columns:                     1;
+    lines:                       6;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                false;
+    fixed-columns:               false;
+    background-color: transparent;
+    orientation:    vertical;
+}
+
+element {
+    background-color: transparent;
+    padding: 10px;
+    margin: 0px;
+    cursor:  pointer;
+    border:  0;
+    orientation:    vertical;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @normal-foreground;
+}
+element normal.urgent {
+    background-color: transparent;
+    text-color:       @urgent-foreground;
+}
+element normal.active {
+    background-color: transparent;
+    text-color:       @active-foreground;
+}
+element selected.normal {
+    background-color: transparent;
+    text-color:       @active-foreground;
+    border-radius:    10;
+}
+element selected.urgent {
+    background-color: transparent;
+    text-color:       @active-foreground;
+    border-radius:    10;
+}
+element selected.active {
+    background-color: transparent;
+    text-color:       @active-foreground;
+    border-radius:    10;
+}
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @foreground;
+}
+element alternate.urgent {
+    background-color: transparent;
+    text-color:       @active-foreground;
+}
+element alternate.active {
+    background-color: transparent;
+    text-color:       @active-foreground;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    highlight:        inherit;
+    cursor:           inherit;
+}
+
+element-icon {
+    size:             64px;
+    background-color: transparent;
+    text-color:       inherit;
+    cursor:           inherit;
+}
+
 message {
     border: 0;
     margin: 2px 10px 2px 10px;
     vertical-align: 0;
 }
 
-listview {
-    columns: 1;
-    lines: 6;
-    orientation: vertical;
+textbox {
+    text-color: @foreground;
 }
 
-element {
-    margin: 0;
-    padding: 10px;
+
+sidebar {
+    border:       2px dash 0px 0px;
+    border-color: @separatorcolor;
 }
 
-element-text {
-    horizontal-align: 0;
+button {
+    padding:     5px 30px 5px 30px;
+    spacing:    0;
+    border-radius: 10px;
+    cursor:     pointer;
+    text-color: @foreground;
+    background-color: @secondary;
 }
+
+button selected {
+    background-color: @main;
+    text-color:       @selected-normal-foreground;
+    border: 1px solid;
+    broder-color: @selected-normal-background;
+}
+
 inputbar {
+    padding: 10px 10px 0 10px;
+    background-color: transparent;
+    spacing:    0px;
+    text-color: @normal-foreground;
     children:   ["prompt", "entry"];
 }
 
@@ -49,5 +166,17 @@ prompt {
 }
 
 entry {
-    placeholder:       "search";
+    vertical-align: 0;
+    padding: 5px;
+    text-color:        @normal-foreground;
+    placeholder:       "Search";
+    placeholder-color: @lightfg;
+    cursor:            text;
+    spacing:           0;
 }
+
+case-indicator {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+

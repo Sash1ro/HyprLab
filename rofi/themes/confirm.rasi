@@ -1,7 +1,6 @@
 @import "colors.rasi"
 @import "config.rasi"
 
-
 configuration {
     show-icons: false;
 }
