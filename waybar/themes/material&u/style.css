@@ -39,8 +39,14 @@ tooltip {
 #perfs,
 #right {
   margin: 6px 5px;
-  padding: 2px 0;
+  padding: 2px 7px;
   border-radius: 15px;
+  background-color: @inactive;
+}
+
+#workspaces,
+#custom-media,
+#middle {
   background-color: @inactive;
 }
 
@@ -59,6 +65,7 @@ tooltip {
    Workspaces
 ========================= */
 #workspaces {
+  padding: 2px 0px;
   transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
 }
 
@@ -109,14 +116,20 @@ tooltip {
 /* =========================
    Window & Middle
 ========================= */
-#window {
+#custom-icon {
   margin-left: 1rem;
-  background-color: @accent;
-  color: @background;
+  background-color: transparent;
+  color: @accent;
+  margin-right: 0.75rem;
 }
 
 #middle {
+  padding: 0 7px;
   margin-right: 1rem;
+}
+
+#custom-media {
+  padding: 0 7px;
 }
 
 /* =========================
@@ -133,8 +146,12 @@ tooltip {
   color: @accent;
 }
 
+#perfs {
+  padding: 2px 1rem;
+}
+
 #memory.icon {
-  margin-left: 10px;
+  margin-left: 1rem;
 }
 
 /* =========================

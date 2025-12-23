@@ -41,7 +41,7 @@
   },
 
   "tray": {
-    "icon-size": 16,
+    "icon-size": 22,
     "spacing": 10,
     "show-passive-items": false
   },
@@ -106,7 +106,7 @@
   },
 
   "custom/icon": {
-    "format": "",
+    "format": "",
     "on-click": "hyprlab menu",
     "on-click-right": "~/.config/hyprlab/scripts/apps/info.sh",
     "on-click-middle": "pkill waybar && hyprctl dispatch exec waybar"
@@ -129,13 +129,13 @@
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
-      "notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "notification": "<sup></sup>",
       "none": "",
-      "dnd-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "dnd-notification": "<sup></sup>",
       "dnd-none": "",
-      "inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "inhibited-notification": "<sup></sup>",
       "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "dnd-inhibited-notification": "<sup></sup>",
       "dnd-inhibited-none": ""
     },
     "return-type": "json",

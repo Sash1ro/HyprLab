@@ -16,7 +16,7 @@
 
   // MODULES POSITIONS
 
-  "modules-left": ["hyprland/window", "custom/media"],
+  "modules-left": ["custom/icon", "custom/media"],
   "modules-center": ["hyprland/workspaces"],
   "modules-right": [
     "custom/record",

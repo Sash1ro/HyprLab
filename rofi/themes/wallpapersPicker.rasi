@@ -4,45 +4,22 @@
 * {
     background-color: transparent;
     margin: 0;
+    spacing: 0;
 }
 
 window {
-    fullscreen:       false;
     width: 80%;
-    padding:          2em;
-    children:         [ listview-split, wrap];
-}
-
-listview-split {
-  orientation: horizontal;
-  spacing: 0.4em;
-  margin: 0;
-  children: [listview];
-}
-
-wrap {
-    expand: false;
-    orientation: vertical;
-    children: [ inputbar, message ];
-    border: 3px;
-    border-radius: 0.4em;
-    margin: 0;
-}
-
-icon-ib {
-    expand: false;
-    filename: "system-search";
-    vertical-align: 0.5;
-    horizontal-align: 0.5;
-    size: 1em;
+    padding:          5px;
+    children:         [inputbar, listview];
 }
 
 inputbar {
     spacing: 0.4em;
     padding: 0.4em;
     margin: 0;
-    children: [ icon-ib, entry ];
+    children: [ entry ];
 }
+
 entry {
     placeholder: "Search";
 }
@@ -62,6 +39,7 @@ element {
 
   children: [element-icon, element-text ];
 }
+
 element-icon {
     size: calc(((100% - 8em) / 7 ));
     horizontal-align: 0.5;
@@ -70,25 +48,15 @@ element-icon {
 element-text {
     horizontal-align: 0.5;
     vertical-align: 0.5;
-  padding: 0.2em;
+    padding: 0.2em;
 }
 
 element selected {
     border-radius: 0.4em;
 }
 
-@media ( enabled: env(PREVIEW, false)) {
-  icon-current-entry {
-    expand:          true;
-    size:            80%;
-  }
-  
-  listview-split {
-    children: [listview, icon-current-entry];
-  }
- 
+@media ( enabled: env(THEME, false)) {
   listview {
-    columns: 4;
+    lines: 1;
   }
-
 }

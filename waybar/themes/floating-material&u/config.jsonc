@@ -14,7 +14,7 @@
   "gtk-layer-shell": true,
 
   // MODULES POSITIONS
-  "modules-left": ["hyprland/window", "custom/media"],
+  "modules-left": ["custom/icon", "custom/media"],
   "modules-center": ["hyprland/workspaces"],
   "modules-right": ["group/perfs", "group/right", "group/middle"],
 
@@ -35,6 +35,22 @@
       "pulseaudio",
       "custom/notification"
     ]
+  },
+
+  "hyprland/workspaces": {
+    "rotate": 0,
+    "all-outputs": false,
+    "active-only": false,
+    "disable-scroll": false,
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "format": "{icon}",
+    "format-icons": {
+      //"active": "",
+      "visible": "",
+      "default": "",
+      "special": ""
+    }
   },
 
   "group/perfs": {

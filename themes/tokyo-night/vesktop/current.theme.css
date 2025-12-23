@@ -24,10 +24,10 @@
     
 
 	/* color of status indicators and window controls */
-    --online-indicator: #9ece6a;     /* change to #23a55a for default green */
+    --online-indicator: #9ece6a;     			/* change to #23a55a for default green */
 	--dnd-indicator: #f7768e;                  /* change to #f13f43 for default red */
-	--idle-indicator: #e0af68;    /* change to #f0b232 for default yellow */
-	--streaming-indicator: #7aa2f7;  /* change to #593695 for default purple */
+	--idle-indicator: #e0af68;    				/* change to #f0b232 for default yellow */
+	--streaming-indicator: #7aa2f7;  			/* change to #593695 for default purple */
 
 
     --accent: #7aa2f7;
@@ -94,7 +94,8 @@
 	--blurple-to-accent-3-filter: hue-rotate(304deg) saturate(0.84) brightness(1.2); /* add friend page school icon */
 }
 
-/* Selected chat/friend text */
+/* Themes Override */
+
 .selected_f5eb4b,
 .selected_f6f816 .link_d8bfb3 {
   color: var(--bg-4) !important;

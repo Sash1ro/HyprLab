@@ -1,6 +1,13 @@
 @import "colors.rasi"
 @import "size.rasi"
 
+/* BASE CONFIG :
+    @background => Rofi BG
+    @trans-bg   => Normal BG with opacity 0.75
+    @foreground => text color 
+    @main       => Accent Color 
+    @lightfg    => lighter text color
+*/
 
 configuration {
     modi: "drun,filebrowser,window";
@@ -60,7 +67,6 @@ listview {
     fixed-columns:               false;
     border: 0;
     border-radius: 12px;
-    border-color:  @separatorcolor;
     orientation:    vertical;
 }
 
@@ -72,44 +78,26 @@ element {
     orientation:    vertical;
 }
 
-element normal.normal {
-    background-color: @normal-background;
-    text-color:       @normal-foreground;
-}
-element normal.urgent {
-    background-color: @urgent-background;
-    text-color:       @urgent-foreground;
-}
-element normal.active {
-    background-color: @normal-background;
-    text-color:       @active-foreground;
-}
-element selected.normal {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-    border-radius:    10;
-}
-element selected.urgent {
-    background-color: @selected-urgent-background;
-    text-color:       @selected-urgent-foreground;
-    border-radius:    10;
-}
-element selected.active {
-    background-color: @selected-active-background;
-    text-color:       @selected-active-foreground;
-    border-radius:    10;
-}
-element alternate.normal {
-    background-color: @alternate-normal-background;
-    text-color:       @alternate-normal-foreground;
-}
+element normal.normal,
+element normal.urgent,
+element alternate.normal,
 element alternate.urgent {
-    background-color: @alternate-urgent-background;
-    text-color:       @alternate-urgent-foreground;
+    background-color: transparent;
+    text-color:       @foreground;
 }
-element alternate.active {
-    background-color: @alternate-active-background;
-    text-color:       @alternate-active-foreground;
+
+element alternate.active,
+element normal.active {
+    background-color: transparent;
+    text-color:       @main;
+}
+
+element selected.normal,
+element selected.urgent,
+element selected.active {
+    background-color: @main;
+    text-color:       @background;
+    border-radius:    10;
 }
 
 element-text {
@@ -130,55 +118,27 @@ element-icon {
 
 message {
     padding:      1px;
-    border:       2px dash 0px 0px;
-    border-color: @separatorcolor;
+    color: @foreground;
 }
 
 textbox {
     text-color: @foreground;
 }
 
-
-sidebar {
-    border:       2px dash 0px 0px;
-    border-color: @separatorcolor;
-}
-
-button {
-    padding:     5px 30px 5px 30px;
-    spacing:    0;
-    border-radius: 10px;
-    cursor:     pointer;
-    text-color: @foreground;
-    background-color: @secondary;
-}
-
-button selected {
-    background-color: @main;
-    text-color:       @selected-normal-foreground;
-    border: 1px solid;
-    broder-color: @selected-normal-background;
-}
-
 inputbar {
     padding: 10px 10px 0 10px;
     background-color: transparent;
     spacing:    0px;
-    text-color: @normal-foreground;
+    text-color: @foreground;
     children:   ["entry"];
 }
 
 entry {
     vertical-align: 0;
     padding: 5px;
-    text-color:        @normal-foreground;
+    text-color:        @foreground;
     placeholder:       "  Search";
     placeholder-color: @lightfg;
     cursor:            text;
     spacing:           0;
-}
-
-case-indicator {
-    spacing:    0;
-    text-color: @normal-foreground;
 }

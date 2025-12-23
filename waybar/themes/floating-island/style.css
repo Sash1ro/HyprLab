@@ -36,7 +36,7 @@ tooltip {
 #first,
 #utils,
 #perfs,
-#window,
+#custom-icon,
 #custom-record,
 #custom-media,
 #workspaces {
@@ -96,7 +96,7 @@ tooltip {
 #first,
 #utils,
 #perfs,
-#window,
+#custom-icon,
 #custom-media,
 #custom-record {
   padding: 0 10px;
@@ -127,9 +127,8 @@ tooltip {
   border-color: @pink;
 }
 
-#window {
-  padding: 0 10px 0 8px;
-  color: @green;
+#custom-icon {
+  color: @accent;
 }
 
 #window:hover {
@@ -180,9 +179,3 @@ tooltip {
   margin: 0 6px;
 }
 
-/* =========================
-   Notifications
-========================= */
-#custom-notification > span {
-  color: @red;
-}

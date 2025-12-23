@@ -18,6 +18,22 @@
   "modules-center": ["group/middle"],
   "modules-right": ["group/right"],
 
+  "hyprland/workspaces": {
+    "rotate": 0,
+    "all-outputs": false,
+    "active-only": false,
+    "disable-scroll": false,
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1",
+    "format": "{icon}",
+    "format-icons": {
+		//"active": "",
+    "visible": "",
+		"default": "",
+    "special": "{name}"
+	}
+  },
+
   "group/right": {
     "orientation": "horizontal",
     "modules": [

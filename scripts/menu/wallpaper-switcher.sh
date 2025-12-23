@@ -5,8 +5,11 @@ source $HOME/.config/hyprlab/scripts/data/conf.env
 current="$THEMES_DIR/current"
 currentWallpaper="$current/wallpaper"
 
+arg=true
+
 case $1 in
-    all) WALLPAPER_ROOT="$HYPRLAB/wallpapers";;
+    all) WALLPAPER_ROOT="$HYPRLAB/wallpapers"
+        arg=false;;
     *)WALLPAPER_ROOT="$current/wallpapers";;
 esac
 
@@ -38,7 +41,7 @@ for fName in "${bgnames[@]}"; do
 done
 
 
-selected=$(echo -en "${strrr}" | sort | PREVIEW=true rofi -dmenu -disable-history -i -theme $ROFI_THEME/wallpapersPicker.rasi)
+selected=$(echo -en "${strrr}" | sort | THEME=$arg rofi -dmenu -disable-history -i -theme $ROFI_THEME/wallpapersPicker.rasi)
 
 if [ -z "$selected" ]; then
     exit 0

@@ -33,7 +33,7 @@ tooltip {
    Workspaces
 ========================= */
 #workspaces {
-  margin: 10px 0 10px 1rem;
+  margin: 10px 0 10px 0px;
   background-color: transparent;
 
   transition: all 200ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background 0;
@@ -54,11 +54,15 @@ tooltip {
   margin: 0 7px;
   min-width: 20px;
 
-  color: @background;
-  background-color: @accent;
+  color: @accent;
   opacity: 1;
 
   border-radius: 2px;
+}
+
+#workspaces button:hover {
+  color: @accent;
+  background-color: transparent;
 }
 
 /* =========================
@@ -77,6 +81,7 @@ tooltip {
 }
 
 #custom-icon {
+  margin-right: 5px;
   margin-left: 1rem;
 }
 

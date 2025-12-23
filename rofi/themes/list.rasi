@@ -1,6 +1,15 @@
 @import "colors.rasi"
 @import "size.rasi"
 
+
+/*  LIST VERSION THEME :
+    @background => Rofi BG
+    @trans-bg   => Normal BG with opacity 0.7
+    @foreground => text color 
+    @main       => Accent Color 
+    @lightfg    => lighter text color
+*/
+
 configuration {
     show-icons: false;
     window-format:              "{w} · {c} · {t}";
@@ -21,7 +30,7 @@ window {
 
     layout: vertical;
 
-    background-color: @trans-bg;
+    background-color: @trans-bg; 
 }
 
 mainbox {
@@ -35,7 +44,7 @@ mainbox {
 }
 
 listbox {
-    margin: 0px;
+    margin: 0;
     children: ["inputbar","listview"];
 }
 
@@ -64,44 +73,27 @@ element {
     orientation:    vertical;
 }
 
-element normal.normal {
-    background-color: transparent;
-    text-color:       @normal-foreground;
-}
-element normal.urgent {
-    background-color: transparent;
-    text-color:       @urgent-foreground;
-}
-element normal.active {
-    background-color: transparent;
-    text-color:       @active-foreground;
-}
-element selected.normal {
-    background-color: transparent;
-    text-color:       @active-foreground;
-    border-radius:    10;
-}
-element selected.urgent {
-    background-color: transparent;
-    text-color:       @active-foreground;
-    border-radius:    10;
-}
-element selected.active {
-    background-color: transparent;
-    text-color:       @active-foreground;
-    border-radius:    10;
-}
+element normal.normal,
+element normal.urgent,
 element alternate.normal {
     background-color: transparent;
     text-color:       @foreground;
 }
+
+element normal.active,
+element selected.normal,
+element selected.urgent,
+element selected.active {
+    background-color: transparent;
+    text-color:       @main;
+}
 element alternate.urgent {
     background-color: transparent;
-    text-color:       @active-foreground;
+    text-color:       @main;
 }
 element alternate.active {
     background-color: transparent;
-    text-color:       @active-foreground;
+    text-color:       @main;
 }
 
 element-text {
@@ -128,55 +120,28 @@ textbox {
     text-color: @foreground;
 }
 
-
-sidebar {
-    border:       2px dash 0px 0px;
-    border-color: @separatorcolor;
-}
-
-button {
-    padding:     5px 30px 5px 30px;
-    spacing:    0;
-    border-radius: 10px;
-    cursor:     pointer;
-    text-color: @foreground;
-    background-color: @secondary;
-}
-
-button selected {
-    background-color: @main;
-    text-color:       @selected-normal-foreground;
-    border: 1px solid;
-    broder-color: @selected-normal-background;
-}
-
 inputbar {
     padding: 10px 10px 0 10px;
     background-color: transparent;
     spacing:    0px;
-    text-color: @normal-foreground;
+    text-color: @foreground;
     children:   ["prompt", "entry"];
 }
 
 prompt {
     vertical-align: 0;
     padding: 5px;
-    text-color:        @normal-foreground;
+    text-color:        @foreground;
     spacing:           0;
 }
 
 entry {
     vertical-align: 0;
     padding: 5px;
-    text-color:        @normal-foreground;
+    text-color:        @foreground;
     placeholder:       "Search";
     placeholder-color: @lightfg;
     cursor:            text;
     spacing:           0;
-}
-
-case-indicator {
-    spacing:    0;
-    text-color: @normal-foreground;
 }
 
