@@ -1,0 +1,44 @@
+# Horizon Dark Palette
+# fg: D5D8DA | red: E95678 | orange: <FAB795> | yellow: FAC29A
+# green: 29D398 | aqua: 59E1E3 | blue: 26BBD9 | purple: B877DB
+# bg0: 1C1E26 | bg1: 232530 | bg2: 2E303E
+
+# syntax highlighting variables
+fish_color_normal D5D8DA
+fish_color_command 59E1E3
+fish_color_keyword 26BBD9
+fish_color_quote FAB795
+fish_color_redirection D5D8DA
+fish_color_end FAB795
+fish_color_error E95678
+fish_color_param B877DB
+fish_color_comment 6C6F93
+fish_color_selection --background=2E303E
+fish_color_operator 29D398
+fish_color_escape 26BBD9
+fish_color_autosuggestion 6C6F93
+fish_color_cwd 29D398
+fish_color_cwd_root E95678
+fish_color_user FAC29A
+fish_color_host 26BBD9
+fish_color_host_remote B877DB
+fish_color_cancel D5D8DA
+fish_color_search_match --background=232530
+fish_color_valid_path
+
+# pager color variables
+fish_pager_color_progress 6C6F93
+fish_pager_color_background --background=1C1E26
+fish_pager_color_prefix 59E1E3
+fish_pager_color_completion D5D8DA
+fish_pager_color_description 6C6F93
+
+fish_pager_color_secondary_background --background=232530
+fish_pager_color_secondary_prefix 59E1E3
+fish_pager_color_secondary_completion D5D8DA
+fish_pager_color_secondary_description 6C6F93
+
+fish_pager_color_selected_background --background=2E303E
+fish_pager_color_selected_prefix 59E1E3
+fish_pager_color_selected_completion D5D8DA
+fish_pager_color_selected_description D5D8DA

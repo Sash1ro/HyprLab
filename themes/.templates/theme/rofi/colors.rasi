@@ -1,0 +1,15 @@
+* {
+
+  background:     {hex.bg};
+  trans-bg:    rgba({rgb.r_bg}, {rgb.g_bg}, {rgb.b_bg}, 0.7);
+
+  foreground:                 {hex.fg};
+  main:                       {hex.accent};
+  red:                        {hex.red};
+
+  lightfg:                    {hex.alt_fg};
+  border-color:               {hex.surface}; 
+  
+  background-color:         transparent;
+
+}

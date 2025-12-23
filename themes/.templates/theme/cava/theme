@@ -1,0 +1,4 @@
+[color]
+gradient = 0
+
+foreground = {hex.accent}

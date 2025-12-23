@@ -1,0 +1,24 @@
+{
+    "hex" : {
+        "accent" : "", 
+        "bg"     : "",
+        "alt_bg" : "",
+        "surface": "",
+        "fg"     : "",
+        "alt_fg" : "",
+        "red"    : "",
+        "green"  : "",
+        "blue"   : "",
+        "mauve"  : "",
+        "pink"   : "",   
+        "yellow" : ""   
+    },
+    "rgb": {
+        "r_bg" : "",
+        "g_bg" : "",
+        "b_bg" : "",
+        "r_accent" : "",
+        "g_accent" : "",
+        "b_accent" : ""
+    }
+}

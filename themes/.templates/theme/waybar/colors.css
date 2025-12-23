@@ -1,0 +1,19 @@
+/*Horizon*/
+
+@define-color background {hex.bg};
+
+@define-color back-alt {hex.bg};
+
+@define-color inactive {hex.alt_bg};
+
+@define-color border {hex.surface};
+
+@define-color foreground {hex.fg};
+
+@define-color accent {hex.accent};
+
+@define-color pink {hex.pink};
+@define-color red {hex.red};
+@define-color yellow {hex.yellow};
+@define-color green {hex.green};
+@define-color blue {hex.blue};
