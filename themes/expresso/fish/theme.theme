@@ -1,0 +1,41 @@
+# Template color Palette
+
+# syntax highlighting variables
+fish_color_normal f0e4dc
+fish_color_command e8b89a
+fish_color_keyword b8b098
+fish_color_quote d8a8a0
+fish_color_redirection f0e4dc
+fish_color_end d8a8a0
+fish_color_error e8a090
+fish_color_param d8a078
+fish_color_comment 5c534a
+fish_color_selection --background=2e2520
+fish_color_operator d8a078
+fish_color_escape b8b098
+fish_color_autosuggestion 5c534a
+fish_color_cwd d8a078
+fish_color_cwd_root e8a090
+fish_color_user e8c8a0
+fish_color_host b8b098
+fish_color_host_remote d8a078
+fish_color_cancel f0e4dc
+fish_color_search_match --background=2e2520
+fish_color_valid_path
+
+# pager color variables
+fish_pager_color_progress 5c534a
+fish_pager_color_background --background=1a1513
+fish_pager_color_prefix e8b89a
+fish_pager_color_completion f0e4dc
+fish_pager_color_description 5c534a
+
+fish_pager_color_secondary_background --background=2e2520
+fish_pager_color_secondary_prefix e8b89a
+fish_pager_color_secondary_completion f0e4dc
+fish_pager_color_secondary_description 5c534a
+
+fish_pager_color_selected_background --background=2e2520
+fish_pager_color_selected_prefix e8b89a
+fish_pager_color_selected_completion f0e4dc
+fish_pager_color_selected_description f0e4dc

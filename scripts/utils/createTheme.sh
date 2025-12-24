@@ -118,6 +118,8 @@ make() {
 
         update "$file" "$THEME/colors.json"
     done
+
+    hyprlab message ok "Theme $NAME created"
 }
 
 case ${1:-} in

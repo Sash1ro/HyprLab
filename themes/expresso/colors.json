@@ -1,0 +1,26 @@
+{
+    "hex": {
+        "accent": "#e8b89a",
+        "secondary": "#d8a078",
+        "tertiary": "#d8a8a0",
+        "bg": "#1a1513",
+        "alt_bg": "#2e2520",
+        "surface": "#5c534a",
+        "fg": "#f0e4dc",
+        "alt_fg": "#78716c",
+        "red": "#e8a090",
+        "green": "#c8b888",
+        "blue": "#b8b098",
+        "mauve": "#d8a8a0",
+        "pink": "#f0b8a8",
+        "yellow": "#e8c8a0"
+    },
+    "rgb": {
+        "r_bg": "26",
+        "g_bg": "21",
+        "b_bg": "19",
+        "r_accent": "232",
+        "g_accent": "184",
+        "b_accent": "154"
+    }
+}

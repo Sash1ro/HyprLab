@@ -15,12 +15,12 @@ $time\
 palette = "colors"
 
 [palettes.colors]
-primary = '{hex.accent}'
-red = '{hex.red}'
-green = '{hex.green}'
-text = '{hex.alt_fg}'
-mauve = '{hex.mauve}'
-blue = '{hex.blue}'
+primary = '#e8b89a'
+red = '#e8a090'
+green = '#c8b888'
+text = '#78716c'
+mauve = '#d8a8a0'
+blue = '#b8b098'
 
 
 [directory]

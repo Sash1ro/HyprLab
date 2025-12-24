@@ -7,8 +7,8 @@
   main:                       #E95678;
   red:                        #e2204d;
 
-  lightfg:                    #FFFFFF66;
-  border-color:               #FFFFFF1A; 
+  lightfg:                    #9CA3AF;
+  border-color:               #2A2F3A; 
   
   background-color:         transparent;
   

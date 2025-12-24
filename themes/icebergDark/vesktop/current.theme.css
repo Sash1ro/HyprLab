@@ -23,13 +23,13 @@
   --corner-text: "Midnight";
 
   /* color of status indicators and window controls */
-  --online-indicator: {hex.green}; /* change to #23a55a for default green */
-  --dnd-indicator: {hex.red}; /* change to #f13f43 for default red */
-  --idle-indicator: {hex.yellow}; /* change to #f0b232 for default yellow */
-  --streaming-indicator: {hex.mauve}; /* change to #593695 for default purple */
+  --online-indicator: #b4be82; /* change to #23a55a for default green */
+  --dnd-indicator: #cc6666; /* change to #f13f43 for default red */
+  --idle-indicator: #ccd3aa; /* change to #f0b232 for default yellow */
+  --streaming-indicator: #7d6bb2; /* change to #593695 for default purple */
 
-  --accent: {hex.accent};
-  --alt-accent: rgba({rgb.r_accent}, {rgb.g_accent}, {rgb.b_accent}, 0.3);
+  --accent: #84a0c6;
+  --alt-accent: rgba(132, 160, 198, 0.3);
 
   --accent-new: var(--accent);
 
@@ -47,17 +47,17 @@
   ); /* mentions & mention messages when hovered */
 
   /* text colors */
-  --text-0: {hex.bg}; /* text on colored elements */
-  --text-1: {hex.fg}; /* other normally white text */
-  --text-5: {hex.alt_fg}; /* muted channels/chats and timestamps */
+  --text-0: #161821; /* text on colored elements */
+  --text-1: #c6c8d1; /* other normally white text */
+  --text-5: #474f61; /* muted channels/chats and timestamps */
   --text-2: var(--text-1); /* headings and important text */
   --text-3: var(--text-1); /* normal text */
   --text-4: var(--text-1); /* icon buttons and channels */
 
   /* background and dark colors */
-  --bg-1: {hex.surface}; /* dark buttons when clicked */
-  --bg-3: {hex.alt_bg}; /* spacing, secondary elements */
-  --bg-4: {hex.bg}; /* main background color */
+  --bg-1: #2A2F3A; /* dark buttons when clicked */
+  --bg-3: #1e2132; /* spacing, secondary elements */
+  --bg-4: #161821; /* main background color */
   --bg-2: var(--bg-1); /* dark buttons */
   --bg-5: var(--bg-1); /* main background color */
   --hover: var(--bg-1); /* channels and buttons when hovered */

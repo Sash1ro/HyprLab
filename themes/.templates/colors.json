@@ -1,6 +1,8 @@
 {
     "hex" : {
         "accent" : "", 
+        "secondary": "", 
+        "tertiary": "",
         "bg"     : "",
         "alt_bg" : "",
         "surface": "",
