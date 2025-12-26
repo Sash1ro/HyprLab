@@ -8,7 +8,7 @@ fastfetch="$THEMES_DIR/current/fastfetch"
 help() {
 cat <<EOF
 Usage:
-  fastfetch.sh <command>
+  hyprlab fastfetch <command>
 
 Commands :
     default      -> Default Ascii (Saitama)

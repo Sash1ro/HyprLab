@@ -20,7 +20,7 @@ Commands :
     delete <name>           -> delete a profile
     list                    -> list all profiles
     selected                -> show the selected profile
-    help                    -> Show this message
+    --help                    -> Show this message
 Options: 
     monitors, -m            -> Monitors profiles
 EOF
@@ -109,13 +109,12 @@ for arg in "$@"; do
     esac
 done
 
-
 case ${1:-} in 
         list)list && exit 0;;
         selected) selected && exit 0;;
         set)shift 1 && set "${@:-}";;
         new)shift 1 && new "${@:-}";;
         delete)shift 1 && del "${@:-}";;
-        help | "") help && exit 0;;
+        --help | "") help && exit 0;;
         *)hyprlab message fail "Unknow option : $1" && help && exit 1;;
 esac

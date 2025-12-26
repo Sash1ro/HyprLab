@@ -6,14 +6,13 @@ source "$HOME/.config/hyprlab/scripts/data/conf.env"
 help() {
 cat <<EOF
 Usage:
-  $(basename "$0") <command>
+  hyprlab wallpaper <command>
 
 Commands :
     add <file path> [options]       -> copy your wallpaper into hyprlab wallpapers folder and theme if provided
     add-all <folder path> [-t, -r]  -> add all wallpaper from a folder
     remove <filename> (theme)       -> remove a wallpaper from everywhere or only from a theme if provided
     set <file path>                 -> set the wallpaper for the current theme
-    clear                           -> clear cache used for rofi menu
     -h, --help                      -> Show this message
 Options :
     -t, --theme                     -> theme name
@@ -206,11 +205,6 @@ add_all() {
     done
 }
 
-clear() {
-    local cache="$SCRIPT_DIR/cache/cached_imgs"
-    rm -rf $cache/*
-}
-
 case "${1:-}" in
     add)
         shift 1
@@ -219,10 +213,6 @@ case "${1:-}" in
     add-all)
         shift 1
         add_all "$@"
-        ;;
-    clear)
-        shift 1
-        clear
         ;;
     remove)
         shift 1 

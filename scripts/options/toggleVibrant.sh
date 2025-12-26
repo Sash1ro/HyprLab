@@ -13,7 +13,7 @@ get_status() {
 }
 
 activate_vibrant() {
-    nvibrant 512 512 512 512
+    nvibrant 512 512 512 512 512 512 >/dev/null
     touch "$file"
     hyprlab notify -a Hyprlab Options "Vibrant ON" -i preferences-system
     hyprlab message ok "Vibrant ON"
@@ -22,7 +22,7 @@ activate_vibrant() {
 
 desactivate_vibrant() {
     rm -f "$file"
-    nvibrant 0 0 0 0
+    nvibrant 0 0 0 0 0 0 >/dev/null
     hyprlab notify -a Hyprlab Options "Vibrant OFF" -i preferences-system
     hyprlab message ok "Vibrant OFF"
     exit 0

@@ -17,6 +17,6 @@ case $1 in
        fi
        ;;
 
-    *) cliphist list | rofi -dmenu -p "Clipboard : " -display-columns 2 -theme $ROFI_THEME/list.rasi  | cliphist decode | wl-copy
+    *) cliphist list | rofi -dmenu -p "Clipboard : " -display-columns 2 -l 10 -theme $ROFI_THEME/list.rasi  | cliphist decode | wl-copy
        ;;
 esac

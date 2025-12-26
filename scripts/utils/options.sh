@@ -7,7 +7,7 @@ ENV_FILE="$HOME/.config/hyprlab/scripts/data/conf.env"
 help() {
 cat <<EOF
 Usage:
-  option <command>
+  hyprlab option <command>
 
 Commands :
     gamemode, -g    -> manage gamemode

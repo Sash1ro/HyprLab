@@ -47,7 +47,7 @@ goLock() {
 	hyprlab notify -a Hyprlab POWER "Locking ..." -i preferences-system
 	sleep 0.5
 	hyprlock
-	hyprlab notify -a Hyprlab POWER "Welcome Back" -i hand
+	hyprlab notify -a Hyprlab $USER "Welcome Back" -i hand
 }
 
 goReboot() {
@@ -83,7 +83,7 @@ goHibernate() {
 help() {
 cat <<EOF
 Usage:
-  $(basename $0) <command>
+  hyprlab power <command>
 
 Commands :
 	lock		-> Lock (hyprlock)

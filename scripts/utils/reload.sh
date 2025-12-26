@@ -3,7 +3,7 @@
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
 #Hyprland
-hyprlab message info "Rechargement commencé..."
+hyprlab message info "Reloading services..."
 hyprlab message info "Reloading Hyprland"
 hyprctl reload >/dev/null && hyprlab message ok "Hyprland reloaded" || hyprlab message fail "Error while reloading Hyprland"
 

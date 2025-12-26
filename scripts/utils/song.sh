@@ -5,7 +5,7 @@ MAX_LEN=0
 
 case ${1:-} in 
     none)MAX_LEN=999999;;
-    "")MAX_LEN=30;;
+    "")MAX_LEN=20;;
     *)MAX_LEN=$1;;
 esac
 
@@ -37,6 +37,8 @@ for blocked in "${BLOCKED_PLAYERS[@]}"; do
     fi
 done
 
+artist=${artist//&/and}
+title=${title//&/and}
 if (( ${#artist} > MAX_LEN )); then
     artist="${artist:0:MAX_LEN}…"
 fi
@@ -46,7 +48,7 @@ if (( ${#title} > MAX_LEN )); then
 fi
 
 case "$status" in
-    Playing) echo "󰽴  $artist - $title" ;;
+    Playing) echo -e "󰽴  $artist - $title" ;;
     Paused)  echo "  $artist - $title" ;;
     *)       echo "  $artist - $title" ;;
 esac

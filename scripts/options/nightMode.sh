@@ -3,6 +3,10 @@ source $HOME/.config/hyprlab/scripts/data/conf.env
 
 file="$SCRIPT_DIR/cache/currentTemp"
 
+if ! command -v hyprsunset >/dev/null;then
+    hyprlab message fail "Hyprsunset is not installed !"
+    exit 1
+fi
 get_status() {
     if [[ -f "$file" ]]; then
         echo "true"
@@ -13,7 +17,7 @@ get_status() {
 }
 
 activate() {
-    hyprctl hyprsunset temperature 5000
+    hyprctl hyprsunset temperature 5000 >/dev/null
     touch "$file"
     hyprlab notify -a Hyprlab Options "NightMode ON" -i preferences-system
     hyprlab message ok "NightMode ON"
@@ -21,7 +25,7 @@ activate() {
 }
 
 desactivate() {
-    hyprctl hyprsunset temperature 6200
+    hyprctl hyprsunset temperature 6200 >/dev/null
     rm -f "$file"
     hyprlab notify -a Hyprlab Options "NightMode OFF" -i preferences-system
     hyprlab message ok "NightMode OFF"

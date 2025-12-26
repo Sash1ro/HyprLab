@@ -21,7 +21,7 @@ activate() {
             keyword general:gaps_in 0;\
             keyword general:gaps_out 0;\
             keyword general:border_size 1;\
-            keyword decoration:rounding 0"
+            keyword decoration:rounding 0" >/dev/null
         hyprlab notify -a Hyprlab Options "Gamemode ON" -i input-gamepad
         hyprlab message ok "Gamemode ON"
         exit 0
@@ -30,7 +30,7 @@ activate() {
 desactivate() {
     hyprlab notify -a Hyprlab Options "Gamemode OFF" -i input-gamepad
     hyprlab message ok "Gamemode OFF"
-    hyprctl reload
+    hyprctl reload >/dev/null
     exit 0
 }
 

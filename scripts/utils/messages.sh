@@ -10,6 +10,7 @@ RESET="\033[0m"
 OK=""
 FAIL="󰅙"
 INFO=""
+WARN=""
 
 help(){
 cat <<EOF
@@ -20,22 +21,27 @@ Commands :
     ok          -> show ok message
     fail        -> show fail message
     info        -> show info message
+    warn        -> show warn message
     help        -> Show this message
 EOF
 }
 
 msg_ok() { echo -e "${GREEN}${OK} $* ${RESET}"; }
+msg_warn() { echo -e "${YELLOW}${WARN} $* ${RESET}"; }
 msg_fail() { echo -e "${RED}${FAIL} $* ${RESET}"; }
 msg_info() { echo -e "${BLUE}${INFO} $*${RESET}"; }
 
-if [[ -z ${2:-} ]]; then
-    msg_fail "Message cannot be empty"
-    help
-fi
-
+verif() {
+    local arg=$1
+    if [[ -z ${arg:-} ]]; then
+        msg_fail "Message cannot be empty"
+        exit 1
+    fi
+}
 case $1 in 
-    ok)   msg_ok $2;;
-    info) msg_info $2;;
-    fail) msg_fail $2;;
+    ok)verif ${2:-} && msg_ok $2;;
+    info)verif ${2:-} && msg_info $2;;
+    fail)verif ${2:-} && msg_fail $2;;
+    warn)verif ${2:-} && msg_warn $2;;
     *|""|-h|help)help && exit 1;
 esac

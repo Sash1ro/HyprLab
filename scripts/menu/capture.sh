@@ -10,15 +10,15 @@ if pgrep -x "rofi" >/dev/null; then
 fi
 
 # Menu options
-op1="  Screenshot screen"
-op2="  Screenshot region"
-op3="󰻂  Record screen"
-op4="  Record region"
+op1=" Screenshot screen"
+op2=" Screenshot region"
+op3="󰻂 Record screen"
+op4=" Record region"
 
 menu="$op1\n$op2\n$op3\n$op4"
 [ -f "$recording_flag" ] && menu="$menu\nStop record"
 
-choice=$(printf "%b" "$menu" | rofi -dmenu -i -p "Capture : " -theme "$ROFI_THEME/list.rasi")
+choice=$(printf "%b" "$menu" | rofi -dmenu -i -a 4 -p "Capture : " -theme "$ROFI_THEME/list.rasi")
 
 case "$choice" in
     "$op1") hyprshot -m output ;;

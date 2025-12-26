@@ -60,7 +60,6 @@ appliquer_theme() {
   fi
 
   hyprlab reload
-  hyprlab message info "Restart gtk apps to see changes"
   hyprlab message info "Applying Papirus icon theme"
   appliquer_icon "$dossier"
 
@@ -131,9 +130,9 @@ selected_theme() {
 theme="off"
 taille="off"
 
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-  -t)
+
+case "$1" in
+  -t|set)
     theme="$2"
     shift 2
     ;;
@@ -158,9 +157,9 @@ while [[ $# -gt 0 ]]; do
     help
     exit 1
     ;;
-  esac
-done
+esac
 
-[[ "$theme" != "off" ]] && appliquer_theme "$THEMES_DIR/$theme" && hyprlab notify -a "Hyprlab" "Updated theme" "Actual : $theme" -i preferences-theme 
-[[ "$taille" != "off" ]] && appliquer_taille "$taille" && hyprlab notify -a "Hyprlab" "Updated size profile" "Actual : $taille" -i preferences-theme 
+
+[[ "$theme" != "off" ]] && appliquer_theme "$THEMES_DIR/$theme" && hyprlab notify -a "Hyprlab" "Updated theme" "Actual : $theme" -i preferences-theme && exit 0
+[[ "$taille" != "off" ]] && appliquer_taille "$taille" && hyprlab notify -a "Hyprlab" "Updated size profile" "Actual : $taille" -i preferences-theme && exit 0
 

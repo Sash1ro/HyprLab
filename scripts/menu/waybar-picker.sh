@@ -13,16 +13,18 @@ fi
 if [ -L "$currentLink" ]; then
     currentTheme=$(basename "$(readlink -f "$currentLink")")
 else
-    currentTheme="Aucun"
+    currentTheme="None"
 fi
 
 if [ ! -d "$themeFolder" ]; then
-    echo "Le dossier $themeFolder n'existe pas."
+    echo "$themeFolder is not a directory"
     exit 1
 fi
 
 
 themes=()
+currentLine="󱝁 $currentTheme"
+themes+=("$currentLine")
 for folder in "$themeFolder"/*; do
     name=$(basename "$folder")
     if [ "$name" != "current" ] && [ "$name" != "$currentTheme" ] && [ "$name" != "size" ]; then
@@ -36,11 +38,7 @@ if [ ${#themes[@]} -eq 0 ]; then
     exit 1
 fi
 
-currentLine=">>$currentTheme"
-themes+=("$currentLine")
-themes=($(printf '%s\n' "${themes[@]}" | sort))
-
-selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -p "Waybar : " -theme $rofiConf  )
+selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -p "Waybar : " -a 0 -selected-row 1 -theme $rofiConf  )
 
 
 if [ -z "$selected" ] || [[ "$selected" == ">>"* ]]; then

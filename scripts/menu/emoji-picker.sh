@@ -4,7 +4,7 @@
 
 # Variables
 rofi_theme="$HOME/.config/hyprlab/rofi/themes/list.rasi"
-msg='** note ** 👀 Click or Return to choose || Ctrl V to Paste'
+msg='Click or Return to choose || Ctrl V to Paste'
 
 # Check if rofi is already running
 if pidof rofi > /dev/null; then
@@ -12,7 +12,7 @@ if pidof rofi > /dev/null; then
 fi
 
 sed '1,/^# # DATA # #$/d' "$0" | \
-rofi -i -dmenu -mesg "$msg" -p "Emoji : " -theme $rofi_theme | \
+rofi -i -dmenu -mesg "$msg" -l 10 -width 30 -p "Emoji : " -theme $rofi_theme | \
 awk '{print $1}' | \
 head -n 1 | \
 tr -d '\n' | \

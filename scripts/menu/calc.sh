@@ -24,7 +24,7 @@ run () {
 
     if [ -z "$*" ]; then
         echo -en "\0prompt\x1fCalc : \n"
-        echo -en "\0message\x1fType an expression\nCTRL+ENTER to validate"
+        echo -en "\0message\x1fPress RETURN to validate\n"
 
         if [ -s "$HISTORY_FILE" ]; then
             echo "Clear History"
@@ -66,7 +66,7 @@ run () {
 show() {
     rofi -show calc \
     -modes "calc:$SCRIPT_DIR/menu/calc.sh" \
-    -theme "~/.config/hyprlab/rofi/themes/list.rasi"  -matching ""
+    -theme "~/.config/hyprlab/rofi/themes/list.rasi"  -matching regex
 }
 
 case ${1:-} in 

@@ -48,51 +48,51 @@ COMMAND="${1:-}"
 
 case "$COMMAND" in
     menu)
-        shift 1
-        "$SCRIPT_DIR/menu/menu.sh"
+        shift 
+        "$SCRIPT_DIR/menu/menu.sh" "${@:-}"
         ;;
     fastfetch)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/fastfetch.sh" "${@:-}"
         ;;
     notify)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/notify.sh" "${@:-}"
         ;;
     profile)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/profiles.sh" "${@:-}"
         ;;
     theme)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/themes-switcher.sh" "${@:-}"
         ;;
     waybar)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/waybar-switcher.sh" "${@:-}"
         ;;
     wallpaper)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/wallpaper.sh" "${@:-}"
         ;;
     message)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/messages.sh" "${@:-}"
         ;;
     reload)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/reload.sh"
         ;;
     power)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/power.sh" "${@:-}"
         ;;
     record)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/record.sh" "${@:-}"
         ;;
     option)
-        shift 1
+        shift 
         "$SCRIPT_DIR/utils/options.sh" "${@:-}"
         ;;
     "" | -h | --help )

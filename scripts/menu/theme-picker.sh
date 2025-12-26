@@ -15,12 +15,13 @@ else
 fi
 
 if [ ! -d "$THEMES_DIR" ]; then
-    echo "Le dossier $THEMES_DIR n'existe pas."
+    echo "$THEMES_DIR is not a directory"
     exit 1
 fi
 
-
+currentLine="󱝁 $currentTheme"
 themes=()
+themes+=("$currentLine")
 for folder in "$THEMES_DIR"/*; do
     name=$(basename "$folder")
     if [ "$name" != "current" ] && [ "$name" != "$currentTheme" ] && [ "$name" != "size" ]; then
@@ -30,18 +31,13 @@ done
 
 
 if [ ${#themes[@]} -eq 0 ]; then
-    echo "Aucun thème trouvé dans $THEMES_DIR."
+    echo "No themes in $THEMES_DIR."
     exit 1
 fi
 
-currentLine=">>$currentTheme"
-themes+=("$currentLine")
-themes=($(printf '%s\n' "${themes[@]}" | sort))
+selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -l 20 -a 0 -selected-row 1 -p "Themes : " -theme $ROFI_THEME/list.rasi  )
 
-selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -l 20 -p "Themes : " -theme $ROFI_THEME/list.rasi  )
-
-
-if [ -z "$selected" ] || [[ "$selected" == ">>"* ]]; then
+if [ -z "$selected" ] || [[ "$selected" == "->"* ]]; then
     exit 0
 fi
 

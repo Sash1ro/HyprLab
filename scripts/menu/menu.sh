@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
+menu="$SCRIPT_DIR/menu"
+
 #KILL ROFI
 if pgrep -x "rofi" >/dev/null; then
     pkill rofi
@@ -9,6 +11,7 @@ fi
 
 #OPTIONS
 clip=" Clipboard"
+calc="󰃬 Calcul"
 capture=" Capture"
 opt=" Options"
 prof=" Profiles" 
@@ -20,6 +23,7 @@ emoji="󰱰 Emoji Picker"
 custom=" Customizations"
 
 prompt="$clip
+$calc
 $capture
 $tam
 $lofi
@@ -30,198 +34,74 @@ $keys
 $power
 $custom"
 
-#POP ROFI
-v=$(echo -e "$prompt" | rofi -dmenu -l 20 -i -p "MENU : " -theme $ROFI_THEME/list.rasi)
+show_help() {
+cat <<EOF
+Usage:
+  hyprlab menu -> show the general menu
+  hyprlab menu <command>
 
-custom_menu() {
-    local theme=" Themes"
-    local waybar=" Waybar themes"
-    local wallpaper="󰸉 Wallpapers"
-    local wallpaperall="󰸉 All Wallpapers"
-    local p="$theme\n$waybar\n$wallpaper\n$wallpaperall"
-
-    local v=$(echo -e "$p" | rofi -dmenu -i -p "Customizations : " -theme $ROFI_THEME/list.rasi)
-
-    case $v in 
-        "$theme") "$SCRIPT_DIR/menu/theme-picker.sh";;
-        "$wallpaper") "$SCRIPT_DIR/menu/wallpaper-switcher.sh";;
-        "$wallpaperall") "$SCRIPT_DIR/menu/wallpaper-switcher.sh" all;;
-        "$waybar") "$SCRIPT_DIR/menu/waybar-picker.sh";;
-        *)exit 0
-    esac
+Commands :
+    clip                    -> Show the clipboard
+    calc                    -> Show a calcul menu
+    capture                 -> Show a capture menu
+    options                 -> Show options menu
+    emoji                   -> Show emojis
+    music                   -> Show online Music menu
+    wifi                    -> Show the wifi menu
+    profile                 -> Show the profile menu
+    keybinds                -> Show keybinds
+    themes                  -> Show themes 
+    waybar                  -> Show waybar themes
+    wallpapers,wall         -> Show wallpapers
+    wallpapers-all, walls   -> Show all wallpapers
+    customizations, custom  -> show the general themes menu
+    -h, --help              -> Show this message
+EOF
 }
 
-other_menu() {
-    local vibrant="󰌁 Turn vibrant on"
-    if [[ "$($SCRIPT_DIR/options/toggleVibrant.sh status)" == "true" ]]; then
-        vibrant="󰹊 Turn vibrant off"
-    fi
-
-    local gamemode="󰊗 Turn gamemode on"
-    if [[ "$($SCRIPT_DIR/options/gamemode.sh status)" == "true" ]]; then
-        gamemode="󰊗 Turn gamemode off"
-    fi
-    local clip="󱘜 Clear Clipboard"
-
-    local p="$vibrant\n$gamemode\n$clip"
-    local v=$(echo -e "$p" | rofi -dmenu -i -p "Other : " -theme $ROFI_THEME/list.rasi)
-
-    case $v in 
-        "$vibrant") "$SCRIPT_DIR/options/toggleVibrant.sh" toggle;;
-        "$gamemode") "$SCRIPT_DIR/options/gamemode.sh" toggle;;
-        "$clip") "$SCRIPT_DIR/menu/clip.sh" w;;
-        *)exit 0
-    esac
-}
-
-hypr_menu() {
-    local options=("$HYPRLAB/hyprland/profiles/current/"*.conf)
-    local target
-    target=$(readlink -f "$HYPRLAB/hyprland/monitors_profile/current")
-
-    declare -A map
-
-    for conf in "${options[@]}"; do
-        map[" $(basename "${conf%.conf}")"]="$conf"
-    done
-
-    map[" monitors"]="$target"
-
-    local choice
-    choice=$(
-        printf '%s\n' "${!map[@]}" \
-        | sort \
-        | rofi -dmenu -i -p "Hyprland : " -l 12 -theme "$ROFI_THEME/list.rasi"
-    )
-
-    local selected_file=${map[$choice]}
-    if [[ -f "$selected_file" ]]; then
-        $TERMINAL --class float nvim "$selected_file"
-    fi
-}
-
-profile_menu() {
-    local profiles=("$HYPRLAB/hyprland/profiles/"*)
-    local name;local selected
-    declare -A map
-
-    for conf in "${profiles[@]}"; do 
-        [ -L $conf ] && continue
-
-
-        name=$(basename "$conf")
-        selected=$(hyprlab profile selected)
-        
-
-        if [ "$name" == "$selected" ]; then
-            map[" $name"]="$name"
-        else
-            map["󰘼 $name"]="$name"
-        fi
-    done
-
-    choice=$(
-        printf '%s\n' "${!map[@]}" \
-        | sort \
-        | rofi -dmenu -i -p "System : " -l 12 -theme "$ROFI_THEME/list.rasi"
-    )
-
-    if [ ! -z "$choice" ]; then 
-        hyprlab profile set ${map[$choice]}
-    fi
-
-}
-
-monitor_menu() {
-    local profiles=("$HYPRLAB/hyprland/monitors_profile/"*)
-    local name;local selected
-    declare -A map
-
-    for conf in "${profiles[@]}"; do 
-        [ -L $conf ] && continue
-
-
-        name=$(basename "$conf")
-        name=${name%.conf}
-        selected=$(hyprlab profile -m selected)
-        
-
-        if [ "$name" == "$selected" ]; then
-            map[" $name"]="$name"
-        else
-            map["󰘼 $name"]="$name"
-        fi
-    done
-
-    choice=$(
-        printf '%s\n' "${!map[@]}" \
-        | sort \
-        | rofi -dmenu -i -p "Monitors : " -l 12 -theme "$ROFI_THEME/list.rasi"
-    )
-
-    if [ ! -z "$choice" ]; then 
-        hyprlab profile -m set ${map[$choice]}
-    fi
-
-}
-
-prof_menu() {
-    local p=" System profiles"
-    local m="󰍹 Monitors profiles"
-    local s="$p\n$m"
-    local choice
-    choice=$(echo -e "$s" | rofi -dmenu -i -p "Profiles :" -theme $ROFI_THEME/list.rasi)
-
-    case $choice in
-        $p)profile_menu;;
-        $m)monitor_menu;;
-        *) exit 0
-    esac
-}
-
-opt_menu() {
-    local hypr=" Hyprland"
-    local wifi=" WIFI"
-    local conn="󰈀 Internet"
-    local bt="󰂯 Bluetooth"
-    local sound=" Sound"
-    local other=" Others"
-
-    local p="$hypr\n$wifi\n$conn\n$bt\n$sound\n$other"
-
-    local v=$(echo -e "$p" | rofi -dmenu -i -p "Options : " -theme $ROFI_THEME/list.rasi)
-
-    case $v in
-    "$hypr")hypr_menu;;
-    "$wifi") "$SCRIPT_DIR/menu/wifi.sh" &;;
-    "$conn")pkill nm-connection-editor && hyprctl dispatch exec nm-connection-editor || hyprctl dispatch exec nm-connection-editor;;
-    "$bt")pkill blueman-manager && hyprctl dispatch exec blueman-manager || hyprctl dispatch exec blueman-manager;;
-    "$sound")pkill pavucontrol && hyprctl dispatch exec pavucontrol || hyprctl dispatch exec pavucontrol;;
-    "$other")other_menu;;
-    *)exit 0
-    esac
-}
-
+#handle CLI
+v=""
+case ${1:-} in
+    clip) v=$clip;;
+    calc) v=$calc;;
+    capture) v=$capture;;
+    options) v=$opt;;
+    emoji)v=$emoji;;
+    music)v=$lofi;;
+    wifi) "$menu/wifi.sh";;
+    profile)v=$prof;;
+    keybinds)v=$keys;;
+    themes)"$menu/theme-picker.sh";;
+    waybar)"$menu/waybar-picker.sh";;
+    wallpapers|wall)"$menu/wallpaper-switcher.sh";;
+    wallpapers-all|walls)"$menu/wallpaper-switcher.sh" all;;
+    customization|custom)v=$custom;;
+    --help|-h) show_help;;
+    "")v=$(echo -e "$prompt" | rofi -dmenu -l 20 -i -p "MENU : " -theme $ROFI_THEME/list.rasi);;
+    *)hyprlab message fail "Invalid option : $1" && exit 1;; 
+esac
 
 #SETTING UP OPTIONS 
 case $v in
-    "$clip") "$SCRIPT_DIR/menu/clip.sh";;
+    "$clip") "$menu/clip.sh";;
 
-    "$emoji")"$SCRIPT_DIR/menu/emoji-picker.sh";;
+    "$calc") "$menu/calc.sh" show;;
 
-    "$lofi") "$SCRIPT_DIR/menu/lofi.sh";;
+    "$emoji")"$menu/emoji-picker.sh";;
 
-    "$keys") "$SCRIPT_DIR/menu/keybinds.sh";;
+    "$lofi") "$menu/lofi.sh";;
 
-    "$capture") "$SCRIPT_DIR/menu/capture.sh";;
+    "$keys") "$menu/keybinds.sh";;
+
+    "$capture") "$menu/capture.sh";;
 
     "$tam") "$SCRIPT_DIR/apps/btop.sh";;
 
-    "$opt") opt_menu;;
+    "$opt") shift && "$menu/options.sh" ${@:-};;
 
-    "$prof") prof_menu;;
+    "$prof") "$menu/profilesmenu.sh";;
 
-    "$custom") custom_menu;;
+    "$custom") "$menu/customization.sh";;
 
     "$power") wlogout -b 4;;
     *) exit 0

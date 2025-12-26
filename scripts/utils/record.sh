@@ -27,15 +27,25 @@ record() {
         region=$(slurp -o)
         [ -z "$region" ] && { rm -f "$recording_flag"; exit 0; }
 
-        hyprlab notify -a Hyprlab Capture "Starting screen recording..." -i video
-        hyprlab message ok "Starting screen recording..."
-        wf-recorder --audio --bframes max_b_frames -g "$region" -f "$videoFolder/$dateTime.mp4"
+        if wf-recorder --audio --bframes 2 -g "$region" -f "$videoFolder/$dateTime.mp4"; then
+            hyprlab notify -a "Hyprlab Capture" "Starting screen recording..." -i video
+            hyprlab message ok "Starting screen recording..."
+        else
+            hyprlab message fail "Failed to record"
+            hyprlab notify -a "Hyprlab" Capture "Failed to record!" -i video
+        fi
+        
     else
         region=$(slurp)
         [ -z "$region" ] && { rm -f "$recording_flag"; exit 0; } 
-        hyprlab notify -a Hyprlab Capture "Starting region recording..." -i video
-        hyprlab message ok "Starting region recording..."
-        wf-recorder --audio --bframes max_b_frames -g "$region" -f "$videoFolder/$dateTime.mp4"
+        if wf-recorder --audio --bframes max_b_frames -g "$region" -f "$videoFolder/$dateTime.mp4"; then
+            hyprlab notify -a Hyprlab Capture "Starting region recording..." -i video
+            hyprlab message ok "Starting region recording..."
+        else
+            hyprlab message fail "Failed to record"
+            hyprlab notify -a "Hyprlab" Capture "Failed to record!" -i video
+        fi
+        
     fi
 
     rm -f "$recording_flag"
@@ -56,9 +66,9 @@ help() {
 Usage : $(basename "$0") <commands>
 
 Options :
-  region      -> Select a region and start record
-  screen      -> Select a screen and start record
-  stop        -> Stop the actual record
+  region      -> Select a region and start recording
+  screen      -> Select a screen and start recording
+  stop        -> Stop recording
   -h, --help  -> Show this message
 EOF
 }

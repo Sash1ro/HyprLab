@@ -2,7 +2,6 @@
 
 source $HOME/.config/hyprlab/scripts/data/conf.env
 
-# Get current Bluetooth state (0 = unblocked, 1 = blocked)
 state=$(rfkill list bluetooth | grep "Soft blocked" | awk '{print $3}')
 
 getStatus() {
@@ -15,14 +14,14 @@ getStatus() {
 }
 
 activate() {
-    rfkill unblock bluetooth # turn on
+    rfkill unblock bluetooth >/dev/null 
     hyprlab notify -a Hyprlab Options "Bluetooth ON" -i bluetooth
     hyprlab message ok "Bluetooth ON" 
     exit 0
 }
 
 desactivate() {
-    rfkill block bluetooth   # turn off
+    rfkill block bluetooth >/dev/null   
     hyprlab notify -a Hyprlab Options "Bluetooth OFF" -i bluetooth
     hyprlab message ok "Bluetooth OFF"
     exit 0
