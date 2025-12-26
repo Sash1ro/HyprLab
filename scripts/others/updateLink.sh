@@ -18,6 +18,7 @@ ROFI="$CONFIG/rofi/colors.rasi"
 STARSHIP="$CONFIG/starship.toml"
 VESTOP="$CONFIG/vesktop/themes/current.theme.css"
 NVIM="$CONFIG/nvim/lua/config/colorscheme.txt"
+NCOLORS="$CONFIG/nvim/lua/utils/matugen.lua"
 CAVA="$CONFIG/cava/themes/current"
 FISH="$CONFIG/fish/themes/current.theme"
 
@@ -42,6 +43,10 @@ apply() {
   lien_conf "$VESTOP" "$dossier/vesktop/current.theme.css" "Vesktop"
   lien_conf "$NVIM" "$dossier/nvim/colorscheme.txt" "Nvim"
   lien_conf "$CAVA" "$dossier/cava/theme" "cava"
+
+  if [ -f "$dossier/nvim/colors.lua" ]; then
+    lien_conf "$NCOLORS" "$dossier/nvim/colors.lua" "Nvim colors"
+  fi
 }
 
 main() {

@@ -15,11 +15,11 @@ $time\
 palette = "colors"
 
 [palettes.colors]
-primary = '#89b4fa'
+primary = '#cba6f7'
 red = '#f38ba8'
 green = '#a6e3a1'
 text = '#cdd6f4'
-mauve = '#cba6f7'
+mauve = '#89b4fa'
 
 [directory]
 style = "fg:primary bold" 

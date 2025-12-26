@@ -2,12 +2,9 @@
 set -euo pipefail
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
-TEMPLATES="$HYPRLAB/themes/.templates"
+TEMPLATES="$THEMES_DIR/.templates"
 
-# if [ -z "$COLORS" ] || [ ! -f "$COLORS" ]; then
-#     hyprlab message fail "No file provided, you need to provide a valid JSON"
-#     exit 1
-# fi
+nvim="$HOME/.config/nvim/lua/utils"
 
 help() {
 cat <<EOF
@@ -15,13 +12,16 @@ Usage:
   createTheme.sh <command>
 
 Commands :
-    help                       -> Show this message
+    init <name>                    -> Create a theme 
+    make <name>                    -> Make the theme with the color provided 
+    update <file path> <json path> -> Update a provided file with the provided JSON
+    --help                         -> Show this message
 EOF
 }
 
 init() {
     local NAME=${1:-}
-    local THEME="$HYPRLAB/themes/$NAME"
+    local THEME="$THEMES_DIR/$NAME"
 
     if [ -z "$NAME" ]; then
         hyprlab message fail "Please provide a theme name"
@@ -47,7 +47,7 @@ update() {
     
     hyprlab message info "Updating $NAME"
 
-    #HEX VALUES
+    #HEX VALUES / HHEX = HEX without '#'
     while IFS== read -r key value; do
         sed -i "s/{hex.$key}/$value/g" "$FILE"
         sed -i "s/{hhex.$key}/${value#\#}/g" "$FILE"
@@ -63,7 +63,7 @@ update() {
 
 tcopy() {
     local NAME=${1:-}
-    local THEME="$HYPRLAB/themes/$NAME"
+    local THEME="$THEMES_DIR/$NAME"
 
     for d in "$TEMPLATES/theme"/*; do
         if [[ -d "$d" ]]; then
@@ -79,11 +79,13 @@ tcopy() {
             cp -r "$f" "$THEME/$filename"
         fi
     done
+
+    cp "$TEMPLATES/nvim/colors.lua" "$THEME/nvim/colors.lua"
 }
 
 make() {
     local NAME=${1:-}
-    local THEME="$HYPRLAB/themes/$NAME"
+    local THEME="$THEMES_DIR/$NAME"
 
     if [ -z "$NAME" ]; then
         hyprlab message fail "Please provide a theme name"
@@ -113,18 +115,25 @@ make() {
         fi
 
         if [ -d "$f" ]; then
-            file=$(find $f -maxdepth 1 -type f | head -n 1)
+            for f2 in "$f"/*; do
+                update "$f2" "$THEME/colors.json"
+            done
+            continue
         fi
 
         update "$file" "$THEME/colors.json"
     done
 
+    ln -sfn "$THEME/nvim/colors.lua" "$nvim/matugen.lua"
+
+    hyprlab fastfetch default
     hyprlab message ok "Theme $NAME created"
 }
 
 case ${1:-} in
     init)shift && init ${@:-};;
     make)shift && make ${@:-};;
-    "" | help | -h) help && exit 0;;
+    update) shift && update ${@:-};;
+    "" | --help | -h) help && exit 0;;
     *) hyprlab message fail "Invalid option : $1" && exit 1;;
 esac

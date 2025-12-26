@@ -1,108 +1,100 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# ---------------- CONFIG ----------------
 ENV_FILE="$HOME/.config/hyprlab/scripts/data/conf.env"
-DEFAULT_ICON_DIR="$HOME/.config/hyprlab/assets"
-
 [[ -f "$ENV_FILE" ]] && source "$ENV_FILE"
 
-ICON_DIR="${ICON_DIR:-$DEFAULT_ICON_DIR}"
-
-RED="\033[31m"
-GREEN="\033[32m"
-YELLOW="\033[33m"
-BLUE="\033[34m"
-RESET="\033[0m"
+ICON_DIR="${ICON_DIR:-$ASSETS}"
+SOUND_DIR="/usr/share/sounds/freedesktop/stereo"
 
 show_help() {
 cat <<EOF
-
 Usage:
-  $(basename $0) <urgency> <app> <title> <content> [options]
-
-Urgency levels:
-  low | normal | crit
-
-Examples:
-  $(basename $0) normal Firefox "Download Complete" "Your file is ready" --icon download
-  $(basename $0) crit System "Error" "Something happened" --icon warning --sound /path/beep.ogg
+  hyprlab notify [notify-send args] [-i icon_name_or_path] [-s sound_file] content
 
 Options:
-  -i, --icon <name>   Use icon from $ICON_DIR (<name>.svg / .png)
-  -s, --sound <file>  Play a sound with the notification
-  -h, --help          Show this help
+  -i, --icon <name|path>   Icon for the notification (searched in ICON_DIR if relative)
+  -s, --sound <file>       Sound to play along with the notification
+  -h, --help               Show this help
+
+Examples:
+  hyprlab notify -u critical -i warning "Disk full"
+  hyprlab notify -a System -t "Update" -i download "Download complete"
+  hyprlab notify -i info -s beep.ogg "Hello world"
 EOF
 }
 
-if [[ $# -lt 4 ]]; then
-    show_help
-    exit 1
-fi
-
-URGENCY="$1"
-APP="$2"
-TITLE="$3"
-CONTENT="$4"
-
-shift 4
-
-PLAY_SOUND=""
-ICON_NAME=""
+# ---------- DEFAULTS ----------
 ICON=""
+SOUND=""
+ARGS=()
 
-[[ ! -d "$ICON_DIR" ]] && echo -e "${YELLOW}Warning:${RESET} Icon directory missing: $ICON_DIR"
-
+# ---------- PARSE OPTIONS ----------
 while [[ $# -gt 0 ]]; do
     case "$1" in
         -i|--icon)
-            ICON_NAME="$2"
-            ICON="$ICON_DIR/$ICON_NAME"
-            shift 2
+            shift
+            [[ $# -eq 0 ]] && { echo "Missing icon"; exit 1; }
+            ICON="$1"
+            shift
             ;;
         -s|--sound)
-            PLAY_SOUND="$2"
-            shift 2
+            shift
+            [[ $# -eq 0 ]] && { echo "Missing sound"; exit 1; }
+            SOUND="$1"
+            shift
             ;;
-        -h|--help)
+        -h|--help|"")
             show_help
             exit 0
             ;;
         *)
-            echo -e "${RED}Unknown option:${RESET} $1"
-            exit 1
+            ARGS+=("$1")
+            shift
             ;;
     esac
 done
 
-case "$URGENCY" in
-    low)    URG_FLAG="-u low" ;;
-    crit)   URG_FLAG="-u critical" ;;
-    *)      URG_FLAG="" ;;  # normal
-esac
-
-
-if [[ -n "$ICON" ]]; then
-    if [[ ! -f "$ICON.svg" ]]; then
-        if [[ -f "$ICON.png" ]]; then
-            ICON="$ICON.png"
-        else
-            echo -e "${YELLOW}Warning:${RESET} Icon not found, using default icon theme."
-            ICON=$ICON_NAME
+play() {
+    if [[ -n "$SOUND" ]]; then
+    [[ ! -f "$SOUND" ]] && SOUND="$SOUND_DIR/$SOUND"
+    if [[ -f "$SOUND" ]]; then
+        if command -v paplay >/dev/null; then
+            paplay "$SOUND" &
+        elif command -v aplay >/dev/null; then
+            aplay "$SOUND" &
         fi
     fi
 fi
+}
 
-if [[ -n "$ICON" ]]; then
-    notify-send $URG_FLAG -a "$APP" "$TITLE" "$CONTENT" -i "$ICON"
-else
-    notify-send $URG_FLAG -a "$APP" "$TITLE" "$CONTENT"
+if [[ ${#ARGS[@]} -eq 0 ]] && [ -n "$SOUND" ]; then
+    play
+    exit 0
 fi
 
-if [[ -n "$PLAY_SOUND" ]]; then
-    if command -v paplay >/dev/null; then
-        paplay "$PLAY_SOUND" &
-    elif command -v aplay >/dev/null; then
-        aplay "$PLAY_SOUND" &
+
+[[ ${#ARGS[@]} -eq 0 ]] && { echo "Missing content"; exit 1; }
+CONTENT="${ARGS[*]}"
+
+# ---------- RESOLVE ICON ----------
+if [[ -n "$ICON" && "$ICON" != /* ]]; then
+    if [[ -f "$ICON_DIR/$ICON.svg" ]]; then
+        ICON="$ICON_DIR/$ICON.svg"
+    elif [[ -f "$ICON_DIR/$ICON.png" ]]; then
+        ICON="$ICON_DIR/$ICON.png"
     fi
 fi
+
+# ---------- BUILD CMD ----------
+CMD=(notify-send)
+[[ -n "$ICON" ]] && CMD+=(-i "$ICON")
+CMD+=("${ARGS[@]}")
+
+# ---------- EXECUTE ----------
+"${CMD[@]}"
+
+# ---------- PLAY SOUND ----------
+play
 

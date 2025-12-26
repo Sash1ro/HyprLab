@@ -2,8 +2,10 @@
 set -euo pipefail
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
-file="$HYPRLAB/themes/current/folder"
-distpy="$HYPRLAB/scripts/py/dist.py"
+file="$THEMES_DIR/current/folder"
+distpy="$SCRIPT_DIR/py/dist.py"
+
+#COLORS FROM PAPIRUS FOLDERS
 declare -A COLORS=(
     ["cyan"]="#00BCD4"
     ["green"]="#87B158"
@@ -46,5 +48,4 @@ appliquer_icon() {
   fi
 }
 
-appliquer_icon
-echo "La couleur la plus proche de $base est : $result"
+appliquer_icon || hyprlab message fail "Error or papirus folder not installed"

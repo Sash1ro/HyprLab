@@ -9,11 +9,11 @@ fish_color_redirection c6c8d1
 fish_color_end b4be82
 fish_color_error cc6666
 fish_color_param a093c7
-fish_color_comment 2A2F3A
+fish_color_comment 9a9ca8
 fish_color_selection --background=1e2132
 fish_color_operator a093c7
 fish_color_escape 84a0c6
-fish_color_autosuggestion 2A2F3A
+fish_color_autosuggestion 9a9ca8
 fish_color_cwd a093c7
 fish_color_cwd_root cc6666
 fish_color_user ccd3aa

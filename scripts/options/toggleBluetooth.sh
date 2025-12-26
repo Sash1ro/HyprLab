@@ -16,14 +16,14 @@ getStatus() {
 
 activate() {
     rfkill unblock bluetooth # turn on
-    hyprlab notify normal Hyprlab Options "Bluetooth ON" -i bluetooth
+    hyprlab notify -a Hyprlab Options "Bluetooth ON" -i bluetooth
     hyprlab message ok "Bluetooth ON" 
     exit 0
 }
 
 desactivate() {
     rfkill block bluetooth   # turn off
-    hyprlab notify normal Hyprlab Options "Bluetooth OFF" -i bluetooth
+    hyprlab notify -a Hyprlab Options "Bluetooth OFF" -i bluetooth
     hyprlab message ok "Bluetooth OFF"
     exit 0
 }

@@ -18,7 +18,7 @@ main() {
 
   link="${menu_options[$choice]}"
 
-  hyprlab notify low "Hyprlab" "Media" "Playing now $choice"
+  hyprlab notify -u low -a "Hyprlab" "Media" "Playing now $choice"
   
   if [[ $link == *playlist* || $link == *watch* ]]; then
     mpv --shuffle --vid=no --volume=75 "$link"
@@ -27,4 +27,4 @@ main() {
   fi
 }
 
-pkill mpv && hyprlab notify low "Hyprlab" "Media" "Online Music stopped" || main
+pkill mpv && hyprlab notify -u low -a "Hyprlab" "Media" "Online Music stopped" || main

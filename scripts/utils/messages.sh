@@ -20,7 +20,7 @@ Commands :
     ok          -> show ok message
     fail        -> show fail message
     info        -> show info message
-    -h, --help  -> Show this message
+    help        -> Show this message
 EOF
 }
 
@@ -37,5 +37,5 @@ case $1 in
     ok)   msg_ok $2;;
     info) msg_info $2;;
     fail) msg_fail $2;;
-    *|""|-h|--help)help && exit 1;
+    *|""|-h|help)help && exit 1;
 esac

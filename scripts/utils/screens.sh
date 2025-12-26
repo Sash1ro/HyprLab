@@ -51,7 +51,7 @@ if [ -n "$arg" ] && [ "$arg" == "detect" ]; then
   echo $last
   echo $PRIMARY
   if [ ! "$PRIMARY" == "$last" ]; then
-    hyprlab notify normal "Hyprlab" "Monitors" "Another primary monitor detected" 
+    hyprlab notify -a "Hyprlab" "Monitors" "Another primary monitor detected" 
   fi
   exit 0
 fi

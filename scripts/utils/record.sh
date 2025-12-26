@@ -16,7 +16,7 @@ record() {
     dateTime=$(date +%Y-%m-%d-%H-%M-%S)
 
     if [ -f "$recording_flag" ]; then
-        hyprlab notify normal Hyprlab Capture "Recording already in progress!" -i video
+        hyprlab notify -a Hyprlab Capture "Recording already in progress!" -i video
         hyprlab message fail "recording already in progress!"
         exit 0
     fi
@@ -27,13 +27,13 @@ record() {
         region=$(slurp -o)
         [ -z "$region" ] && { rm -f "$recording_flag"; exit 0; }
 
-        hyprlab notify normal Hyprlab Capture "Starting screen recording..." -i video
+        hyprlab notify -a Hyprlab Capture "Starting screen recording..." -i video
         hyprlab message ok "Starting screen recording..."
         wf-recorder --audio --bframes max_b_frames -g "$region" -f "$videoFolder/$dateTime.mp4"
     else
         region=$(slurp)
         [ -z "$region" ] && { rm -f "$recording_flag"; exit 0; } 
-        hyprlab notify normal Hyprlab Capture "Starting region recording..." -i video
+        hyprlab notify -a Hyprlab Capture "Starting region recording..." -i video
         hyprlab message ok "Starting region recording..."
         wf-recorder --audio --bframes max_b_frames -g "$region" -f "$videoFolder/$dateTime.mp4"
     fi
@@ -45,7 +45,7 @@ stopRecord() {
     if [[ -f $recording_flag ]]; then
         rm -f $recording_flag
         pkill -INT -x wf-recorder
-        hyprlab notify normal Hyprlab Capture "Recording stopped\n$videoFolder" -i video
+        hyprlab notify -a Hyprlab Capture "Recording stopped\n$videoFolder" -i video
     else
         hyprlab message fail "Not recording"
     fi

@@ -18,7 +18,7 @@ fi
 run () {
     if [ "$*" == "Clear History" ]; then
         truncate -s 0 "$HISTORY_FILE"
-        notify-send "History cleared"
+        hyprlab notify -a ROFI CALC "History cleared" --icon user-trash
         exit 0
     fi
 

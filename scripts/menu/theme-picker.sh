@@ -38,7 +38,7 @@ currentLine=">>$currentTheme"
 themes+=("$currentLine")
 themes=($(printf '%s\n' "${themes[@]}" | sort))
 
-selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -l 10 -p "Themes : " -theme $ROFI_THEME/list.rasi  )
+selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -l 20 -p "Themes : " -theme $ROFI_THEME/list.rasi  )
 
 
 if [ -z "$selected" ] || [[ "$selected" == ">>"* ]]; then

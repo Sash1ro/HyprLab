@@ -262,11 +262,12 @@ setupApplications() {
 
 # --- Codium setup ---
 setupCodium() {
-  msg_info "Setting up Codium"
   if ! command -v codium >/dev/null; then
     msg_fail "Codium is not installed"
     return
   fi
+
+  msg_info "Setting up Codium"
 
   icon_themes=(
     "PKief.material-icon-theme"
@@ -279,6 +280,8 @@ setupCodium() {
     "arcticicestudio.nord-visual-studio-code"
     "enkia.tokyo-night"
     "jdinhlife.gruvbox"
+    "jolaleye.horizon-theme-vscode"
+    "steffo.ora-code"
   )
   extensions=(
     "esbenp.prettier-vscode"
@@ -331,13 +334,15 @@ iconApply         #Applying papirus icons
 setupApplications #Copying .desktops
 setupGpu          #Nvidia setup
 
-export PATH="$HYPRLAB/bin:$PATH" #Exporting hyprlab CLI to use it after
+export PATH="$HYPRLAB/scripts/bin:$PATH" #Exporting hyprlab CLI to use it after
 
 "$HYPRLAB/scripts/others/theme-setup.sh" || msg_fail "Error running theme setup"
 "$HYPRLAB/scripts/utils/screen.sh" || msg_fail "Failed to auto generate monitors configuration"
 msg_ok "HyprLab setup complete! Please reboot to apply all changes."
 notify-send "HyprLab installed successfully" "Reboot is required"
 
-msg_info "Starting Neovim for LazyVim installation"
+hyprlab notify -s service-login.oga
+
+msg_info "Starting Neovim for LazyVim initialisation and installation"
 nvim --headless +Lazy! +qall || msg_fail "Failed to auto setup LazyVim, do it manually"
 

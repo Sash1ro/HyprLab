@@ -23,36 +23,36 @@
   --corner-text: 'Midnight';
 
   /* color of status indicators and window controls */
-  --online-indicator: #a7c8ff; /* change to #23a55a for default green */
+  --online-indicator: #9ad4a1; /* change to #23a55a for default green */
   --dnd-indicator: #ffb4ab; /* change to #f13f43 for default red */
-  --idle-indicator: #dbbde2; /* change to #f0b232 for default yellow */
-  --streaming-indicator: #bdc7dc; /* change to #593695 for default purple */
+  --idle-indicator: #a1ced8; /* change to #f0b232 for default yellow */
+  --streaming-indicator: #b7ccb6; /* change to #593695 for default purple */
 
   /* accent colors */
-  --accent-1: #dbbde2; /* links */
-  --accent-2: #a7c8ff; /* general unread/mention elements, some icons when active */
-  --accent-3: #a7c8ff; /* accent buttons */
-  --accent-4: #234777; /* accent buttons when hovered */
-  --accent-5: #a7c8ff; /* accent buttons when clicked */
-  --mention: #234777; /* mentions & mention messages */
-  --mention-hover: #a7c8ff; /* mentions & mention messages when hovered */
+  --accent-1: #a1ced8; /* links */
+  --accent-2: #9ad4a1; /* general unread/mention elements, some icons when active */
+  --accent-3: #9ad4a1; /* accent buttons */
+  --accent-4: #1a512a; /* accent buttons when hovered */
+  --accent-5: #9ad4a1; /* accent buttons when clicked */
+  --mention: #1a512a; /* mentions & mention messages */
+  --mention-hover: #9ad4a1; /* mentions & mention messages when hovered */
 
   /* text colors */
-  --text-0: #03305f; /* text on colored elements */
-  --text-1: #e1e2e9; /* other normally white text */
-  --text-2: #e1e2e9; /* headings and important text */
-  --text-3: #e1e2e9; /* normal text */
-  --text-4: #c4c6cf; /* icon buttons and channels */
-  --text-5: #8e9199; /* muted channels/chats and timestamps */
+  --text-0: #003917; /* text on colored elements */
+  --text-1: #dfe4dc; /* other normally white text */
+  --text-2: #dfe4dc; /* headings and important text */
+  --text-3: #dfe4dc; /* normal text */
+  --text-4: #c1c9be; /* icon buttons and channels */
+  --text-5: #8b9389; /* muted channels/chats and timestamps */
 
   /* background and dark colors */
-  --bg-1: #111318; /* dark buttons when clicked */
-  --bg-2: #282a2f; /* dark buttons */
-  --bg-3: #1d2024; /* spacing, secondary elements */
-  --bg-4: #111318; /* main background color */
-  --hover: #282a2f; /* channels and buttons when hovered */
-  --active: #32353a; /* channels and buttons when clicked or selected */
-  --message-hover: #282a2f; /* messages when hovered */
+  --bg-1: #101510; /* dark buttons when clicked */
+  --bg-2: #262b26; /* dark buttons */
+  --bg-3: #1c211c; /* spacing, secondary elements */
+  --bg-4: #101510; /* main background color */
+  --hover: #262b26; /* channels and buttons when hovered */
+  --active: #313631; /* channels and buttons when clicked or selected */
+  --message-hover: #262b26; /* messages when hovered */
 
   /* amount of spacing and padding */
   --spacing: 12px;

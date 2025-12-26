@@ -44,15 +44,15 @@ goExit() {
 
 goLock() {
 	echo ":: Lock"
-	hyprlab notify normal Hyprlab Hyprlab "Locking ..." -i preferences-system
+	hyprlab notify -a Hyprlab POWER "Locking ..." -i preferences-system
 	sleep 0.5
 	hyprlock
-	hyprlab notify normal Hyprlab Hyperlab "Welcome Back" -i hand
+	hyprlab notify -a Hyprlab POWER "Welcome Back" -i hand
 }
 
 goReboot() {
 	echo ":: Reboot"
-	hyprlab notify normal Hyprlab Hyprlab "Rebooting ..." -i preferences-system
+	hyprlab notify -a Hyprlab POWER "Rebooting ..." -i preferences-system -s service-logout.oga
 	terminate_clients
 	sleep 0.5
 	systemctl reboot
@@ -60,7 +60,7 @@ goReboot() {
 
 goShutdown() {
 	echo ":: Shutdown"
-	hyprlab notify normal Hyprlab Hyprlab "Shutting down ..." -i preferences-system
+	hyprlab notify -a Hyprlab POWER "Shutting down ..." -i preferences-system -s service-logout.oga
 	terminate_clients
 	sleep 0.5
 	systemctl poweroff
@@ -68,14 +68,14 @@ goShutdown() {
 
 goSuspend() {
 	echo ":: Suspend"
-	hyprlab notify normal Hyprlab Hyprlab "Suspending ..." -i preferences-system
+	hyprlab notify -a Hyprlab POWER "Suspending ..." -i preferences-system
 	sleep 0.5
 	systemctl suspend
 }
 
 goHibernate() {
 	echo ":: Hibernate"
-	hyprlab notify normal Hyprlab Hyprlab "Hibernating ..." -i preferences-system
+	hyprlab notify -a Hyprlab POWER "Hibernating ..." -i preferences-system
 	sleep 1
 	systemctl hibernate
 }
@@ -96,7 +96,7 @@ Commands :
 EOF
 }
 
-case $1 in 
+case ${1:-} in 
 	lock) goLock;;
 	shutdown) goShutdown;;
 	suspend) goSuspend;;

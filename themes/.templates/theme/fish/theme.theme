@@ -9,11 +9,11 @@ fish_color_redirection {hhex.fg}
 fish_color_end {hhex.tertiary}
 fish_color_error {hhex.red}
 fish_color_param {hhex.secondary}
-fish_color_comment {hhex.surface}
+fish_color_comment {hhex.alt_fg}
 fish_color_selection --background={hhex.alt_bg}
 fish_color_operator {hhex.secondary}
 fish_color_escape {hhex.blue}
-fish_color_autosuggestion {hhex.surface}
+fish_color_autosuggestion {hhex.alt_fg}
 fish_color_cwd {hhex.secondary}
 fish_color_cwd_root {hhex.red}
 fish_color_user {hhex.yellow}
