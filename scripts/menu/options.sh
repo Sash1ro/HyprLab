@@ -20,24 +20,38 @@ if [[ "$($SCRIPT_DIR/options/toggleVibrant.sh status)" == "true" ]]; then
     vibrant=" Vibrant"
 fi
 
+waybar=" Waybar"
+if pgrep -x "waybar" >/dev/null; then
+    waybar=" Waybar"
+fi
+
 gamemode=" Gamemode"
 if [[ "$($SCRIPT_DIR/options/gamemode.sh status)" == "true" ]]; then
     gamemode=" Gamemode"
 fi
 clip="󱘜 Clear Clipboard"
 
-p="$vibrant\n$gamemode\n$hypr\n$wifi\n$conn\n$bt\n$sound\n$clip"
+p="$vibrant\n$waybar\n$gamemode\n$hypr\n$wifi\n$conn\n$bt\n$sound\n$clip"
 
 v=$(echo -e "$p" | rofi -dmenu -i -p "Options : " -l 10 -selected-row $index -theme $ROFI_THEME/list.rasi)
 
+toggleWaybar() {
+    if pgrep -x "waybar" >/dev/null; then
+        pkill waybar
+    else 
+        hyprctl dispatch exec waybar
+    fi
+}
+
 case $v in
     "$hypr")"$SCRIPT_DIR/menu/hypropt.sh";;
+    "$waybar")toggleWaybar && "$SCRIPT_DIR/menu/options.sh" 1;;
     "$wifi") "$SCRIPT_DIR/menu/wifi.sh" &;;
     "$conn")pkill nm-connection-editor && hyprctl dispatch exec nm-connection-editor || hyprctl dispatch exec nm-connection-editor;;
     "$bt")pkill blueman-manager && hyprctl dispatch exec blueman-manager || hyprctl dispatch exec blueman-manager;;
     "$sound")pkill pavucontrol && hyprctl dispatch exec pavucontrol || hyprctl dispatch exec pavucontrol;;
     "$vibrant") "$SCRIPT_DIR/options/toggleVibrant.sh" toggle && "$SCRIPT_DIR/menu/options.sh" 0;;
-    "$gamemode") "$SCRIPT_DIR/options/gamemode.sh" toggle && "$SCRIPT_DIR/menu/options.sh" 1;;
+    "$gamemode") "$SCRIPT_DIR/options/gamemode.sh" toggle && "$SCRIPT_DIR/menu/options.sh" 2;;
     "$clip") "$SCRIPT_DIR/menu/clip.sh" w;;
     *)exit 0
 esac    

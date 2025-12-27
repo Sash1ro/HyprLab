@@ -1,25 +1,25 @@
 return {
 	-- Core
-	background = "#0f1417",
-	foreground = "#dfe3e6",
+	background = "#1a1110",
+	foreground = "#f1dfdb",
 
 	-- Primary
-	primary = "#8ad0ef",
-	on_primary = "#003545",
-	primary_container = "#004d63",
-	on_primary_container = "#bce9ff",
+	primary = "#ffb4a7",
+	on_primary = "#561e16",
+	primary_container = "#73342a",
+	on_primary_container = "#ffdad4",
 
 	-- Secondary
-	secondary = "#b4cad5",
-	on_secondary = "#1e333c",
-	secondary_container = "#354a53",
-	on_secondary_container = "#d0e6f2",
+	secondary = "#e7bdb6",
+	on_secondary = "#442925",
+	secondary_container = "#5d3f3a",
+	on_secondary_container = "#ffdad4",
 
 	-- Tertiary
-	tertiary = "#c5c3ea",
-	on_tertiary = "#2e2d4d",
-	tertiary_container = "#454364",
-	on_tertiary_container = "#e2dfff",
+	tertiary = "#ddc48c",
+	on_tertiary = "#3e2e04",
+	tertiary_container = "#564519",
+	on_tertiary_container = "#fbe0a6",
 
 	-- Error
 	error = "#ffb4ab",
@@ -28,9 +28,9 @@ return {
 	on_error_container = "#ffdad6",
 
 	-- Surfaces / Outlines
-	surface_variant = "#40484c",
-	on_surface_variant = "#c0c8cd",
-	outline = "#8a9297",
-	inverse_surface = "#dfe3e6",
-	inverse_on_surface = "#2c3134",
+	surface_variant = "#534340",
+	on_surface_variant = "#d8c2be",
+	outline = "#a08c89",
+	inverse_surface = "#f1dfdb",
+	inverse_on_surface = "#392e2c",
 }
