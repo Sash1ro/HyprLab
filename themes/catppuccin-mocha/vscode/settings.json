@@ -7,7 +7,7 @@
   "editor.formatOnSave": true,
   "editor.minimap.autohide": "mouseover",
   "files.autoSaveDelay": 100,
-  "editor.fontFamily": "'JetBrainsMono Nerd Font Propo'", 
+  "editor.fontFamily": "'JetBrainsMono Nerd Font Propo'",
   "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "security.workspace.trust.untrustedFiles": "open",
@@ -42,5 +42,6 @@
   "editor.scrollbar.horizontal": "auto",
   "window.zoomLevel": 0,
   "workbench.statusBar.visible": false,
-  "qt-qml.qmlls.useQmlImportPathEnvVar": true
+  "qt-qml.qmlls.useQmlImportPathEnvVar": true,
+  "javascript.updateImportsOnFileMove.enabled": "always"
 }

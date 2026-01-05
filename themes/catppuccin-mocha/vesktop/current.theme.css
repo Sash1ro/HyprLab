@@ -40,7 +40,7 @@
 	--accent-3: var(--accent);             /* accent buttons */
 	--accent-4: var(--accent);      /* accent buttons when hovered */
 	--accent-5: var(--accent);   /* accent buttons when clicked */
-	--mention:  var(--accent);             /* mentions & mention messages */
+	--mention:  var(--alt-accent);             /* mentions & mention messages */
 	--mention-hover: var(--alt-accent); /* mentions & mention messages when hovered */
 
 	/* text colors */
