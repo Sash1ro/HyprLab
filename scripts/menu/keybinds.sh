@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
-file="$HYPRLAB/hyprland/profiles/current/keybinds.conf"
 
-keybinds=()
+json=$(hyprctl -j binds)
+
 max_len=0
-extra_space=3
+extra_space=5
+keybinds=()
 
 # Close Rofi if already running
 if pgrep -x "rofi" >/dev/null; then
@@ -13,55 +14,52 @@ if pgrep -x "rofi" >/dev/null; then
     exit 0
 fi
 
+mapfile -t items < <(jq -c '.[]' <<< "$json")
 
-while IFS= read -r line; do
-    
-    [[ -z "$line" || "$line" =~ ^# ]] && continue
+for item in "${items[@]}"; do
+    mod=$(jq -r '.modmask' <<< "$item")
+    key=$(jq -r '.key' <<< "$item")
+    desc=$(jq -r '.description' <<< "$item")
 
-    if [[ "$line" =~ ^bind\ *= ]] ; then
-     
-        comment=""
-        if [[ "$line" == *"#"* ]]; then
-            comment="${line#*#}"
-            comment="$(echo "$comment" | xargs)" 
-        fi
+    case ${mod:-} in 
+        64) mod="SUPER";;
+        65) mod="SUPER + SHIFT";;
+        72) mod="SUPER + ALT";;
+        1)  mod="SHIFT";;
+        ""|0) mod="";;
+    esac 
 
-        line_content="${line%%#*}"
-        line_content="${line_content#bind = }"
-        line_content="$(echo "$line_content" | xargs)"
+    case ${key:-} in
+        ampersand)key="1";;
+        eacute)key="2";;  
+        quotedbl)key="3";; 
+        apostrophe)key="4";;  
+        parenleft)key="5";;  
+        egrave)key="6";; 
+        minus)key="7";; 
+        underscore)key="8";;  
+        ccedilla)key="9";;
+        agrave)key="10";;
+        mouse:272)key="MBL";;
+        mouse:273)key="MBR";;
+    esac 
 
-       
-        IFS=',' read -r key1 key2 action cmd <<< "$line_content"
-        key1="$(echo "$key1" | xargs)"
-        key2="$(echo "$key2" | xargs)"
-
-   
-        [[ "$key1" == '$mainMod' ]] && key1="SUPER"
-        [[ "$key2" == '$mainMod' ]] && key2="SUPER"
-        [[ "$key1" == '$shiftMod' ]] && key1="SHIFT"
-        [[ "$key2" == '$shiftMod' ]] && key2="SHIFT"
-        [[ "$key1" == '$mainMod SHIFT' ]] && key1="SUPER + SHIFT"
-        [[ "$key1" == '$mainMod ALT' ]] && key1="SUPER + ALT"
-       
-        if [[ -z "$key1" ]]; then
-            keys="$key2"
-        elif [[ -z "$key2" ]]; then
-            keys="$key1"
-        else
-            keys="$key1 + $key2"
-        fi
-
-       
-        (( ${#keys} > max_len )) && max_len=${#keys}
-
-      
-        keybinds+=("$keys|$comment")
+ 
+    if [[ -n "$mod" ]]; then              
+        res="<span style='italic'>$mod</span> + $key"
+    else
+        res="<span style='normal'>$key</span>"
     fi
-done < "$file"
 
+    (( ${#res} > max_len )) && max_len=${#res}
+
+    keybinds+=("$res|$desc")
+done
+
+width=$((max_len + extra_space))
 
 for line in "${keybinds[@]}"; do
     keys="${line%%|*}"
     comment="${line#*|}"
-    printf "%-$((max_len + extra_space))s -> %s\n" "$keys" "$comment"
-done | rofi -dmenu -i -p "Keybinds : " -l 10 -theme "$ROFI_THEME/keyslist.rasi"
+    printf "%-${width}s -> %s\n" "$keys" "$comment"
+done | rofi -dmenu -markup-rows -i -p "Keybinds : " -l 10 -theme "$ROFI_THEME/keyslist.rasi"

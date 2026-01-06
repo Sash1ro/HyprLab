@@ -43,5 +43,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "everforest.darkContrast": "hard",
-  "everforest.darkWorkbench": "high-contrast"
+  "everforest.darkWorkbench": "high-contrast",
+  "glassit.alpha": 100
 }

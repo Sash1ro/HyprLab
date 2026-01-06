@@ -1,6 +1,8 @@
 @import "colors.css";
 @import "size.css";
 
+@define-color op alpha(@background, 0.75);
+
 /* =========================
    Global Defaults
 ========================= */
@@ -18,7 +20,7 @@
    Waybar & Tooltip
 ========================= */
 window#waybar {
-  background: alpha(@background, 0.75);
+  background: @op;
   color: @foreground;
   border-radius: 0;
   box-shadow: none;

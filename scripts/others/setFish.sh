@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Load configuration
 source "$HOME/.config/hyprlab/scripts/data/conf.env"
 
 set_couleur_fish() {
