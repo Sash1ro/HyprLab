@@ -45,8 +45,8 @@
   surface-container-high: {{colors.surface_container_high.default.hex}};
   surface-container-highest: {{colors.surface_container_highest.default.hex}};
 
-  background:     @surface-container-highest;
-  trans-bg:    rgba({{colors.surface_container.default.red}}, {{colors.surface_container.default.green}}, {{colors.surface_container.default.blue}}, 0.75);
+  background:     @surface;
+  trans-bg:    rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, 0.75);
 
   foreground:                 @on-surface;
   main:                       @primary;

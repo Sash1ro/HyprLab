@@ -2,4 +2,4 @@
 require("config.lazy")
 require("config.commands")
 require("config.autocmds")
-require("utils.focus_reload")
+require("utils.reload")

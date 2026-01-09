@@ -11,4 +11,7 @@ return {
   { "ellisonleao/gruvbox.nvim", lazy = false },
   { "rose-pine/neovim", lazy = false },
   { "rebelot/kanagawa.nvim", lazy = false },
+  { "akinsho/horizon.nvim", lazy = false },
+  { "samharju/synthweave.nvim", lazy = false },
+  { "bjarneo/aether.nvim", lazy = false },
 }

@@ -16,6 +16,11 @@ vim.api.nvim_create_autocmd("Signal", {
     else
       vim.notify("Colorscheme file not found: " .. cs_file, vim.log.levels.WARN)
     end
+    local ok, lualine = pcall(require, "lualine")
+    if ok then
+      lualine.setup()
+      lualine.refresh()
+    end
   end,
 })
 
@@ -36,6 +41,11 @@ vim.api.nvim_create_autocmd("User", {
       end
     else
       vim.notify("Colorscheme file not found: " .. cs_file, vim.log.levels.WARN)
+    end
+    local ok, lualine = pcall(require, "lualine")
+    if ok then
+      lualine.setup()
+      lualine.refresh()
     end
   end,
 })

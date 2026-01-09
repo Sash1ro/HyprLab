@@ -40,8 +40,8 @@ for item in "${items[@]}"; do
         underscore)key="8";;  
         ccedilla)key="9";;
         agrave)key="10";;
-        mouse:272)key="MBL";;
-        mouse:273)key="MBR";;
+        mouse:272)key="LMB";;
+        mouse:273)key="RMB";;
     esac 
 
  

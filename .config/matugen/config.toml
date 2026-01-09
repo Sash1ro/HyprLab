@@ -1,0 +1,52 @@
+[config.wallpaper]
+command = "swww"
+arguments = ["img", "--transition-type", "center"]
+set = true
+
+[templates.waybar] #ok
+input_path = '~/.config/hyprlab/themes/matugen/templates/colors.css'
+output_path = '~/.config/hyprlab/themes/matugen/waybar/colors.css'
+
+[templates.kitty] #ok
+input_path = '~/.config/hyprlab/themes/matugen/templates/colors.conf'
+output_path = '~/.config/hyprlab/themes/matugen/kitty/colors.conf'
+
+[templates.vesktop] #ok
+input_path = '~/.config/hyprlab/themes/matugen/templates/vesktop.css'
+output_path = '~/.config/hyprlab/themes/matugen/vesktop/current.theme.css'
+
+[templates.hyprland] #ok
+input_path = '~/.config/hyprlab/themes/matugen/templates/hypr.conf'
+output_path = '~/.config/hyprlab/themes/matugen/hypr/matugen.conf'
+
+[templates.gtk4] #ok gtk3 and 4
+input_path = '~/.config/hyprlab/themes/matugen/templates/gtk.css'
+output_path = '~/.config/hyprlab/themes/matugen/gtk/gtk.css'
+
+[templates.starship] #ok
+input_path = '~/.config/hyprlab/themes/matugen/templates/starship.toml'
+output_path = '~/.config/hyprlab/themes/matugen/starship/starship.toml'
+
+[templates.rofi] #ok 
+input_path = '~/.config/hyprlab/themes/matugen/templates/colors.rasi'
+output_path = '~/.config/hyprlab/themes/matugen/rofi/colors.rasi'
+
+[templates.cava] #ok
+input_path = '~/.config/hyprlab/themes/matugen/templates/cava.ini'
+output_path = '~/.config/hyprlab/themes/matugen/cava/theme'
+
+[templates.codium] #ok
+input_path = '~/.config/hyprlab/themes/matugen/templates/vscode.json'
+output_path = '~/.config/hyprlab/themes/matugen/vscode/settings.json'
+
+[templates.fish]
+input_path = '~/.config/hyprlab/themes/matugen/templates/fish.theme'
+output_path = '~/.config/hyprlab/themes/matugen/fish/theme.theme'
+
+[templates.nvim]
+input_path = "~/.config/hyprlab/themes/matugen/templates/nvim.lua"
+output_path = "~/.config/hyprlab/themes/matugen/nvim/colors.lua"
+
+[templates.folder]
+input_path= "~/.config/hyprlab/themes/matugen/templates/folder"
+output_path = "~/.config/hyprlab/themes/matugen/folder"

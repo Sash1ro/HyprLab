@@ -7,9 +7,9 @@
 
 @define-color inactive @surface_container_high;
 
-@define-color border @outline_variant;
+@define-color border @surface_container_high;
 
-@define-color foreground @on_background;
+@define-color foreground @on_surface;
 
 @define-color accent @primary;
 
@@ -20,8 +20,5 @@
 @define-color blue @primary;
 
 <* for name, value in colors *>
-    @define-color {{name}} {{value.default.hex}};
+@define-color {{name}} {{value.default.hex}};
 <* endfor *>
-
-
-@define-color background @surface_container_low;

@@ -87,6 +87,10 @@ tooltip {
   margin-left: 1rem;
 }
 
+#custom-notification.dnd-none {
+  color: @error;
+}
+
 /* =========================
    CPU & Memory
 ========================= */

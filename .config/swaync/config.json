@@ -1,6 +1,6 @@
 {
   "": "/etc/xdg/swaync/configSchema.json",
-  "notification-window-preferred-output": "DP-2",
+  "notification-window-preferred-output": "HDMI-A-1",
   "positionX": "right",
   "positionY": "top",
   "cssPriority": "user",

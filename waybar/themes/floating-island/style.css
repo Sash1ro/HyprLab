@@ -12,6 +12,11 @@
   min-height: 0;
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
   font-weight: bold;
+
+  animation: none;
+  transition-property: color;
+  transition-duration: 0s;
+  transition-timing-function: ease-in-out;
 }
 
 /* =========================
@@ -40,6 +45,7 @@ tooltip {
 #custom-record,
 #custom-media,
 #workspaces {
+  border: 1px solid @border;
   margin: 0px 5px;
   border-radius: 40px;
 }
@@ -47,10 +53,13 @@ tooltip {
 /* =========================
    Workspaces
 ========================= */
+#workspaces:hover {
+  border-color: @accent;
+}
+
 #workspaces {
   padding: 0;
   background-color: @back-alt;
-  border: 2px solid transparent;
   transition: all 200ms ease-out;
 }
 
@@ -131,6 +140,10 @@ tooltip {
   color: @accent;
 }
 
+#custom-icon:hover {
+  border-color: @accent;
+}
+
 #window:hover {
   border-color: @green;
 }
@@ -178,4 +191,3 @@ tooltip {
 #custom-clip {
   margin: 0 6px;
 }
-
