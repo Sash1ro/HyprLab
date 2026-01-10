@@ -4,163 +4,102 @@ set -euo pipefail
 
 clear
 
+# --- Packages ---
 pkgs=(
-  "nautilus"
-  "kitty"
-  "adw-gtk-theme"
-  "vesktop"
-  "vscodium"
-  "waybar"
-  "nvim"
-  "cava"
-  "btop"
-  "rofi"
-  "hyprshot"
-  "hyprlock"
-  "swww"
-  "swaync"
-  "wlogout"
-  "wf-recorder"
-  "slurp"
-  "ttf-jetbrains-mono-nerd"
-  "papirus-folders-git"
-  "starship"
-  "zenity"
-  "eza"
-  "fish"
-  "wl-clipboard"
-  "python3"
-  "cliphist"
-  "base-devel"
-  "git"
-  "wget"
-  "nvibrant"
-  "pavucontrol"
-  "blueman-manager"
-  "NetworkManager-git"
-  "mpris"
-  "yt-dlp"
-  "mpv-mpris"
-  "mpv"
-  "playerctl"
-  "hyprsunset"
+  "nautilus" "kitty" "adw-gtk-theme" "vesktop" "vscodium" "waybar"
+  "nvim" "cava" "btop" "rofi" "hyprshot" "hyprlock" "swww" "swaync"
+  "wlogout" "wf-recorder" "slurp" "ttf-jetbrains-mono-nerd" "papirus-folders-git"
+  "starship" "zenity" "eza" "fish" "wl-clipboard" "python3" "cliphist"
+  "base-devel" "git" "wget" "nvibrant" "pavucontrol" "blueman-manager"
+  "NetworkManager-git" "mpris" "yt-dlp" "mpv-mpris" "mpv" "playerctl" "hyprsunset"
 )
 
-OK="☑"
-FAIL="☒"
-INFO="->"
-
-C_RESET="\e[0m"
-C_GREEN="\e[32m"
-C_RED="\e[31m"
-C_BLUE="\e[34m"
-
+# --- Colors & symbols ---
+OK="☑"; FAIL="☒"; INFO="->"
+C_RESET="\e[0m"; C_GREEN="\e[32m"; C_RED="\e[31m"; C_BLUE="\e[34m"
 msg_ok() { echo -e "${C_GREEN}${OK}${C_RESET} $*"; }
 msg_fail() { echo -e "${C_RED}${FAIL}${C_RESET} $*"; }
 msg_info() { echo -e "${C_BLUE}${INFO}${C_RESET} $*"; }
 
-msg_ok ┏┓━┏┓┏┓━━┏┓┏━━━┓┏━━━┓┏┓━━━┏━━━┓┏━━┓━
-msg_ok ┃┃━┃┃┃┗┓┏┛┃┃┏━┓┃┃┏━┓┃┃┃━━━┃┏━┓┃┃┏┓┃━
-msg_ok ┃┗━┛┃┗┓┗┛┏┛┃┗━┛┃┃┗━┛┃┃┃━━━┃┃━┃┃┃┗┛┗┓
-msg_ok ┃┏━┓┃━┗┓┏┛━┃┏━━┛┃┏┓┏┛┃┃━┏┓┃┗━┛┃┃┏━┓┃
-msg_ok ┃┃━┃┃━━┃┃━━┃┃━━━┃┃┃┗┓┃┗━┛┃┃┏━┓┃┃┗━┛┃
-msg_ok ┗┛━┗┛━━┗┛━━┗┛━━━┗┛┗━┛┗━━━┛┗┛━┗┛┗━━━┛
-msg_fail ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-msg_info ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
+# --- Variables ---
 TERMINAL="${TERMINAL:-kitty}"
 gitURL="https://github.com/Sash1ro/HyprLab.git"
 CONFIG="$HOME/.config"
 HYPRLAB="$CONFIG/hyprlab"
 BACKUP_DIR="$HOME/conf-backups"
+FONT_DIR="$HYPRLAB/assets/fonts/SF-Pro"
+SYSTEM_FONT_DIR="/usr/local/share/fonts/otf"
 
+# --- Log everything ---
+LOGFILE="$HOME/hyprlab_install.log"
+exec > >(tee -i "$LOGFILE") 2>&1
+
+# --- Preliminary checks ---
 if [ "$EUID" -eq 0 ]; then
-    msg_fail "Error: Do not run this script as root."
+    msg_fail "Do not run this script as root."
     exit 1
 fi
 
 if ! command -v pacman >/dev/null; then
-  msg_fail "This setup is only compatible (for now) with Arch Linux based distros"
+  msg_fail "Only Arch-based distros supported"
   exit 1
 fi
 
 if ! pacman -Qi hyprland >/dev/null 2>&1; then
-  msg_fail "Please install hyprland first!"
+  msg_fail "Please install Hyprland first!"
   exit 1
 fi
 
 if [[ ! -d "$CONFIG" ]]; then
-  msg_fail "No config folder found in: $CONFIG"
+  msg_fail "No config folder found at $CONFIG"
   exit 1
 fi
 
-# --- Ask for sudo once and keep it alive ---
-if [[ $EUID -ne 0 ]]; then
-  msg_info "Requesting sudo access..."
-  sudo -v || (msg_fail "sudo access is required" && exit 1)
+# --- Sudo keep-alive ---
+msg_info "Requesting sudo access..."
+sudo -v || (msg_fail "sudo required" && exit 1)
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-  # Keep-alive: update existing sudo timestamp until script finishes
-  while true; do
-    sudo -n true
-    sleep 60
-    kill -0 "$$" || exit
-  done 2>/dev/null &
-fi
-
-# --- BACKUP User Config ---
+# --- Backup configs ---
 backup() {
-  dirs=("hypr" "fish" "fastfetch" "kitty" "swaync" "waybar" "wlogout" "rofi" "nvim" "cava" "gtk-3.0" "gtk-4.0" "btop")
+  dirs=("hypr" "matugen" "fish" "fastfetch" "kitty" "swaync" "waybar" "wlogout" "rofi" "nvim" "cava" "gtk-3.0" "gtk-4.0" "btop")
   files=("starship.toml")
-
-  msg_info "Backing up your configs"
-
+  msg_info "Backing up configs"
   mkdir -p "$BACKUP_DIR"
-
   for d in "${dirs[@]}"; do
-    if [[ -d "$CONFIG/$d" ]]; then
-      mv "$CONFIG/$d" "$BACKUP_DIR/$d.bak"
-      mkdir -p "$CONFIG/$d"
-    fi
+    [[ -d "$CONFIG/$d" ]] && mv "$CONFIG/$d" "$BACKUP_DIR/$d.bak" && mkdir -p "$CONFIG/$d"
   done
-
   for f in "${files[@]}"; do
-    if [[ -f "$CONFIG/$f" ]]; then
-      mv "$CONFIG/$f" "$BACKUP_DIR/$f.bak"
-    fi
+    [[ -f "$CONFIG/$f" ]] && mv "$CONFIG/$f" "$BACKUP_DIR/$f.bak"
   done
-
   msg_ok "Backup complete"
 }
 
 # --- Yay install ---
 yayInstall() {
+  msg_info "Installing dependencies for yay..."
+  sudo pacman -S --needed --noconfirm base-devel git
   msg_info "Cloning yay..."
   cd /tmp || exit
   git clone "https://aur.archlinux.org/yay.git"
-  cd "yay" || exit
-
-  msg_info "Installing yay..."
+  cd yay || exit
+  msg_info "Building and installing yay..."
   makepkg -si --noconfirm
-
   cd ..
-  rm -rf "yay"
-  msg_ok "Yay install complete"
+  rm -rf yay
+  msg_ok "Yay installation complete"
 }
 
 # --- Package installation ---
 installPkgs() {
   if ! command -v yay >/dev/null 2>&1; then
-    yayInstall || (msg_fail "Error while installing yay" && exit 1)
+    yayInstall || (msg_fail "Failed to install yay" && exit 1)
   fi
 
-  # Papirus icon theme
-  if [[ ! -d "$HOME/.local/share/icons/Papirus" ]]; then
-    msg_info "Installing Papirus icon theme"
-    wget -qO- "https://git.io/papirus-icon-theme-install" |
-      env DESTDIR="$HOME/.local/share/icons" sh
-  fi
+  [[ ! -d "$HOME/.local/share/icons/Papirus" ]] && \
+    wget -qO- "https://git.io/papirus-icon-theme-install" | env DESTDIR="$HOME/.local/share/icons" sh
 
-  msg_info "Updating package database"
+  msg_info "Updating package database..."
   yay -Sy --noconfirm
 
   for pkg in "${pkgs[@]}"; do
@@ -171,178 +110,130 @@ installPkgs() {
         msg_ok "$pkg installed" ||
         (msg_fail "Failed to install $pkg" && exit 1)
     else
-      msg_info "$pkg is already installed"
+      msg_info "$pkg already installed"
     fi
   done
 
-  msg_ok "All required packages installed"
+  msg_ok "All packages installed"
 }
 
-# --- Fish setup ---
+# --- Fish shell setup ---
 setupFish() {
   local fishConfig="$CONFIG/fish/config.fish"
-  msg_info "Setting up fish"
   mkdir -p "$(dirname "$fishConfig")"
-
-  if ! command -v fish >/dev/null 2>&1; then
-    msg_fail "Fish is not installed"
-    return 1
-  fi
-
   [[ ! -f "$fishConfig" ]] && touch "$fishConfig"
 
   local fishPath
   fishPath=$(command -v fish)
-
   if ! grep -q "$fishPath" /etc/shells; then
-    msg_info "Adding $fishPath in /etc/shells"
+    msg_info "Adding $fishPath to /etc/shells"
     echo "$fishPath" | sudo tee -a /etc/shells >/dev/null
   fi
 
-  msg_info "Changing default shell to fish. You may need to log out and log in."
-  chsh -s "$fishPath"
-
-  msg_ok "Fish setup complete"
+  msg_info "Changing default shell to fish"
+  chsh -s "$fishPath" && msg_ok "Default shell set to fish" || msg_fail "Failed to change shell"
 }
 
 # --- Clone HyprLab ---
 hyprlabClone() {
   if [[ ! -d "$HYPRLAB" ]]; then
-    msg_info "Cloning HyprLab repo"
+    msg_info "Cloning HyprLab..."
     git clone "$gitURL" "$HYPRLAB"
   else
-    msg_info "HyprLab already cloned"
+    msg_info "HyprLab already exists"
   fi
-  msg_ok "HyprLab download complete"
+  msg_ok "HyprLab ready"
+
+  find $HYPRLAB -type f -name "*.sh" -exec chmod +x {} \;
+  find $HYPRLAB -type f -name "hyprlab" -exec chmod +x {} \;
 }
 
 # --- Font setup ---
-FONT_DIR="$HYPRLAB/assets/fonts/SF-Pro"
-SYSTEM_FONT_DIR="/usr/local/share/fonts/otf"
-
 fontSetup() {
-  msg_info "Copying fonts to system fonts"
-  sudo mkdir -p "$SYSTEM_FONT_DIR/sf-pro"
-  sudo cp "$FONT_DIR"/*.otf "$SYSTEM_FONT_DIR/sf-pro"
-  fc-cache -fv
-  msg_ok "Font setup complete"
+  msg_info "Copying fonts..."
+  if [[ -d "$FONT_DIR" && $(ls "$FONT_DIR"/*.otf 2>/dev/null | wc -l) -gt 0 ]]; then
+    sudo mkdir -p "$SYSTEM_FONT_DIR/sf-pro"
+    sudo cp "$FONT_DIR"/*.otf "$SYSTEM_FONT_DIR/sf-pro"
+    fc-cache -fv
+    msg_ok "Fonts installed"
+  else
+    msg_fail "No fonts found in $FONT_DIR"
+  fi
 }
 
 # --- Icons ---
 iconApply() {
   if command -v papirus-folders >/dev/null; then
-    msg_info "Applying Papirus icons"
-    papirus-folders -C blue
-    msg_ok "Icon setup complete"
+    msg_info "Applying Papirus icons..."
+    papirus-folders -C blue && msg_ok "Icons applied"
   fi
 }
 
 # --- GPU detection ---
 setupGpu() {
-  msg_info "GPU detection..."
-  if lspci | grep -i nvidia >/dev/null; then
-    msg_info "Found NVIDIA GPU"
-    grep -qxF "source=~/.config/hyprlab/hyprland/conf/nvidia.conf" "$HOME/.config/hyprlab/hyprland/conf/env.conf" ||
-      printf "%s\n" "source=~/.config/hyprlab/hyprland/conf/nvidia.conf" >>"$HOME/.config/hyprlab/hyprland/conf/env.conf"
+  msg_info "Detecting GPU..."
+  if lspci | grep -iq nvidia; then
+    msg_info "NVIDIA GPU detected"
+    [[ ! $(grep -Fxq "source=~/.config/hyprlab/hyprland/conf/nvidia.conf" "$HOME/.config/hyprlab/hyprland/conf/env.conf" 2>/dev/null) ]] && \
+      echo "source=~/.config/hyprlab/hyprland/conf/nvidia.conf" >> "$HOME/.config/hyprlab/hyprland/conf/env.conf"
   else
-    msg_info "Found compatible GPU"
+    msg_info "Compatible GPU detected"
   fi
-  msg_ok "GPU detection complete"
+  msg_ok "GPU setup done"
 }
 
-# --- Applications ---
+# --- Copy applications ---
 setupApplications() {
-  msg_info "Copying .desktop files"
+  msg_info "Copying .desktop files..."
   local apps="$HYPRLAB/applications"
-  for app in "$apps"/*; do
-    cp -a "$app" "$HOME/.local/share/applications"
-  done
-  msg_ok "Application setup complete"
+  [[ -d "$apps" ]] && cp -a "$apps/." "$HOME/.local/share/applications" && msg_ok "Applications ready"
 }
 
 # --- Codium setup ---
 setupCodium() {
-  if ! command -v codium >/dev/null; then
-    msg_fail "Codium is not installed"
-    return
-  fi
-
-  msg_info "Setting up Codium"
-
-  icon_themes=(
-    "PKief.material-icon-theme"
-    "PKief.material-product-icons"
-  )
-  color_themes=(
-    "Catppuccin.catppuccin-vsc"
-    "mvllow.rose-pine"
-    "sainnhe.everforest"
-    "arcticicestudio.nord-visual-studio-code"
-    "enkia.tokyo-night"
-    "jdinhlife.gruvbox"
-    "jolaleye.horizon-theme-vscode"
-    "steffo.ora-code"
-  )
-  extensions=(
-    "esbenp.prettier-vscode"
-    "formulahendry.code-runner"
-  )
-
-  for ext in "${icon_themes[@]}"; do
-    codium --install-extension "$ext" && msg_ok "Installed $ext" || msg_fail "Failed to install $ext"
+  command -v codium >/dev/null || { msg_fail "Codium not installed"; return; }
+  msg_info "Installing Codium extensions..."
+  local exts=( "PKief.material-icon-theme" "Catppuccin.catppuccin-vsc" "esbenp.prettier-vscode" )
+  for ext in "${exts[@]}"; do
+    codium --install-extension "$ext" && msg_ok "Installed $ext" || msg_fail "Failed $ext"
   done
-
-  for ext in "${color_themes[@]}"; do
-    codium --install-extension "$ext" && msg_ok "Installed $ext" || msg_fail "Failed to install $ext"
-  done
-
-  for ext in "${extensions[@]}"; do
-    codium --install-extension "$ext" && msg_ok "Installed $ext" || msg_fail "Failed to install $ext"
-  done
-
   msg_ok "Codium setup complete"
 }
 
-# --- Default Configs ---
+# --- Configs ---
 configSetup() {
-  mkdir -p "$CONFIG/fish/themes"
-  mkdir -p "$CONFIG/cava/themes"
-
-  newCONFIG="$HYPRLAB/config"
-  for d in "$newCONFIG"/*; do
-    if [[ -d "$d" ]]; then
-      dirname=$(basename "$d")
-      mkdir -p "$CONFIG/$dirname"
-      cp -r "$d/." "$CONFIG/$dirname/" || msg_fail "Error copying config $dirname"
-    fi
+  msg_info "Copying configs..."
+  mkdir -p "$CONFIG/fish/themes" "$CONFIG/cava/themes"
+  for d in "$HYPRLAB/config"/*; do
+    [[ -d "$d" ]] || continue
+    dirname=$(basename "$d")
+    mkdir -p "$CONFIG/$dirname"
+    cp -r "$d/." "$CONFIG/$dirname/" || msg_fail "Error copying $dirname"
   done
-
   ln -sfn "$HYPRLAB/hyprland/profiles/default" "$HYPRLAB/hyprland/profiles/current"
   ln -sfn "$HYPRLAB/hyprland/monitors_profile/default.conf" "$HYPRLAB/hyprland/monitors_profile/current"
-  ln -sfn "$HYPRLAB/assets/fastfetch" "$HYPRLAB/themes/current/fastfetch"
 }
 
-# --- Run all ---
-installPkgs       #install dependancies
-hyprlabClone      #clone hyprlab repo
-backup            #Backup user configs
-configSetup       #Copying configs into ~/.config/
-setupFish         #fish shell
-setupCodium       #Install default extensions
-fontSetup         #Copying Fonts
-iconApply         #Applying papirus icons
-setupApplications #Copying .desktops
-setupGpu          #Nvidia setup
+# --- Run everything ---
+backup
+installPkgs
+hyprlabClone
+configSetup
+setupFish
+setupApplications
+setupGpu
+setupCodium
+fontSetup
+iconApply
 
-export PATH="$HYPRLAB/scripts/bin:$PATH" #Exporting hyprlab CLI to use it after
+export PATH="$HYPRLAB/scripts/bin:$PATH"
 
-"$HYPRLAB/scripts/others/theme-setup.sh" || msg_fail "Error running theme setup"
-"$HYPRLAB/scripts/utils/screen.sh" || msg_fail "Failed to auto generate monitors configuration"
-msg_ok "HyprLab setup complete! Please reboot to apply all changes."
+[[ -x "$HYPRLAB/scripts/others/theme-setup.sh" ]] && "$HYPRLAB/scripts/others/theme-setup.sh" || msg_fail "Theme setup failed"
+[[ -x "$HYPRLAB/scripts/utils/screen.sh" ]] && "$HYPRLAB/scripts/utils/screen.sh" || msg_fail "Screen config failed"
+
+msg_ok "HyprLab installation complete! Reboot recommended."
 notify-send "HyprLab installed successfully" "Reboot is required"
 
-hyprlab notify -s service-login.oga
-
-msg_info "Starting Neovim for LazyVim initialisation and installation"
-nvim --headless +Lazy! +qall || msg_fail "Failed to auto setup LazyVim, do it manually"
-
+# LazyVim initialisation
+msg_info "Running Neovim headless for LazyVim..."
+nvim --headless +Lazy! +qall && msg_ok "LazyVim initialized" || msg_fail "LazyVim setup failed"

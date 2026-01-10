@@ -13,7 +13,7 @@
 }
 
 window {
-  background-color: transparent;
+  background-color: alpha(@background, 0);
   border: 0;
   font-size: 14px;
 }
@@ -23,34 +23,68 @@ window {
 /* ─────────────────────────────────────────────── */
 
 button {
-  margin: 200px 0;
+  margin: 15rem 0;
   font-size: 20px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20%;
+  padding: 0;
 
   background-color: alpha(@background, 0.6);
   color: @text;
 
-  border: 0;
+  border: 0px solid;
   border-radius: 0;
-  border-color: transparent;
+  border-color: @border;
 
-  transition: margin 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
-    background-size 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+  transition:
+    all 0s,
+    margin 300ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
+    background-color 400ms ease,
+    border-radius 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-size 0.5s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+}
+
+#shutdown {
+  border-radius: 0 50px 50px 0;
+}
+
+#lock {
+  border-radius: 50px 0 0 50px;
 }
 
 /* Hover / Focus / Active shared */
-button:hover,
+#shutdown:active,
+#shutdown:focus,
+#lock:active,
+#lock:focus,
 button:focus,
 button:active {
-  background-color: alpha(@accent, 0.2);
+  margin: 10rem 0em;
+  background-color: alpha(@accent, 0.6);
   color: @text;
-  margin: 150px 0;
   border-radius: 50px;
   background-size: 25%;
-  transition: margin 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
-    background-size 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+
+  transition:
+    all 0s,
+    margin 300ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
+    background-color 400ms ease,
+    border-radius 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-size 0.5s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+}
+
+button:hover {
+  color: @text;
+  background-color: alpha(@accent, 0.5);
+  background-size: 25%;
+
+  transition:
+    all 0s,
+    margin 400ms cubic-bezier(0.47, 1.64, 0.41, 0.8),
+    background-color 300ms linear,
+    border-radius 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-size 0.5s cubic-bezier(0.47, 1.64, 0.41, 0.8);
 }
 
 /* ─────────────────────────────────────────────── */

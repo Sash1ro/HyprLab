@@ -1,6 +1,6 @@
 {
-  "$schema": "/etc/xdg/swaync/configSchema.json",
-  "notification-window-preferred-output": "DP-2",
+  "": "/etc/xdg/swaync/configSchema.json",
+  "notification-window-preferred-output": "HDMI-A-1",
   "positionX": "right",
   "positionY": "top",
   "cssPriority": "user",
@@ -9,7 +9,7 @@
   "layer-shell": true,
   "control-center-width": 375,
   "control-center-margin-top": 10,
-  "control-center-margin-bottom": 500,
+  "control-center-margin-bottom": 300,
   "control-center-margin-right": 10,
   "control-center-margin-left": 0,
   "notification-window-width": 320,
@@ -66,7 +66,7 @@
           "label": "",
           "type": "toggle",
           "active": true,
-          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
+          "command": "sh -c '[[  == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
           "update-command": "sh -c '[[ $(nmcli r wifi) == \"enabled\" ]] && echo true || echo false'"
         },
         
@@ -82,7 +82,7 @@
           "label": "",
           "type": "toggle",
           "active": false,
-          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && pactl set-source-mute @DEFAULT_SOURCE@ 1 || pactl set-source-mute @DEFAULT_SOURCE@ 0'",
+          "command": "sh -c '[[  == true ]] && pactl set-source-mute @DEFAULT_SOURCE@ 1 || pactl set-source-mute @DEFAULT_SOURCE@ 0'",
           "update-command": "sh -c '[[ $(pactl get-source-mute @DEFAULT_SOURCE@) == *yes* ]] && echo true || echo false'"
         },
         {
@@ -96,4 +96,3 @@
     }
   }
 }
-

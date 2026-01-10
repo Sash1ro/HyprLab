@@ -1,96 +1,81 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
-         "type": "kitty",
-         "source": "~/.config/hyprlab/assets/fastfetch/logo.png",
-         "width": 25
-     },
+    "type": "auto", 
+    "source": "$(sh -c \"~/.config/hyprlab/scripts/utils/fastfetch.sh current\")",
+  },
+  "display": {
+    "separator": " ",
+  },
   "modules": [
-      "break",
-      {
-          "type": "title",
-          "key": "",
-          "keyColor": "red",
-           "color": {
-              "user": "red",
-              "at": "red",
-              "host": "red"
-           }
-      },
+    {
+      "key": "╭───────────╮",
+      "type": "custom",
+    },
+    {
+      "key": "│ {#31} user    {#keys}│",
+      "type": "title",
+      "format": "{user-name}",
+    },
+    {
+      "key": "│ {#32}󰇅 hname   {#keys}│",
+      "type": "title",
+      "format": "{host-name}",
+    },
+    {
+      "key": "│ {#33}󰅐 uptime  {#keys}│",
+      "type": "uptime",
+    },
 
-      "break",
+    {
+      "key": "│ {#35} kernel  {#keys}│",
+      "type": "kernel",
+    },
+    {
+      "key": "│ {#36}󰇄 desktop {#keys}│",
+      "type": "de",
+    },
+    {
+      "key": "│ {#31} term    {#keys}│",
+      "type": "terminal",
+    },
+    {
+      "key": "│ {#32} shell   {#keys}│",
+      "type": "shell",
+    },
+    {
+      "key": "│ {#33}󰍛 cpu     {#keys}│",
+      "type": "cpu",
+      "showPeCoreCount": true,
+    },
+    {
+      "key": "│ {#34}󰉉 disk    {#keys}│",
+      "type": "disk",
+      "folders": "/",
+    },
+    {
+      "key": "│ {#35} memory  {#keys}│",
+      "type": "memory",
+    },
+    {
+      "key": "│ {#36}󰩟 network {#keys}│",
+      "type": "localip",
+      "format": "{ipv4} ({ifname})",
+    },
+    {
+      "key": "├───────────┤",
+      "type": "custom",
+    },
+    {
+      "key": "│ {#39}󰌁 colors  {#keys}│",
+      "type": "colors",
+      "symbol": "circle",
+    },
+    {
+      "key": "╰───────────╯",
+      "type": "custom",
+    },
 
-      {
-          "type": "os",
-          "key": " OS",
-          "keyColor": "green"
-      },
-            {
-          "type": "de",
-          "key": " DE",
-          "keyColor": "green"
-      },
-      {
-          "type": "kernel",
-          "key": " Kernel",
-          "keyColor": "green"
-      },
-      {
-          "type": "packages",
-          "key": "󰏖 Packages",
-          "keyColor": "green"
-      },
-      {
-          "type": "shell",
-          "key": " Shell",
-          "keyColor": "green"
-      },
-      "break",
-
-
-       {
-          "type": "cpu",
-          "key": " CPU",
-          "showPeCoreCount": true,
-          "format": "{1}",
-          "keyColor": "yellow"
-      },
-      {
-          "type": "gpu",
-          "key": "󰍛 GPU",
-          "keyColor": "yellow"
-      },
-
-
-      {
-          "type": "gpu",
-          "key": "󰍛 GPU Driver",
-          "format": "{3}",
-          "keyColor": "yellow"
-      },
-      {
-          "type": "memory",
-          "key": "󰍛 RAM",
-          "keyColor": "yellow"
-      },
-
-      "break",
-      {
-          "type": "command",
-          "key": " OS Age",
-          "keyColor": "red",
-          "text": "birth_install=$(stat -c %W /); current=$(date +%s); time_progression=$((current - birth_install)); days_difference=$((time_progression / 86400)); echo $days_difference days"
-      },
-      {
-          "type": "uptime",
-          "key": " Uptime",
-          "keyColor": "red"
-      },
-      "break",
-      {
-          "type": "custom",
-          "format": "\u001b[90m  \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m "
-      },
-      "break"
-  ]
+    { "type": "break" },
+  ],
 }

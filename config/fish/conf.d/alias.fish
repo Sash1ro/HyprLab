@@ -7,7 +7,7 @@ alias remove="yay -Rns"
 alias r="yay -Rns"
 alias search="yay -s"
 alias clean="sudo pacman -Rns $(pacman -Qtdq)"
-
+alias golab="cd $HOME/.config/hyprlab/"
 alias god="sudo"
 
 #EZA
@@ -17,10 +17,10 @@ alias ll='eza -l --color=always --group-directories-first --icons' # long format
 alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
 alias ldot="eza -a | grep -e '^\.'" # show only dotfiles
 
-#ALIAS====
+#ALIAS
 alias code='vscodium'
 alias iutvpn='sudo openconnect --protocol=anyconnect vpn.univ-lorraine.fr'
-
+alias ff="fastfetch"
 # Common use
 alias grubup="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
