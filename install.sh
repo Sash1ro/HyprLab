@@ -10,16 +10,32 @@ pkgs=(
   "nvim" "cava" "btop" "rofi" "hyprshot" "hyprlock" "swww" "swaync"
   "wlogout" "wf-recorder" "slurp" "ttf-jetbrains-mono-nerd" "papirus-folders-git"
   "starship" "zenity" "eza" "fish" "wl-clipboard" "python3" "cliphist"
-  "base-devel" "git" "wget" "nvibrant" "pavucontrol" "blueman-manager"
+  "base-devel" "git" "wget" "nvibrant" "pavucontrol" "blueman-manager" "python"
   "NetworkManager-git" "mpris" "yt-dlp" "mpv-mpris" "mpv" "playerctl" "hyprsunset"
 )
 
-# --- Colors & symbols ---
-OK="☑"; FAIL="☒"; INFO="->"
+# --- Logging ---
+LOGFILE="$HOME/hyprlab_install.log"
+touch "$LOGFILE"
+
+log() {
+    local level="$1"
+    shift
+    local message="$*"
+    local timestamp
+    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+
+    echo "[$timestamp][$level] $message" >> "$LOGFILE"
+
+    echo -e "$message"
+}
+
 C_RESET="\e[0m"; C_GREEN="\e[32m"; C_RED="\e[31m"; C_BLUE="\e[34m"
-msg_ok() { echo -e "${C_GREEN}${OK}${C_RESET} $*"; }
-msg_fail() { echo -e "${C_RED}${FAIL}${C_RESET} $*"; }
-msg_info() { echo -e "${C_BLUE}${INFO}${C_RESET} $*"; }
+
+msg_ok()   { log "OK"   "${C_GREEN}OK${C_RESET} $*"; }
+msg_fail() { log "ERROR" "${C_RED}ERROR${C_RESET} $*"; }
+msg_info() { log "INFO"  "${C_BLUE}INFO${C_RESET} $*"; }
+
 
 # --- Variables ---
 TERMINAL="${TERMINAL:-kitty}"
@@ -29,10 +45,6 @@ HYPRLAB="$CONFIG/hyprlab"
 BACKUP_DIR="$HOME/conf-backups"
 FONT_DIR="$HYPRLAB/assets/fonts/SF-Pro"
 SYSTEM_FONT_DIR="/usr/local/share/fonts/otf"
-
-# --- Log everything ---
-LOGFILE="$HOME/hyprlab_install.log"
-exec > >(tee -i "$LOGFILE") 2>&1
 
 # --- Preliminary checks ---
 if [ "$EUID" -eq 0 ]; then
@@ -174,8 +186,9 @@ setupGpu() {
   msg_info "Detecting GPU..."
   if lspci | grep -iq nvidia; then
     msg_info "NVIDIA GPU detected"
-    [[ ! $(grep -Fxq "source=~/.config/hyprlab/hyprland/conf/nvidia.conf" "$HOME/.config/hyprlab/hyprland/conf/env.conf" 2>/dev/null) ]] && \
+    if ! grep -Fxq "source=~/.config/hyprlab/hyprland/conf/nvidia.conf" "$HOME/.config/hyprlab/hyprland/conf/env.conf" 2>/dev/null; then
       echo "source=~/.config/hyprlab/hyprland/conf/nvidia.conf" >> "$HOME/.config/hyprlab/hyprland/conf/env.conf"
+    fi
   else
     msg_info "Compatible GPU detected"
   fi
@@ -237,3 +250,6 @@ notify-send "HyprLab installed successfully" "Reboot is required"
 # LazyVim initialisation
 msg_info "Running Neovim headless for LazyVim..."
 nvim --headless +Lazy! +qall && msg_ok "LazyVim initialized" || msg_fail "LazyVim setup failed"
+
+trap 'kill $(jobs -p)' EXIT
+
