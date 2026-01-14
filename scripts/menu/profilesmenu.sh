@@ -8,7 +8,7 @@ if pgrep -x "rofi" >/dev/null; then
 fi
 
 profile_menu() {
-    local profiles=("$HYPRLAB/hyprland/profiles/"*)
+    local profiles=("$HYPRLAB/hyprland/profiles/global/"*)
     local name;local selected;local index
     declare -A map
 
@@ -17,10 +17,11 @@ profile_menu() {
         [ -L "$conf" ] && continue
 
         name=$(basename "$conf")
+        name=${name%.conf}
         selected=$(hyprlab profile selected)
 
         if [ "$name" == "$selected" ]; then
-            index=$((i-1))
+            index=$((i))
             map[" $name"]="$name"
         else
             map["󰘼 $name"]="$name"
@@ -43,7 +44,7 @@ profile_menu() {
 }
 
 monitor_menu() {
-    local profiles=("$HYPRLAB/hyprland/monitors_profile/"*)
+    local profiles=("$HYPRLAB/hyprland/profiles/monitors/"*)
     local name;local selected;local index
     declare -A map
 
@@ -57,7 +58,7 @@ monitor_menu() {
         
 
         if [ "$name" == "$selected" ]; then
-            index=$((i-1))
+            index=$((i))
             map[" $name"]="$name"
         else
             map["󰘼 $name"]="$name"

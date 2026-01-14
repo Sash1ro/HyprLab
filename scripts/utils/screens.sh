@@ -56,7 +56,7 @@ if [ -n "$arg" ] && [ "$arg" == "detect" ]; then
   exit 0
 fi
 
-file="$HYPRLAB/hyprland/monitors_profile/current"
+file="$HYPRLAB/hyprland/profiles/current/monitors"
 [ -n "$arg" ] && [ -f "$arg" ] && file=$arg
 
 : > "$file"

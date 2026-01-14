@@ -1,7 +1,6 @@
 {
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "material-product-icons",
-  "workbench.colorTheme": "Tokyo Night",
   "editor.cursorBlinking": "expand",
   "files.autoSave": "afterDelay",
   "editor.formatOnSave": true,

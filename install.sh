@@ -9,9 +9,9 @@ pkgs=(
   "nautilus" "kitty" "adw-gtk-theme" "vesktop" "vscodium" "waybar"
   "nvim" "cava" "btop" "rofi" "hyprshot" "hyprlock" "swww" "swaync"
   "wlogout" "wf-recorder" "slurp" "ttf-jetbrains-mono-nerd" "papirus-folders-git"
-  "starship" "zenity" "eza" "fish" "wl-clipboard" "python3" "cliphist"
-  "base-devel" "git" "wget" "nvibrant" "pavucontrol" "blueman-manager" "python"
-  "NetworkManager-git" "mpris" "yt-dlp" "mpv-mpris" "mpv" "playerctl" "hyprsunset"
+  "starship" "zenity" "eza" "fish" "wl-clipboard" "python3" "cliphist" "matugen"
+  "base-devel" "git" "wget" "nvibrant" "pavucontrol" "blueman" "python"
+  "nm-connection-editor" "mpris" "yt-dlp" "mpv-mpris" "mpv" "playerctl" "hyprsunset"
 )
 
 # --- Logging ---
@@ -25,16 +25,16 @@ log() {
     local timestamp
     timestamp=$(date '+%Y-%m-%d %H:%M:%S')
 
-    echo "[$timestamp][$level] $message" >> "$LOGFILE"
+    echo "[$timestamp] $message" >> "$LOGFILE"
 
-    echo -e "$message"
+    echo -e "[$level] $message"
 }
 
 C_RESET="\e[0m"; C_GREEN="\e[32m"; C_RED="\e[31m"; C_BLUE="\e[34m"
 
-msg_ok()   { log "OK"   "${C_GREEN}OK${C_RESET} $*"; }
-msg_fail() { log "ERROR" "${C_RED}ERROR${C_RESET} $*"; }
-msg_info() { log "INFO"  "${C_BLUE}INFO${C_RESET} $*"; }
+msg_ok()   { log "${C_GREEN}OK${C_RESET}"  "$*"; }
+msg_fail() { log "${C_RED}ERROR${C_RESET}" "$*"; }
+msg_info() { log "${C_BLUE}INFO${C_RESET}" "$*"; }
 
 
 # --- Variables ---

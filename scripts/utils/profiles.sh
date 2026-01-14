@@ -4,10 +4,10 @@ set -euo pipefail
 ENV_FILE="$HOME/.config/hyprlab/scripts/data/conf.env"
 [[ -f "$ENV_FILE" ]] && source "$ENV_FILE"
 
-hProfiles="$HYPRLAB/hyprland/profiles/"
-profiles=$hProfiles
-mProfiles="$HYPRLAB/hyprland/monitors_profile"
-monitor=false
+gProfiles="$HYPRLAB/hyprland/profiles/global"
+mProfiles="$HYPRLAB/hyprland/profiles/monitors"
+profiles=$gProfiles
+monitor=0
 
 help() {
 cat <<EOF
@@ -39,23 +39,28 @@ verif() {
         hyprlab message fail "No profile name provided" && exit 1
     fi
 
-    if [[ ! -d "$profiles/$name" && ! -f "$profiles/$name.conf"  ]]; then
+    if [[ ! -f "$profiles/$name.conf"  ]]; then
         hyprlab message fail "Unknow profile : $name" && exit 1
     fi
 }
 
 selected() {
-    local file=$(basename $(readlink "$profiles/current"))
+    local current="$HYPRLAB/hyprland/profiles/current/global"
+    if (( monitor )); then
+        current="$HYPRLAB/hyprland/profiles/current/monitors"
+    fi
+    local file=$(basename $(readlink "$current"))
     echo "${file%.*}"
 }
 
 set() {
     local name="${1:-}"
     verif $name
-    if [[ "$profiles" == "$mProfiles" ]]; then
-        name="$name".conf
+    if (( monitor )); then
+        ln -sfn "$profiles/$name.conf" "$HYPRLAB/hyprland/profiles/current/monitors"
+    else 
+        ln -sfn "$profiles/$name.conf" "$HYPRLAB/hyprland/profiles/current/global"
     fi
-    ln -sfn "$profiles/$name" "$profiles/current" 
     touch "$HOME/.config/hypr/hyprlock.conf" >/dev/null
     hyprlab message ok "Profile $name applied"
     hyprctl -q reload && exit 0
@@ -68,16 +73,15 @@ new() {
         hyprlab message fail "No profile name provided" && exit 1
     fi
 
-    if [[ -d "$profiles/$name" || -f "$profiles/$name.conf" ]]; then
+    if [[ -f "$profiles/$name.conf" ]]; then
         hyprlab message fail "Profile $name, already exist" && exit 1
     fi
 
-    if [[ ! "$profiles" == "$mProfiles" ]]; then
-        cp -r "$profiles/default" "$profiles/$name" 
-    else 
-        touch "$profiles/$name".conf
+    touch "$profiles/$name".conf
+    if (( monitor )); then
         "$SCRIPT_DIR/utils/screens.sh" "$profiles/$name".conf
     fi
+
     hyprlab message ok "Profile $name created"
     exit 0
 } 
@@ -89,12 +93,9 @@ del() {
     if [ "$selected" == "$name" ]; then
         set default
     fi
-
-     if [[ ! "$profiles" == "$mProfiles" ]]; then
-        rm -rf "$profiles/$name" 
-    else 
-        rm -rf "$profiles/$name.conf" 
-    fi
+    
+    rm -rf "$profiles/$name.conf" 
+    
     hyprlab message ok "Profile $name deleted"
     exit 0
 } 
@@ -102,6 +103,7 @@ del() {
 for arg in "$@"; do
     case "$arg" in
         -m|monitors)
+            monitor=1
             profiles=$mProfiles
             [[ "$1" == "$arg" ]] && shift
             break

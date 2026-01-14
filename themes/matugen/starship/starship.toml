@@ -16,18 +16,18 @@ palette = "colors"
 
 [palettes.colors]
 mustard = '#af8700' # example
-primary = '#b3c5ff'
-color2 = '#192e60'
-color3 = '#c5c6d0'
-color4 = '#1e1f25'
-color5 = '#192e60'
-color6 = '#121318'
-color7 = '#121318'
-color8 = '#b3c5ff'
-color9 = '#e1bbdc'
+primary = '#e4c36c'
+color2 = '#3d2e00'
+color3 = '#cfc5b4'
+color4 = '#231f17'
+color5 = '#3d2e00'
+color6 = '#16130b'
+color7 = '#16130b'
+color8 = '#e4c36c'
+color9 = '#aecfad'
 
 [directory]
-style = "fg:#b3c5ff bold" 
+style = "fg:#e4c36c bold" 
 home_symbol = ""
 read_only = "󰌾"
 read_only_style = "fg:red" 
@@ -49,12 +49,12 @@ format = "[ $path ]($style)[$read_only]($read_only_style)"
 ".config" = ""
 
 [character]
-success_symbol = '[](fg:#b3c5ff bold)'
+success_symbol = '[](fg:#e4c36c bold)'
 error_symbol = '[](fg:#ffb4ab bold)'
-vicmd_symbol = '[](fg:#121318 bold)'
+vicmd_symbol = '[](fg:#16130b bold)'
 
 [git_branch]
-style = "fg:#e1bbdc bold" # color9 (red)
+style = "fg:#aecfad bold" # color9 (red)
 format = '[$symbol$branch]($style) '
 
 [git_status]
@@ -66,7 +66,7 @@ format = '[[($all_status$ahead_behind )](fg:#ea6962)]($style)'
 
 [os]
 format = "[$symbol]($style)"
-style = "fg:#b3c5ff bold" # color8
+style = "fg:#e4c36c bold" # color8
 disabled = false
 
 [os.symbols]
@@ -118,7 +118,7 @@ Windows = "󰍲 "
 
 [time]
  disabled = false
- format = '[ ](#c1c6dd)[[ $time ](fg:#c1c6dd )]($style)'
+ format = '[ ](#d6c5a0)[[ $time ](fg:#d6c5a0 )]($style)'
  time_format = "%R"
 
 [line_break]
