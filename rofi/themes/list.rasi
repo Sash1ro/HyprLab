@@ -88,7 +88,9 @@ element normal.active {
 element selected.normal,
 element selected.urgent,
 element selected.active {
-    background-color: @main;
+    background-color: @trans-main;
+    border: 1px solid;
+    border-color: @main;
     border-radius: 12px;
     text-color:       @background;
 }

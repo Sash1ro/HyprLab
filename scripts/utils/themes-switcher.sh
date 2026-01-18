@@ -58,6 +58,10 @@ appliquer_theme() {
   else 
       swww img "$dossier/wallpaper" --transition-type grow --transition-fps 60 || hyprlab message fail "Error while changing wallpaper"
   fi
+  hyprlab message info "Applying GTK themes"
+
+  gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' >/dev/null 2>&1
+  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' >/dev/null 2>&1
 
   hyprlab reload
   hyprlab message info "Applying Papirus icon theme"

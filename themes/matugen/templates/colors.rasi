@@ -47,6 +47,7 @@
 
   background:     @surface;
   trans-bg:    rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, 0.75);
+  trans-main:    rgba({{colors.primary.default.red}}, {{colors.primary.default.green}}, {{colors.primary.default.blue}}, 0.55);
 
   foreground:                 @on-surface;
   main:                       @primary;

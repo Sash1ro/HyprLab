@@ -1,0 +1,44 @@
+@import "colors.rasi"
+@import "size.rasi"
+@import "list.rasi"
+
+/*  LIST VERSION THEME :
+    @background => Rofi BG
+    @trans-bg   => Normal BG with opacity 0.7
+    @foreground => text color 
+    @main       => Accent Color 
+    @lightfg    => lighter text color
+*/
+
+configuration {
+    show-icons: true;
+}
+
+window {
+    width: 25%;
+}
+
+listview {
+    lines: 6; 
+}
+
+element {
+    orientation:    horizontal;
+}
+
+element-text {
+    vertical-align: 0.5;
+    background-color: transparent;
+    text-color:       inherit;
+    highlight:        inherit;
+    cursor:           inherit;
+}
+
+element-icon {
+    size:             32px;
+    background-color: transparent;
+    text-color:       inherit;
+    cursor:           inherit;
+}
+
+

@@ -2,7 +2,7 @@
 
   background:     #1E2326;
   trans-bg:    rgba(30, 35, 38, 0.75);
-
+  trans-main:    rgba(167, 192, 128, 0.55);
   foreground:                 #D3C6AA;
   main:                       #A7C080;
   red:                        #E67E80;
